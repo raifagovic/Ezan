@@ -27,6 +27,10 @@ struct ContentView: View {
             Spacer()
             
             // Add time to next prayer UI here
+            Text("Time to Next Prayer: \(timeToNextPrayer)")
+                .font(.headline)
+                .foregroundColor(.blue)
+                .padding()
         }
         .padding()
     }
