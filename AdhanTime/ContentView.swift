@@ -16,7 +16,14 @@ struct ContentView: View {
                 .padding()
             
             // Add location selection UI here
-        
+            Picker("Select Location", selection: $selectedLocation) {
+                ForEach(locations, id: \.self) { location in
+                    Text(location)
+                }
+            }
+            .pickerStyle(.wheel)
+            .padding()
+            
             Spacer()
             
             // Add time to next prayer UI here
