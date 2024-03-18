@@ -1,0 +1,578 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DCA22F482BA87A8200330EA2 /* AdhanTimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */; };
+		DCA22F4A2BA87A8200330EA2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F492BA87A8200330EA2 /* ContentView.swift */; };
+		DCA22F4C2BA87A8300330EA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */; };
+		DCA22F4F2BA87A8300330EA2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA22F4E2BA87A8300330EA2 /* Preview Assets.xcassets */; };
+		DCA22F5A2BA87A8300330EA2 /* AdhanTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F592BA87A8300330EA2 /* AdhanTimeTests.swift */; };
+		DCA22F642BA87A8300330EA2 /* AdhanTimeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F632BA87A8300330EA2 /* AdhanTimeUITests.swift */; };
+		DCA22F662BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F652BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DCA22F562BA87A8300330EA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCA22F3C2BA87A8200330EA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCA22F432BA87A8200330EA2;
+			remoteInfo = AdhanTime;
+		};
+		DCA22F602BA87A8300330EA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCA22F3C2BA87A8200330EA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCA22F432BA87A8200330EA2;
+			remoteInfo = AdhanTime;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DCA22F442BA87A8200330EA2 /* AdhanTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdhanTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeApp.swift; sourceTree = "<group>"; };
+		DCA22F492BA87A8200330EA2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DCA22F4E2BA87A8300330EA2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DCA22F502BA87A8300330EA2 /* AdhanTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdhanTime.entitlements; sourceTree = "<group>"; };
+		DCA22F552BA87A8300330EA2 /* AdhanTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdhanTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA22F592BA87A8300330EA2 /* AdhanTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeTests.swift; sourceTree = "<group>"; };
+		DCA22F5F2BA87A8300330EA2 /* AdhanTimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdhanTimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA22F632BA87A8300330EA2 /* AdhanTimeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeUITests.swift; sourceTree = "<group>"; };
+		DCA22F652BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCA22F412BA87A8200330EA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA22F522BA87A8300330EA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA22F5C2BA87A8300330EA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DCA22F3B2BA87A8200330EA2 = {
+			isa = PBXGroup;
+			children = (
+				DCA22F462BA87A8200330EA2 /* AdhanTime */,
+				DCA22F582BA87A8300330EA2 /* AdhanTimeTests */,
+				DCA22F622BA87A8300330EA2 /* AdhanTimeUITests */,
+				DCA22F452BA87A8200330EA2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DCA22F452BA87A8200330EA2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCA22F442BA87A8200330EA2 /* AdhanTime.app */,
+				DCA22F552BA87A8300330EA2 /* AdhanTimeTests.xctest */,
+				DCA22F5F2BA87A8300330EA2 /* AdhanTimeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCA22F462BA87A8200330EA2 /* AdhanTime */ = {
+			isa = PBXGroup;
+			children = (
+				DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */,
+				DCA22F492BA87A8200330EA2 /* ContentView.swift */,
+				DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */,
+				DCA22F502BA87A8300330EA2 /* AdhanTime.entitlements */,
+				DCA22F4D2BA87A8300330EA2 /* Preview Content */,
+			);
+			path = AdhanTime;
+			sourceTree = "<group>";
+		};
+		DCA22F4D2BA87A8300330EA2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DCA22F4E2BA87A8300330EA2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DCA22F582BA87A8300330EA2 /* AdhanTimeTests */ = {
+			isa = PBXGroup;
+			children = (
+				DCA22F592BA87A8300330EA2 /* AdhanTimeTests.swift */,
+			);
+			path = AdhanTimeTests;
+			sourceTree = "<group>";
+		};
+		DCA22F622BA87A8300330EA2 /* AdhanTimeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DCA22F632BA87A8300330EA2 /* AdhanTimeUITests.swift */,
+				DCA22F652BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift */,
+			);
+			path = AdhanTimeUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DCA22F432BA87A8200330EA2 /* AdhanTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCA22F692BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTime" */;
+			buildPhases = (
+				DCA22F402BA87A8200330EA2 /* Sources */,
+				DCA22F412BA87A8200330EA2 /* Frameworks */,
+				DCA22F422BA87A8200330EA2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdhanTime;
+			productName = AdhanTime;
+			productReference = DCA22F442BA87A8200330EA2 /* AdhanTime.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DCA22F542BA87A8300330EA2 /* AdhanTimeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCA22F6C2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTimeTests" */;
+			buildPhases = (
+				DCA22F512BA87A8300330EA2 /* Sources */,
+				DCA22F522BA87A8300330EA2 /* Frameworks */,
+				DCA22F532BA87A8300330EA2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCA22F572BA87A8300330EA2 /* PBXTargetDependency */,
+			);
+			name = AdhanTimeTests;
+			productName = AdhanTimeTests;
+			productReference = DCA22F552BA87A8300330EA2 /* AdhanTimeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DCA22F5E2BA87A8300330EA2 /* AdhanTimeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCA22F6F2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTimeUITests" */;
+			buildPhases = (
+				DCA22F5B2BA87A8300330EA2 /* Sources */,
+				DCA22F5C2BA87A8300330EA2 /* Frameworks */,
+				DCA22F5D2BA87A8300330EA2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCA22F612BA87A8300330EA2 /* PBXTargetDependency */,
+			);
+			name = AdhanTimeUITests;
+			productName = AdhanTimeUITests;
+			productReference = DCA22F5F2BA87A8300330EA2 /* AdhanTimeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCA22F3C2BA87A8200330EA2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					DCA22F432BA87A8200330EA2 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					DCA22F542BA87A8300330EA2 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = DCA22F432BA87A8200330EA2;
+					};
+					DCA22F5E2BA87A8300330EA2 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = DCA22F432BA87A8200330EA2;
+					};
+				};
+			};
+			buildConfigurationList = DCA22F3F2BA87A8200330EA2 /* Build configuration list for PBXProject "AdhanTime" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DCA22F3B2BA87A8200330EA2;
+			productRefGroup = DCA22F452BA87A8200330EA2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCA22F432BA87A8200330EA2 /* AdhanTime */,
+				DCA22F542BA87A8300330EA2 /* AdhanTimeTests */,
+				DCA22F5E2BA87A8300330EA2 /* AdhanTimeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DCA22F422BA87A8200330EA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA22F4F2BA87A8300330EA2 /* Preview Assets.xcassets in Resources */,
+				DCA22F4C2BA87A8300330EA2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA22F532BA87A8300330EA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA22F5D2BA87A8300330EA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCA22F402BA87A8200330EA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA22F4A2BA87A8200330EA2 /* ContentView.swift in Sources */,
+				DCA22F482BA87A8200330EA2 /* AdhanTimeApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA22F512BA87A8300330EA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA22F5A2BA87A8300330EA2 /* AdhanTimeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA22F5B2BA87A8300330EA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA22F662BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift in Sources */,
+				DCA22F642BA87A8300330EA2 /* AdhanTimeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DCA22F572BA87A8300330EA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCA22F432BA87A8200330EA2 /* AdhanTime */;
+			targetProxy = DCA22F562BA87A8300330EA2 /* PBXContainerItemProxy */;
+		};
+		DCA22F612BA87A8300330EA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCA22F432BA87A8200330EA2 /* AdhanTime */;
+			targetProxy = DCA22F602BA87A8300330EA2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DCA22F672BA87A8300330EA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DCA22F682BA87A8300330EA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		DCA22F6A2BA87A8300330EA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AdhanTime/AdhanTime.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AdhanTime/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.AdhanTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DCA22F6B2BA87A8300330EA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AdhanTime/AdhanTime.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AdhanTime/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.AdhanTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DCA22F6D2BA87A8300330EA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.AdhanTimeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdhanTime.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdhanTime";
+			};
+			name = Debug;
+		};
+		DCA22F6E2BA87A8300330EA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.AdhanTimeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdhanTime.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdhanTime";
+			};
+			name = Release;
+		};
+		DCA22F702BA87A8300330EA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.AdhanTimeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = AdhanTime;
+			};
+			name = Debug;
+		};
+		DCA22F712BA87A8300330EA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.AdhanTimeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = AdhanTime;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DCA22F3F2BA87A8200330EA2 /* Build configuration list for PBXProject "AdhanTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA22F672BA87A8300330EA2 /* Debug */,
+				DCA22F682BA87A8300330EA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCA22F692BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA22F6A2BA87A8300330EA2 /* Debug */,
+				DCA22F6B2BA87A8300330EA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCA22F6C2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTimeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA22F6D2BA87A8300330EA2 /* Debug */,
+				DCA22F6E2BA87A8300330EA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCA22F6F2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTimeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA22F702BA87A8300330EA2 /* Debug */,
+				DCA22F712BA87A8300330EA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCA22F3C2BA87A8200330EA2 /* Project object */;
+}
