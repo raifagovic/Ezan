@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+// Function to calculate time difference between two time strings
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
@@ -35,6 +37,8 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     return timeDifference(currentTime: currentTime, nextPrayerTime: currentPrayerTime)
 }
 
+
+// Function to calculate time difference between two time strings
 func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
