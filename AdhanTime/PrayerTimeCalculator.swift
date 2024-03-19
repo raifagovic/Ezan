@@ -34,3 +34,22 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     // Calculate time to the next prayer
     return timeDifference(currentTime: currentTime, nextPrayerTime: currentPrayerTime)
 }
+
+func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HH:mm"
+    
+    guard let currentDate = dateFormatter.date(from: currentTime),
+          let nextPrayerDate = dateFormatter.date(from: nextPrayerTime) else {
+        return "Error" // Return an error message if date conversion fails
+    }
+    
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.hour, .minute], from: currentDate, to: nextPrayerDate)
+    guard let hours = components.hour, let minutes = components.minute else {
+        return "Error" // Return an error message if components are nil
+    }
+    
+    let timeToNextPrayer = String(format: "%02d:%02d", max(hours, 0), max(minutes, 0))
+    return timeToNextPrayer
+}
