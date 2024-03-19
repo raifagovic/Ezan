@@ -14,6 +14,7 @@
 		DCA22F5A2BA87A8300330EA2 /* AdhanTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F592BA87A8300330EA2 /* AdhanTimeTests.swift */; };
 		DCA22F642BA87A8300330EA2 /* AdhanTimeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F632BA87A8300330EA2 /* AdhanTimeUITests.swift */; };
 		DCA22F662BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F652BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift */; };
+		DCB52E452BA9B14D00EB66BD /* PrayerTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB52E442BA9B14D00EB66BD /* PrayerTimeCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		DCA22F5F2BA87A8300330EA2 /* AdhanTimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdhanTimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA22F632BA87A8300330EA2 /* AdhanTimeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeUITests.swift; sourceTree = "<group>"; };
 		DCA22F652BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DCB52E442BA9B14D00EB66BD /* PrayerTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimeCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */,
 				DCA22F502BA87A8300330EA2 /* AdhanTime.entitlements */,
 				DCA22F4D2BA87A8300330EA2 /* Preview Content */,
+				DCB52E442BA9B14D00EB66BD /* PrayerTimeCalculator.swift */,
 			);
 			path = AdhanTime;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			files = (
 				DCA22F4A2BA87A8200330EA2 /* ContentView.swift in Sources */,
 				DCA22F482BA87A8200330EA2 /* AdhanTimeApp.swift in Sources */,
+				DCB52E452BA9B14D00EB66BD /* PrayerTimeCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
