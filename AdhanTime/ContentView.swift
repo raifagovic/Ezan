@@ -38,7 +38,7 @@ struct ContentView: View {
                     Text(location)
                 }
             }
-            .pickerStyle(.wheel)
+            .pickerStyle(MenuPickerStyle())
             .padding()
             
             Spacer()
