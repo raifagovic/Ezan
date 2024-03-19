@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Define selectedLocation variable to hold the selected location
+        @State private var selectedLocation: String = "Sarajevo"
+    
     var body: some View {
         VStack {
             Text("Adhan Time")
