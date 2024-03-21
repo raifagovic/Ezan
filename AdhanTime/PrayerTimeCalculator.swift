@@ -7,23 +7,17 @@
 
 import Foundation
 
-
-// Function to calculate time difference between two time strings
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
     let currentTime = dateFormatter.string(from: Date())
     
-    // Identify the current prayer and its index
     guard let nextPrayerIndex = prayerTimes.firstIndex(where: { $0 > currentTime }),
           nextPrayerIndex < prayerTimes.count else {
-        return nil // If no prayer times remain for the day, return nil
+        return nil
     }
-    
-    // Retrieve the current prayer time
     let nextPrayerTime = prayerTimes[nextPrayerIndex]
     
-    // Calculate time to the next prayer
     return timeDifference(currentTime: currentTime, nextPrayerTime: nextPrayerTime)
 }
 
