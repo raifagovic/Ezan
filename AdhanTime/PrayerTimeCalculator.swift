@@ -23,20 +23,9 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     // Retrieve the current prayer time
     let currentPrayerTime = prayerTimes[currentPrayerIndex]
     
-    // Handle special case for Fajr (accounting for Sunrise end time)
-    if currentPrayerIndex == 0 && prayerTimes.count > 1 {
-        let sunriseEndTime = prayerTimes[1] // Second value in the array is considered as the end time of Fajr
-        // Check if it's past the end of Fajr (Sunrise)
-        if currentTime > sunriseEndTime {
-            // If past Sunrise, move to the next prayer (Dhuhr)
-            return timeDifference(currentTime: currentTime, nextPrayerTime: prayerTimes[2])
-        }
-    }
-    
     // Calculate time to the next prayer
     return timeDifference(currentTime: currentTime, nextPrayerTime: currentPrayerTime)
 }
-
 
 // Function to calculate time difference between two time strings
 func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
