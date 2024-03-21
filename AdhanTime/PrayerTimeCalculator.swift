@@ -15,16 +15,16 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let currentTime = dateFormatter.string(from: Date())
     
     // Identify the current prayer and its index
-    guard let currentPrayerIndex = prayerTimes.firstIndex(where: { $0 > currentTime }),
-          currentPrayerIndex < prayerTimes.count else {
+    guard let nextPrayerIndex = prayerTimes.firstIndex(where: { $0 > currentTime }),
+          nextPrayerIndex < prayerTimes.count else {
         return nil // If no prayer times remain for the day, return nil
     }
     
     // Retrieve the current prayer time
-    let currentPrayerTime = prayerTimes[currentPrayerIndex]
+    let nextPrayerTime = prayerTimes[nextPrayerIndex]
     
     // Calculate time to the next prayer
-    return timeDifference(currentTime: currentTime, nextPrayerTime: currentPrayerTime)
+    return timeDifference(currentTime: currentTime, nextPrayerTime: nextPrayerTime)
 }
 
 // Function to calculate time difference between two time strings
