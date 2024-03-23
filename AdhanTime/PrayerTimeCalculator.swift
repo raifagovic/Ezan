@@ -31,7 +31,7 @@ func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
     }
     
     let calendar = Calendar.current
-    let components = calendar.dateComponents([.second], from: currentDate, to: nextPrayerDate)
+    let components = calendar.dateComponents([.hour, .minute, .second], from: currentDate, to: nextPrayerDate)
     
     guard let seconds = components.second else {
         return "Error"
