@@ -10,7 +10,7 @@ import Foundation
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
-    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo") // Set the time zone
+    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo") 
     
     let currentTimeString = dateFormatter.string(from: Date())
     print("Current time in Sarajevo: \(currentTimeString)")
