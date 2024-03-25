@@ -24,34 +24,26 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     return timeDifference(currentTime: currentTime, nextPrayerTime: nextPrayerTime)
 }
 
-func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
-    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
+
     
-    guard let currentDate = dateFormatter.date(from: currentTime),
-          let nextPrayerDate = dateFormatter.date(from: nextPrayerTime) else {
-        return "Error"
-    }
-    
-    let calendar = Calendar.current
-    let components = calendar.dateComponents([.hour, .minute, .second], from: currentDate, to: nextPrayerDate)
-    
-    guard let hours = components.hour, let minutes = components.minute else {
-        return "Error"
-    }
-    
-    if hours == 0 && minutes == 0 {
-        return "Less than a minute"
-    }
-    
-    if hours == 0 {
-        return "\(minutes)min"
-    }
-    
-    if minutes == 0 {
-        return "\(hours)h"
-    }
-    
-    return "\(hours)h \(minutes)min"
-}
+//    let calendar = Calendar.current
+//    let components = calendar.dateComponents([.hour, .minute, .second], from: currentDate, to: nextPrayerDate)
+//    
+//    guard let hours = components.hour, let minutes = components.minute else {
+//        return "Error"
+//    }
+//    
+//    if hours == 0 && minutes == 0 {
+//        return "Less than a minute"
+//    }
+//    
+//    if hours == 0 {
+//        return "\(minutes)min"
+//    }
+//    
+//    if minutes == 0 {
+//        return "\(hours)h"
+//    }
+//    
+//    return "\(hours)h \(minutes)min"
+
