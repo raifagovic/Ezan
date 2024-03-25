@@ -15,11 +15,13 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let currentTimeString = dateFormatter.string(from: Date())
     print("Current time in Sarajevo: \(currentTimeString)")
     
-    guard let currentTimeComponents = currentTimeString.split(separator: ":").map({ Int($0) }),
-          let currentHour = currentTimeComponents.first,
-          let currentMinute = currentTimeComponents.last else {
+    let currentTimeComponents = currentTimeString.split(separator: ":").compactMap { Int($0) }
+    guard currentTimeComponents.count == 2 else {
         return nil
     }
+    
+    let currentHour = currentTimeComponents[0]
+    let currentMinute = currentTimeComponents[1]
     
     // Convert current time to minutes
     let currentTimeInMinutes = currentHour * 60 + currentMinute
@@ -29,11 +31,13 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
         return nil
     }
     
-    guard let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").map({ Int($0) }),
-          let nextPrayerHour = nextPrayerTimeComponents.first,
-          let nextPrayerMinute = nextPrayerTimeComponents.last else {
+    let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").compactMap { Int($0) }
+    guard nextPrayerTimeComponents.count == 2 else {
         return nil
     }
+    
+    let nextPrayerHour = nextPrayerTimeComponents[0]
+    let nextPrayerMinute = nextPrayerTimeComponents[1]
     
     // Convert next prayer time to minutes
     let nextPrayerTimeInMinutes = nextPrayerHour * 60 + nextPrayerMinute
@@ -51,6 +55,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     
     return "\(hours)h \(minutes)min"
 }
+
 
 
 
