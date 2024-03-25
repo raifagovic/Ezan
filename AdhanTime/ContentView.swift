@@ -35,11 +35,17 @@ struct ContentView: View {
             Spacer()
             
             // Add time to next prayer UI
-            let timeToNextPrayerResult = timeToNextPrayer(prayerTimes: prayerTimes)
-            Text("Time to Next Prayer: \(timeToNextPrayerResult ?? "Unknown")")
-                .font(.headline)
-                .foregroundColor(.blue)
-                .padding()
+            if let timeToNextPrayerResult = timeToNextPrayer(prayerTimes: prayerTimes) {
+                Text("Time to Next Prayer: \(timeToNextPrayerResult)")
+                    .font(.headline)
+                    .foregroundColor(.blue)
+                    .padding()
+            } else {
+                Text("No prayer times remaining for the day.")
+                    .font(.headline)
+                    .foregroundColor(.red)
+                    .padding()
+            }
         }
         .padding()
     }
