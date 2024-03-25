@@ -15,15 +15,7 @@ struct ContentView: View {
     ]
     
     let prayerTimes = ["3:38", "5:35", "12:00", "15:21", "20:08", "21:50"]
-    
-    init() {
-        if let timeToNext = timeToNextPrayer(prayerTimes: prayerTimes) {
-            print("Time to next adhan:", timeToNext)
-        } else {
-            print("No prayer times remaining for the day.")
-        }
-    }
-    
+        
     var body: some View {
         VStack {
             Text("Adhan Time")

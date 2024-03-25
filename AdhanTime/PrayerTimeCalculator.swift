@@ -10,18 +10,25 @@ import Foundation
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
-    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
+    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo") // Set the time zone
     
-    let currentTime = dateFormatter.string(from: Date())
-    print("Current time in Sarajevo: \(currentTime)")
+    let currentTime = Date()
+    print("Current time in Sarajevo: \(dateFormatter.string(from: currentTime))")
     
-    guard let nextPrayerIndex = prayerTimes.firstIndex(where: { $0 > currentTime }),
-          nextPrayerIndex < prayerTimes.count else {
+    // Convert prayer times to Date objects
+    let prayerDateTimes = prayerTimes.compactMap { dateFormatter.date(from: $0) }
+    
+    // Find the next prayer time
+    guard let nextPrayerDateTime = prayerDateTimes.first(where: { $0 > currentTime }) else {
         return nil
     }
-    let nextPrayerTime = prayerTimes[nextPrayerIndex]
     
-    return timeDifference(currentTime: currentTime, nextPrayerTime: nextPrayerTime)
+    // Calculate time difference
+    let timeDifference = Int(nextPrayerDateTime.timeIntervalSince(currentTime))
+    let hours = timeDifference / 3600
+    let minutes = (timeDifference % 3600) / 60
+    
+    return "\(hours)h \(minutes)min"
 }
 
 
