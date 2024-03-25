@@ -9,7 +9,7 @@ import Foundation
 
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
+    dateFormatter.dateFormat = "HH:mm:ss"
     let currentTime = dateFormatter.string(from: Date())
     
     guard let nextPrayerIndex = prayerTimes.firstIndex(where: { $0 > currentTime }),
@@ -23,7 +23,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
 
 func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
+    dateFormatter.dateFormat = "HH:mm:ss"
     
     guard let currentDate = dateFormatter.date(from: currentTime),
           let nextPrayerDate = dateFormatter.date(from: nextPrayerTime) else {
