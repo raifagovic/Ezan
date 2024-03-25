@@ -12,24 +12,46 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     dateFormatter.dateFormat = "HH:mm"
     dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo") // Set the time zone
     
-    let currentTime = Date()
-    print("Current time in Sarajevo: \(dateFormatter.string(from: currentTime))")
+    let currentTimeString = dateFormatter.string(from: Date())
+    print("Current time in Sarajevo: \(currentTimeString)")
     
-    // Convert prayer times to Date objects
-    let prayerDateTimes = prayerTimes.compactMap { dateFormatter.date(from: $0) }
-    
-    // Find the next prayer time
-    guard let nextPrayerDateTime = prayerDateTimes.first(where: { $0 > currentTime }) else {
+    guard let currentTimeComponents = currentTimeString.split(separator: ":").map({ Int($0) }),
+          let currentHour = currentTimeComponents.first,
+          let currentMinute = currentTimeComponents.last else {
         return nil
     }
     
-    // Calculate time difference
-    let timeDifference = Int(nextPrayerDateTime.timeIntervalSince(currentTime))
-    let hours = timeDifference / 3600
-    let minutes = (timeDifference % 3600) / 60
+    // Convert current time to minutes
+    let currentTimeInMinutes = currentHour * 60 + currentMinute
+    
+    // Find the next prayer time
+    guard let nextPrayerTimeString = prayerTimes.first(where: { $0 > currentTimeString }) else {
+        return nil
+    }
+    
+    guard let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").map({ Int($0) }),
+          let nextPrayerHour = nextPrayerTimeComponents.first,
+          let nextPrayerMinute = nextPrayerTimeComponents.last else {
+        return nil
+    }
+    
+    // Convert next prayer time to minutes
+    let nextPrayerTimeInMinutes = nextPrayerHour * 60 + nextPrayerMinute
+    
+    // Calculate time difference in minutes
+    var timeDifferenceInMinutes = nextPrayerTimeInMinutes - currentTimeInMinutes
+    
+    // Adjust for negative time difference (next prayer time is on the next day)
+    if timeDifferenceInMinutes < 0 {
+        timeDifferenceInMinutes += 1440 // 24 hours in minutes
+    }
+    
+    let hours = timeDifferenceInMinutes / 60
+    let minutes = timeDifferenceInMinutes % 60
     
     return "\(hours)h \(minutes)min"
 }
+
 
 
     
