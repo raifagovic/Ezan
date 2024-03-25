@@ -27,6 +27,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
 func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
+    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
     
     guard let currentDate = dateFormatter.date(from: currentTime),
           let nextPrayerDate = dateFormatter.date(from: nextPrayerTime) else {
