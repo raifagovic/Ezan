@@ -10,7 +10,10 @@ import Foundation
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
+    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
+    
     let currentTime = dateFormatter.string(from: Date())
+    print("Current time in Sarajevo: \(currentTime)")
     
     guard let nextPrayerIndex = prayerTimes.firstIndex(where: { $0 > currentTime }),
           nextPrayerIndex < prayerTimes.count else {
