@@ -9,7 +9,7 @@ import Foundation
 
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm:ss"
+    dateFormatter.dateFormat = "HH:mm"
     let currentTime = dateFormatter.string(from: Date())
     
     guard let nextPrayerIndex = prayerTimes.firstIndex(where: { $0 > currentTime }),
@@ -23,7 +23,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
 
 func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm:ss"
+    dateFormatter.dateFormat = "HH:mm"
     
     guard let currentDate = dateFormatter.date(from: currentTime),
           let nextPrayerDate = dateFormatter.date(from: nextPrayerTime) else {
@@ -33,12 +33,21 @@ func timeDifference(currentTime: String, nextPrayerTime: String) -> String {
     let calendar = Calendar.current
     let components = calendar.dateComponents([.hour, .minute, .second], from: currentDate, to: nextPrayerDate)
     
-    guard let seconds = components.second else {
+    guard let hours = components.hour, let minutes = components.minute else {
         return "Error"
     }
-    let hours = seconds / 3600
-    let minutes = (seconds % 3600) / 60
     
-    let timeToNextPrayer = String(format: "%02d:%02d", max(hours, 0), max(minutes, 0))
-    return timeToNextPrayer
+    if hours == 0 && minutes == 0 {
+        return "Less than a minute"
+    }
+    
+    if hours == 0 {
+        return "\(minutes)min"
+    }
+    
+    if minutes == 0 {
+        return "\(hours)h"
+    }
+    
+    return "\(hours)h \(minutes)min"
 }
