@@ -10,7 +10,7 @@ import Foundation
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
-    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
+    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo") // Set the time zone
     
     let currentTimeString = dateFormatter.string(from: Date())
     print("Current time in Sarajevo: \(currentTimeString)")
@@ -27,7 +27,14 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let currentTimeInMinutes = currentHour * 60 + currentMinute
     
     // Find the next prayer time
-    guard let nextPrayerTimeString = prayerTimes.first(where: { $0 > currentTimeString }) else {
+    guard let nextPrayerTimeString = prayerTimes.first(where: {
+        let components = $0.split(separator: ":")
+        guard components.count == 2, let hour = Int(components[0]), let minute = Int(components[1]) else {
+            return false
+        }
+        let prayerTimeInMinutes = hour * 60 + minute
+        return prayerTimeInMinutes > currentTimeInMinutes
+    }) else {
         return nil
     }
     
@@ -55,4 +62,5 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     
     return "\(hours)h \(minutes)min"
 }
+
 
