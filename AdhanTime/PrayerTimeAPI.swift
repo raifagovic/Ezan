@@ -58,3 +58,9 @@ struct PrayerTimeAPI {
         return prayerTimes
     }
 }
+
+enum NetworkError: Error {
+    case invalidURL
+    case invalidResponse
+    case invalidData
+}
