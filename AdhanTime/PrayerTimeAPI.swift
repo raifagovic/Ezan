@@ -64,3 +64,7 @@ enum NetworkError: Error {
     case invalidResponse
     case invalidData
 }
+
+struct PrayerTimeResponse: Decodable {
+    let vakat: [Date]
+}
