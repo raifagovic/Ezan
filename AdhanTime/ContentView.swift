@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selectedLocation: String = "Sarajevo"
+    @State private var selectedLocationIndex: Int = 0
     @State private var prayerTimes: [String] = []
     
     let locationsWithIndex: [(Int, String)] = [
@@ -131,6 +131,17 @@ struct ContentView: View {
         (116, "Sjenica"),
         (117, "Tutin")
     ]
+    
+    init() {
+        // Find the index of "Sarajevo" in the locations array
+        if let index = locationsWithIndex.firstIndex(where: { $0.1 == "Sarajevo" }) {
+            self._selectedLocationIndex = State(initialValue: index)
+        }
+    }
+    
+    var selectedLocationId: Int {
+        locationsWithIndex[selectedLocationIndex].0
+    }
 
         
     var body: some View {
