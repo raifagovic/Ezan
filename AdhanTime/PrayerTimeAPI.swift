@@ -53,8 +53,7 @@ struct PrayerTimeAPI {
         let response = try decoder.decode(PrayerTimeResponse.self, from: data)
         
         // Convert date strings to formatted time strings
-        let prayerTimes = response.vakat.map { dateFormatter.string(from: $0) }
-        
+        let prayerTimes = response.vakat.map { $0 }
         return prayerTimes
     }
 }
@@ -66,5 +65,5 @@ enum NetworkError: Error {
 }
 
 struct PrayerTimeResponse: Decodable {
-    let vakat: [Date]
+    let vakat: [String]
 }

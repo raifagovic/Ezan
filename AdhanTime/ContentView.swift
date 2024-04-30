@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+//    @State private var selectedLocation: String = "Sarajevo"
     @State private var selectedLocationIndex: Int = 0
-    @State private var prayerTimes: [String] = []
+    @State private var prayerTimes: [String] = ["5:00", "6:00", "12:00", "16:00", "18:00", "20:00"]
+    @State private var timeToNextPrayerResult: String? = nil
+    
+    let locations = [
+        "Banovići", "Banja Luka", "Bihać", "Bijeljina", "Bileća", "Bosanski Brod", "Bosanska Dubica", "Bosanska Gradiška", "Bosansko Grahovo", "Bosanska Krupa", "Bosanski Novi", "Bosanski Petrovac", "Bosanski Šamac", "Bratunac", "Brčko", "Breza", "Bugojno", "Busovača", "Bužim", "Cazin", "Čajniče", "Čapljina", "Čelić", "Čelinac", "Čitluk", "Derventa", "Doboj", "Donji Vakuf", "Drvar", "Foča", "Fojnica", "Gacko", "Glamoč", "Goražde", "Gornji Vakuf", "Gračanica", "Gradačac", "Grude", "Hadžići", "Han-Pijesak", "Hlivno", "Ilijaš", "Jablanica", "Jajce", "Kakanj", "Kalesija", "Kalinovik", "Kiseljak", "Kladanj", "Ključ", "Konjic", "Kotor-Varoš", "Kreševo", "Kupres", "Laktaši", "Lopare", "Lukavac", "Ljubinje", "Ljubuški", "Maglaj", "Modriča", "Mostar", "Mrkonjić-Grad", "Neum", "Nevesinje", "Novi Travnik", "Odžak", "Olovo", "Orašje", "Pale", "Posušje", "Prijedor", "Prnjavor", "Prozor", "Rogatica", "Rudo", "Sanski Most", "Sarajevo", "Skender-Vakuf", "Sokolac", "Srbac", "Srebrenica", "Srebrenik", "Stolac", "Šekovići", "Šipovo", "Široki Brijeg", "Teslić", "Tešanj", "Tomislav-Grad", "Travnik", "Trebinje", "Trnovo", "Tuzla", "Ugljevik", "Vareš", "Velika Kladuša", "Visoko", "Višegrad", "Vitez", "Vlasenica", "Zavidovići", "Zenica", "Zvornik", "Žepa", "Žepče", "Živinice", "Bijelo Polje", "Gusinje", "Nova Varoš", "Novi Pazar", "Plav", "Pljevlja", "Priboj", "Prijepolje", "Rožaje", "Sjenica", "Tutin"
+    ]
+
     
     let locationsWithIndex: [(Int, String)] = [
         (0, "Banovići"),
@@ -143,7 +150,6 @@ struct ContentView: View {
         locationsWithIndex[selectedLocationIndex].0
     }
 
-        
     var body: some View {
         VStack {
             Text("Adhan Time")
@@ -152,9 +158,9 @@ struct ContentView: View {
                 .padding()
             
             // Add location selection UI
-            Picker("Select Location", selection: $selectedLocation) {
-                ForEach(locations, id: \.self) { location in
-                    Text(location)
+            Picker("Select Location", selection: $selectedLocationIndex) {
+                ForEach(0..<locationsWithIndex.count) { index in
+                    Text(self.locationsWithIndex[index].1)
                 }
             }
             .pickerStyle(MenuPickerStyle())
@@ -162,8 +168,8 @@ struct ContentView: View {
             
             Spacer()
             
-            // Add time to next prayer UI
-            if let timeToNextPrayerResult = timeToNextPrayer(prayerTimes: prayerTimes) {
+            // Display time to next prayer
+            if let timeToNextPrayerResult = timeToNextPrayerResult {
                 Text("Time to Next Prayer: \(timeToNextPrayerResult)")
                     .font(.headline)
                     .foregroundColor(.blue)
@@ -174,8 +180,77 @@ struct ContentView: View {
                     .foregroundColor(.red)
                     .padding()
             }
+            
+            Spacer()
+            
+            // Add fetch prayer times button
+            Button(action: {
+                fetchPrayerTimes()
+            }) {
+                Text("Fetch Prayer Times")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            
+            Spacer()
+            
+            // Display fetched prayer times
+            if !prayerTimes.isEmpty {
+                Text("Prayer Times:")
+                    .font(.headline)
+                    .padding()
+                
+                ForEach(prayerTimes, id: \.self) { time in
+                    Text(time)
+                        .font(.subheadline)
+                        .padding(.bottom, 5)
+                }
+            }
         }
         .padding()
+        .onAppear {
+            // Fetch prayer times and calculate time to next prayer when the view appears
+            fetchPrayerTimes()
+        }
+    }
+    
+    func fetchPrayerTimes() {
+        // Fetch prayer times for the selected location
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        
+        guard let year = components.year, let month = components.month, let day = components.day else {
+            return
+        }
+        
+        PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month, day: day) { result in
+            switch result {
+            case .success(let times):
+                // Update the prayer times array
+                DispatchQueue.main.async {
+                    self.prayerTimes = times
+                }
+                
+                // Calculate the time to next prayer
+                if let nextPrayerTime = timeToNextPrayer(prayerTimes: times) {
+                    // Update the time to next prayer result
+                    DispatchQueue.main.async {
+                        self.timeToNextPrayerResult = nextPrayerTime
+                    }
+                } else {
+                    // If no prayer times are available, set the result to nil
+                    DispatchQueue.main.async {
+                        self.timeToNextPrayerResult = nil
+                    }
+                }
+            case .failure(let error):
+                print("Failed to fetch prayer times: \(error)")
+            }
+        }
     }
 }
 
