@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedLocationIndex: Int = 0
-    @State private var prayerTimes: [String] = ["5:00", "6:00", "12:00", "16:00", "18:00", "20:00"]
+    @State private var prayerTimes: [String] = []
     @State private var timeToNextPrayerResult: String? = nil
     
     let locationsWithIndex: [(Int, String)] = [
