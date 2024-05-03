@@ -7,6 +7,16 @@
 
 import Foundation
 
+struct PrayerTimeResponse: Decodable {
+    let vakat: [String]
+}
+
+enum NetworkError: Error {
+    case invalidURL
+    case invalidResponse
+    case invalidData
+}
+
 struct PrayerTimeAPI {
     static let baseURL = "https://api.vaktija.ba/vaktija/v1"
     
@@ -58,12 +68,4 @@ struct PrayerTimeAPI {
     }
 }
 
-enum NetworkError: Error {
-    case invalidURL
-    case invalidResponse
-    case invalidData
-}
 
-struct PrayerTimeResponse: Decodable {
-    let vakat: [String]
-}

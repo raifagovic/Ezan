@@ -152,9 +152,14 @@ struct ContentView: View {
                 .padding()
             
             // Add location selection UI
+//            Picker("Select Location", selection: $selectedLocationIndex) {
+//                ForEach(0..<locationsWithIndex.count) { index in
+//                    Text(self.locationsWithIndex[index].1)
+//                }
+//            }
             Picker("Select Location", selection: $selectedLocationIndex) {
-                ForEach(0..<locationsWithIndex.count) { index in
-                    Text(self.locationsWithIndex[index].1)
+                ForEach(locationsWithIndex.indices, id: \.self) { index in
+                    Text(locationsWithIndex[index].1)
                 }
             }
             .pickerStyle(MenuPickerStyle())
