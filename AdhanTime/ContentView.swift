@@ -151,12 +151,6 @@ struct ContentView: View {
                 .fontWeight(.bold)
                 .padding()
             
-            // Add location selection UI
-//            Picker("Select Location", selection: $selectedLocationIndex) {
-//                ForEach(0..<locationsWithIndex.count) { index in
-//                    Text(self.locationsWithIndex[index].1)
-//                }
-//            }
             Picker("Select Location", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
@@ -209,7 +203,7 @@ struct ContentView: View {
                 }
             }
         }
-        .padding()
+        .padding(.bottom, 30)
         .onAppear {
             // Fetch prayer times and calculate time to next prayer when the view appears
             fetchPrayerTimes()
