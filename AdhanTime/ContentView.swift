@@ -166,7 +166,7 @@ struct ContentView: View {
             
             // Display time to next prayer
             if let timeToNextPrayerResult = timeToNextPrayerResult {
-                Text("Time to Next Prayer: \(timeToNextPrayerResult)")
+                Text("\(timeToNextPrayerResult)")
                     .font(.headline)
                     .foregroundColor(.blue)
                     .padding()
