@@ -38,6 +38,21 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
         return nil
     }
     
+    // Determine the index of the next prayer time
+    guard let index = prayerTimes.firstIndex(of: nextPrayerTimeString) else {
+        return nil
+    }
+    
+    // Define the array of prayer names
+    let prayerNames = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]
+    
+    // Determine the name of the next prayer
+    guard index < prayerNames.count else {
+        return nil
+    }
+    
+    let nextPrayerName = prayerNames[index]
+    
     let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").compactMap { Int($0) }
     guard nextPrayerTimeComponents.count == 2 else {
         return nil
@@ -60,7 +75,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let hours = timeDifferenceInMinutes / 60
     let minutes = timeDifferenceInMinutes % 60
     
-    return "\(hours)h \(minutes)min"
+    return "\(nextPrayerName) is in \(hours)h \(minutes)min"
 }
 
 
