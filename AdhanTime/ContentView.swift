@@ -158,6 +158,9 @@ struct ContentView: View {
             }
             .pickerStyle(MenuPickerStyle())
             .padding()
+            .onChange(of: selectedLocationIndex) {
+                fetchPrayerTimes()
+            }
             
             Spacer()
             
