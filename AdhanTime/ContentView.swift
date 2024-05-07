@@ -132,6 +132,7 @@ struct ContentView: View {
         (116, "Sjenica"),
         (117, "Tutin")
     ]
+    let prayerNames = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]
     
     init() {
         // Find the index of "Sarajevo" in the locations array
@@ -171,12 +172,16 @@ struct ContentView: View {
                     .padding()
             }
             
-            // Display fetched prayer times
+            // Display fetched prayer times with names
             if !prayerTimes.isEmpty {
-                ForEach(prayerTimes, id: \.self) { time in
-                    Text(time)
-                        .font(.subheadline)
-                        .padding(.bottom, 5)
+                ForEach(prayerTimes.indices, id: \.self) { index in
+                    if index < prayerNames.count {
+                        let prayerName = prayerNames[index]
+                        let prayerTime = prayerTimes[index]
+                        Text("\(prayerName): \(prayerTime)")
+                            .font(.subheadline)
+                            .padding(.bottom, 5)
+                    }
                 }
             }
         }
