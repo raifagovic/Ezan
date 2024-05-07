@@ -173,10 +173,6 @@ struct ContentView: View {
             
             // Display fetched prayer times
             if !prayerTimes.isEmpty {
-                Text("Prayer Times:")
-                    .font(.headline)
-                    .padding()
-                
                 ForEach(prayerTimes, id: \.self) { time in
                     Text(time)
                         .font(.subheadline)
