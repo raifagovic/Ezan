@@ -12,8 +12,6 @@ struct ContentView: View {
     @State private var prayerTimes: [String] = []
     @State private var timeToNextPrayerResult: String? = nil
     
-    let prayerNames = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]
-    
     let locationsWithIndex: [(Int, String)] = [
         (0, "Banovići"),
         (1, "Banja Luka"),
