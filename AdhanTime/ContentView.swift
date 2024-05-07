@@ -146,11 +146,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Text("Adhan Time")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding()
-            
+
             Picker("Select Location", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
