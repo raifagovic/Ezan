@@ -176,20 +176,6 @@ struct ContentView: View {
             
             Spacer()
             
-            // Add fetch prayer times button
-            Button(action: {
-                fetchPrayerTimes()
-            }) {
-                Text("Fetch Prayer Times")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            
-            Spacer()
-            
             // Display fetched prayer times
             if !prayerTimes.isEmpty {
                 Text("Prayer Times:")
