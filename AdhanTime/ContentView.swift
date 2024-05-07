@@ -158,8 +158,6 @@ struct ContentView: View {
                 fetchPrayerTimes()
             }
             
-            Spacer()
-            
             // Display time to next prayer
             if let timeToNextPrayerResult = timeToNextPrayerResult {
                 Text("\(timeToNextPrayerResult)")
@@ -172,8 +170,6 @@ struct ContentView: View {
                     .foregroundColor(.red)
                     .padding()
             }
-            
-            Spacer()
             
             // Display fetched prayer times
             if !prayerTimes.isEmpty {
