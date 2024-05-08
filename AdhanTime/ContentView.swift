@@ -178,14 +178,15 @@ struct ContentView: View {
                     if index < prayerNames.count {
                         let prayerName = prayerNames[index]
                         let prayerTime = prayerTimes[index]
-                        HStack {
-                            Text(prayerName)
-                                .font(.subheadline)
-                            Spacer()
-                            Text(prayerTime)
-                                .font(.subheadline)
-                        }
-                        .padding(.bottom, 5)
+                        
+                        // Calculate padding to align text vertically
+                        let paddingWidth = 10 // Adjust as needed
+                        let maxNameLength = 5 // Adjust to the maximum length of prayer names
+                        let maxTimeLength = 5 // Adjust to the maximum length of prayer times
+                        
+                        Text("\(prayerName): \(prayerTime)")
+                            .font(.subheadline)
+                            .padding(.bottom, 5)
                     }
                 }
             }
