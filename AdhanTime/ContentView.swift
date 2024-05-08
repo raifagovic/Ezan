@@ -184,6 +184,10 @@ struct ContentView: View {
                         let maxNameLength = 5 // Adjust to the maximum length of prayer names
                         let maxTimeLength = 5 // Adjust to the maximum length of prayer times
                         
+                        // Ensure prayer name and time have the same length
+                        let formattedPrayerName = prayerName.padding(toLength: maxNameLength, withPad: " ", startingAt: 0)
+                        let formattedPrayerTime = prayerTime.padding(toLength: maxTimeLength, withPad: " ", startingAt: 0)
+                        
                         Text("\(prayerName): \(prayerTime)")
                             .font(.subheadline)
                             .padding(.bottom, 5)
