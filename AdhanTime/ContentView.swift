@@ -172,28 +172,21 @@ struct ContentView: View {
                     .padding()
             }
             
-            // Display fetched prayer times with names
+//             Display fetched prayer times with names
             if !prayerTimes.isEmpty {
                 ForEach(prayerTimes.indices, id: \.self) { index in
                     if index < prayerNames.count {
                         let prayerName = prayerNames[index]
                         let prayerTime = prayerTimes[index]
-                        
-                        // Calculate padding to align text vertically
-                        let paddingWidth = 10 // Adjust as needed
-                        let maxNameLength = 5 // Adjust to the maximum length of prayer names
-                        let maxTimeLength = 5 // Adjust to the maximum length of prayer times
-                        
-                        // Ensure prayer name and time have the same length
-                        let formattedPrayerName = prayerName.padding(toLength: maxNameLength, withPad: " ", startingAt: 0)
-                        let formattedPrayerTime = prayerTime.padding(toLength: maxTimeLength, withPad: " ", startingAt: 0)
-                        
                         Text("\(prayerName): \(prayerTime)")
                             .font(.subheadline)
                             .padding(.bottom, 5)
+                            .frame(width: 70)
+                            .multilineTextAlignment(.leading)
                     }
                 }
             }
+
         }
         .padding(.bottom, 30)
         .onAppear {
