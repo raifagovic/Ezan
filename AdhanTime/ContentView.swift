@@ -178,9 +178,14 @@ struct ContentView: View {
                     if index < prayerNames.count {
                         let prayerName = prayerNames[index]
                         let prayerTime = prayerTimes[index]
-                        Text("\(prayerName): \(prayerTime)")
-                            .font(.subheadline)
-                            .padding(.bottom, 5)
+                        HStack {
+                            Text(prayerName)
+                                .font(.subheadline)
+                            Spacer()
+                            Text(prayerTime)
+                                .font(.subheadline)
+                        }
+                        .padding(.bottom, 5)
                     }
                 }
             }
