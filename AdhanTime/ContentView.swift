@@ -172,21 +172,25 @@ struct ContentView: View {
                     .padding()
             }
             
-//             Display fetched prayer times with names
+            // Display fetched prayer times with names
             if !prayerTimes.isEmpty {
                 ForEach(prayerTimes.indices, id: \.self) { index in
                     if index < prayerNames.count {
                         let prayerName = prayerNames[index]
                         let prayerTime = prayerTimes[index]
-                        Text("\(prayerName): \(prayerTime)")
-                            .font(.subheadline)
-                            .padding(.bottom, 5)
-                            .frame(width: 70)
-                            .multilineTextAlignment(.leading)
+                        HStack {
+                            Text(prayerName)
+                                .font(.subheadline)
+                                .frame(width: 45, alignment: .leading)
+                                .padding(.trailing, 5)
+                            Text(prayerTime)
+                                .font(.subheadline)
+                                .frame(width: 45, alignment: .trailing)
+                        }
+                        .padding(.bottom, 5)
                     }
                 }
             }
-
         }
         .padding(.bottom, 30)
         .onAppear {
