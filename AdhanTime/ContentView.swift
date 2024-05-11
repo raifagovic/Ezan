@@ -154,7 +154,7 @@ struct ContentView: View {
                 }
             }
             .pickerStyle(MenuPickerStyle())
-            .padding()
+            .padding(.bottom, 30)
             .onChange(of: selectedLocationIndex) {
                 fetchPrayerTimes()
             }
@@ -164,12 +164,12 @@ struct ContentView: View {
                 Text("\(timeToNextPrayerResult)")
                     .font(.headline)
                     .foregroundColor(.blue)
-                    .padding()
+                    .padding(.bottom, 30)
             } else {
                 Text("No prayer times remaining for the day.")
                     .font(.headline)
                     .foregroundColor(.red)
-                    .padding()
+                    .padding(.bottom, 30)
             }
             
             // Display fetched prayer times with names
@@ -187,7 +187,7 @@ struct ContentView: View {
                                 .font(.subheadline)
                                 .frame(width: 45, alignment: .trailing)
                         }
-                        .padding(.bottom, 5)
+                        .padding(.bottom, 15)
                     }
                 }
             }
