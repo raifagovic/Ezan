@@ -75,7 +75,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let hours = timeDifferenceInMinutes / 60
     let minutes = timeDifferenceInMinutes % 60
     
-    return "\(nextPrayerName) is in \(hours)h \(minutes)min"
+    return "\(nextPrayerName) je za \(hours)h \(minutes)min"
 }
 
 
