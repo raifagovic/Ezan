@@ -132,7 +132,7 @@ struct ContentView: View {
         (116, "Sjenica"),
         (117, "Tutin")
     ]
-    let prayerNames = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]
+    let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
     
     init() {
         // Find the index of "Sarajevo" in the locations array

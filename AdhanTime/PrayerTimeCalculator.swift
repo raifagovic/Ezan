@@ -44,7 +44,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     }
     
     // Define the array of prayer names
-    let prayerNames = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]
+    let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
     
     // Determine the name of the next prayer
     guard index < prayerNames.count else {
