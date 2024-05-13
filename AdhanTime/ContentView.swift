@@ -153,6 +153,7 @@ struct ContentView: View {
                     Text(locationsWithIndex[index].1)
                 }
             }
+            .labelsHidden()
             .pickerStyle(MenuPickerStyle())
             .padding(.bottom, 40)
             .onChange(of: selectedLocationIndex) {
@@ -199,6 +200,7 @@ struct ContentView: View {
             fetchPrayerTimes()
         }
     }
+    
     
     func fetchPrayerTimes() {
         // Fetch prayer times for the selected location
