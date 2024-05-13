@@ -147,17 +147,17 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-
-            Picker("Izaberi lokaciju", selection: $selectedLocationIndex) {
+           
+            Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
                 }
             }
             .pickerStyle(MenuPickerStyle())
-            .padding(.bottom, 50)
             .onChange(of: selectedLocationIndex) {
                 fetchPrayerTimes()
             }
+            
             
             // Display time to next prayer
             if let timeToNextPrayerResult = timeToNextPrayerResult {
