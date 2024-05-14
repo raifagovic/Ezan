@@ -169,7 +169,7 @@ struct ContentView: View {
                     .foregroundColor(.blue)
                     .padding(.bottom, 40)
             } else {
-                Text("No prayer times remaining for the day.")
+                Text("Nema više ezana danas")
                     .font(.headline)
                     .foregroundColor(.red)
                     .padding(.bottom, 40)
