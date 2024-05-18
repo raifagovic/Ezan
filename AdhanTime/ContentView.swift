@@ -198,6 +198,7 @@ struct ContentView: View {
         }
         .padding(.bottom, 30)
         .onAppear {
+            fetchPrayerTimes()
             // Start timer when the view appears
             timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
                 fetchPrayerTimes()
