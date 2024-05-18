@@ -203,6 +203,11 @@ struct ContentView: View {
                 fetchPrayerTimes()
             }
         }
+        .onDisappear {
+            // Invalidate timer when the view disappears
+            timer?.invalidate()
+            timer = nil
+        }
     }
     
     
