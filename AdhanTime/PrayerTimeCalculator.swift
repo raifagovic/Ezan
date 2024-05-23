@@ -61,14 +61,10 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let nextPrayerHour = nextPrayerTimeComponents[0]
     let nextPrayerMinute = nextPrayerTimeComponents[1]
     
-    // Convert next prayer time to minutes
-    let nextPrayerTimeInMinutes = nextPrayerHour * 60 + nextPrayerMinute
-    
-    
-    
+    // Convert next prayer time to seconds
+        let nextPrayerTimeInSeconds = (nextPrayerHour * 3600) + (nextPrayerMinute * 60)
     
     let currentTimeInSeconds = currentTimeInMinutes * 60 + Calendar.current.component(.second, from: Date())
-    let nextPrayerTimeInSeconds = nextPrayerTimeInMinutes * 60
     var timeDifferenceInSeconds = nextPrayerTimeInSeconds - currentTimeInSeconds
     
     // Adjust timeDifferenceInSeconds for negative time difference
