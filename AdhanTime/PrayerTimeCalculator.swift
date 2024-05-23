@@ -22,9 +22,10 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     
     let currentHour = currentTimeComponents[0]
     let currentMinute = currentTimeComponents[1]
+    let currentSecond = Calendar.current.component(.second, from: Date())
     
-    // Convert current time to minutes
-    let currentTimeInMinutes = currentHour * 60 + currentMinute
+    // Convert current time to seconds
+    let currentTimeInSeconds = (currentHour * 3600) + (currentMinute * 60) + currentSecond
     
     // Find the next prayer time
     guard let nextPrayerTimeString = prayerTimes.first(where: {
@@ -32,8 +33,8 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
         guard components.count == 2, let hour = Int(components[0]), let minute = Int(components[1]) else {
             return false
         }
-        let prayerTimeInMinutes = hour * 60 + minute
-        return prayerTimeInMinutes > currentTimeInMinutes
+        let prayerTimeInSeconds = (hour * 3600) + (minute * 60)
+        return prayerTimeInSeconds > currentTimeInSeconds
     }) else {
         return nil
     }
@@ -62,26 +63,30 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let nextPrayerMinute = nextPrayerTimeComponents[1]
     
     // Convert next prayer time to seconds
-        let nextPrayerTimeInSeconds = (nextPrayerHour * 3600) + (nextPrayerMinute * 60)
+    let nextPrayerTimeInSeconds = (nextPrayerHour * 3600) + (nextPrayerMinute * 60)
     
-    let currentTimeInSeconds = currentTimeInMinutes * 60 + Calendar.current.component(.second, from: Date())
+    // Calculate time difference in seconds
     var timeDifferenceInSeconds = nextPrayerTimeInSeconds - currentTimeInSeconds
     
-    // Adjust timeDifferenceInSeconds for negative time difference
+    // Adjust for negative time difference (next prayer time is on the next day)
     if timeDifferenceInSeconds < 0 {
         timeDifferenceInSeconds += 86400 // 24 hours in seconds
     }
     
     // Calculate hours, minutes, and seconds
-        let hours = timeDifferenceInSeconds / 3600
-        let minutes = (timeDifferenceInSeconds % 3600) / 60
-        let seconds = timeDifferenceInSeconds % 60
+    let hours = timeDifferenceInSeconds / 3600
+    let minutes = (timeDifferenceInSeconds % 3600) / 60
+    let seconds = timeDifferenceInSeconds % 60
     
-    if hours == 0 {
-            return "\(nextPrayerName) je za \(minutes)min"
-        } else {
-            return "\(nextPrayerName) je za \(hours)h \(minutes)min"
-        }
+    // Format the output based on the remaining time
+    if timeDifferenceInSeconds < 60 {
+        return "\(nextPrayerName) je za \(seconds) sec"
+    } else if hours == 0 {
+        return "\(nextPrayerName) je za \(minutes) min"
+    } else {
+        return "\(nextPrayerName) je za \(hours)h \(minutes)min"
+    }
 }
+
 
 
