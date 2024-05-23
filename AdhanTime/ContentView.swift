@@ -200,7 +200,7 @@ struct ContentView: View {
         .onAppear {
             fetchPrayerTimes()
             // Start timer when the view appears
-            timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+            timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
                 fetchPrayerTimes()
             }
         }
