@@ -199,20 +199,15 @@ struct ContentView: View {
         .padding(.bottom, 30)
         .onAppear {
             fetchPrayerTimes()
-            // Start timer when the view appears
-            timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
-                fetchPrayerTimes()
-            }
+            startTimer()
         }
         .onDisappear {
-            // Invalidate timer when the view disappears
             timer?.invalidate()
             timer = nil
         }
     }
     
     func startTimer() {
-            timer?.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
                 fetchPrayerTimes()
             }
