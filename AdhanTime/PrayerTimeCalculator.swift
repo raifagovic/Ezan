@@ -76,6 +76,10 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
         timeDifferenceInSeconds += 86400 // 24 hours in seconds
     }
     
+    // Calculate hours, minutes, and seconds
+        let hours = timeDifferenceInSeconds / 3600
+        let minutes = (timeDifferenceInSeconds % 3600) / 60
+        let seconds = timeDifferenceInSeconds % 60
     
     if hours == 0 {
             return "\(nextPrayerName) je za \(minutes)min"
