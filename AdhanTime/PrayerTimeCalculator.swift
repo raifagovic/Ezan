@@ -64,15 +64,9 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     // Convert next prayer time to minutes
     let nextPrayerTimeInMinutes = nextPrayerHour * 60 + nextPrayerMinute
     
-    // Calculate time difference in minutes
-    var timeDifferenceInMinutes = nextPrayerTimeInMinutes - currentTimeInMinutes
     
-    // Adjust for negative time difference (next prayer time is on the next day)
-    if timeDifferenceInMinutes < 0 {
-        timeDifferenceInMinutes += 1440 // 24 hours in minutes
-    }
     
-    let totalSeconds = timeDifferenceInMinutes * 60
+    
     let currentTimeInSeconds = currentTimeInMinutes * 60 + Calendar.current.component(.second, from: Date())
     let nextPrayerTimeInSeconds = nextPrayerTimeInMinutes * 60
     var timeDifferenceInSeconds = nextPrayerTimeInSeconds - currentTimeInSeconds
@@ -82,8 +76,6 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
         timeDifferenceInSeconds += 86400 // 24 hours in seconds
     }
     
-    let hours = timeDifferenceInMinutes / 60
-    let minutes = timeDifferenceInMinutes % 60
     
     if hours == 0 {
             return "\(nextPrayerName) je za \(minutes)min"
