@@ -211,6 +211,13 @@ struct ContentView: View {
         }
     }
     
+    func startTimer() {
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
+                fetchPrayerTimes()
+            }
+        }
+    
     
     func fetchPrayerTimes() {
         // Fetch prayer times for the selected location
