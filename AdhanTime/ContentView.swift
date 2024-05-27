@@ -236,6 +236,7 @@ struct ContentView: View {
                 if let nextPrayerTime = timeToNextPrayer(prayerTimes: times) {
                     // Update the time to next prayer result
                     DispatchQueue.main.async {
+                        self.remainingTime = nextPrayerTime.timeInterval
                         self.timeToNextPrayerResult = nextPrayerTime
                         self.startTimer()
                     }
@@ -259,6 +260,20 @@ struct ContentView: View {
         } else {
             let timeString = formatTimeInterval(remainingTime)
             timeToNextPrayerResult = timeString
+        }
+    }
+    
+    func formatTimeInterval(_ interval: TimeInterval) -> String {
+        let hours = Int(interval) / 3600
+        let minutes = (Int(interval) % 3600) / 60
+        let seconds = Int(interval) % 60
+        
+        if hours > 0 {
+            return "Asr je za \(hours) h \(minutes) min \(seconds) sec"
+        } else if minutes > 0 {
+            return "Asr je za \(minutes) min \(seconds) sec"
+        } else {
+            return "Asr je za \(seconds) sec"
         }
     }
 }
