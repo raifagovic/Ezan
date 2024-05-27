@@ -12,10 +12,10 @@ struct NextPrayerTime {
     let formatted: String
 }
 
-func timeToNextPrayer(prayerTimes: [String]) -> String? {
+func timeToNextPrayer(prayerTimes: [String]) -> NextPrayerTime? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
-    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo") // Set the time zone
+    dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
     
     let currentTimeString = dateFormatter.string(from: Date())
     print("Current time in Sarajevo: \(currentTimeString)")
@@ -84,13 +84,16 @@ func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let seconds = timeDifferenceInSeconds % 60
     
     // Format the output based on the remaining time
+    let formatted: String
     if timeDifferenceInSeconds < 60 {
-        return "\(nextPrayerName) je za \(seconds) sec"
+        formatted = "\(nextPrayerName) je za \(seconds) sec"
     } else if hours == 0 {
-        return "\(nextPrayerName) je za \(minutes) min"
+        formatted = "\(nextPrayerName) je za \(minutes) min \(seconds) sec"
     } else {
-        return "\(nextPrayerName) je za \(hours)h \(minutes)min"
+        formatted = "\(nextPrayerName) je za \(hours) h \(minutes) min"
     }
+
+    return NextPrayerTime(timeInterval: TimeInterval(timeDifferenceInSeconds), formatted: formatted)
 }
 
 
