@@ -51,9 +51,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> TimeInterval? {
     guard index < prayerNames.count else {
         return nil
     }
-    
-    let nextPrayerName = prayerNames[index]
-    
+        
     let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").compactMap { Int($0) }
     guard nextPrayerTimeComponents.count == 2 else {
         return nil

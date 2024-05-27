@@ -250,9 +250,8 @@ struct ContentView: View {
             case .success(let times):
                 DispatchQueue.main.async {
                     self.prayerTimes = times
-                    if let nextPrayerTime = timeToNextPrayer(prayerTimes: times) {
-                        let currentTime = Date().timeIntervalSince1970
-                        self.remainingTime = nextPrayerTime - currentTime
+                    if let nextPrayerTimeInterval = timeToNextPrayer(prayerTimes: times) {
+                        self.remainingTime = nextPrayerTimeInterval
                         self.startTimer()
                     } else {
                         self.timeToNextPrayerResult = nil
