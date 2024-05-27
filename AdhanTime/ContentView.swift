@@ -209,10 +209,14 @@ struct ContentView: View {
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            updateRemainingTime()
+            remainingTime -= 1
+            if remainingTime <= 0 {
+                fetchPrayerTimes()
+            } else {
+                updateRemainingTime()
+            }
         }
     }
-    
     
     func fetchPrayerTimes() {
         // Fetch prayer times for the selected location
@@ -227,22 +231,15 @@ struct ContentView: View {
         PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month, day: day) { result in
             switch result {
             case .success(let times):
-                // Update the prayer times array
                 DispatchQueue.main.async {
                     self.prayerTimes = times
-                }
-                
-                // Calculate the time to next prayer
-                if let nextPrayerTime = timeToNextPrayer(prayerTimes: times) {
-                    // Update the time to next prayer result
-                    DispatchQueue.main.async {
-                        self.timeToNextPrayerResult = nextPrayerTime
+                    if let nextPrayerTime = timeToNextPrayer(prayerTimes: times) {
+                        let currentTime = Date().timeIntervalSince1970
+                        self.remainingTime = nextPrayerTime - currentTime
                         self.startTimer()
-                    }
-                } else {
-                    // If no prayer times are available, set the result to nil
-                    DispatchQueue.main.async {
+                    } else {
                         self.timeToNextPrayerResult = nil
+                        self.remainingTime = 0
                     }
                 }
             case .failure(let error):
