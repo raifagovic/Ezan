@@ -209,14 +209,31 @@ struct ContentView: View {
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            remainingTime -= 1
-            if remainingTime <= 0 {
-                fetchPrayerTimes()
+            if self.remainingTime <= 0 {
+                self.timer?.invalidate()
+                self.timer = nil
+                fetchPrayerTimes() // Refresh prayer times
             } else {
-                updateRemainingTime()
+                self.remainingTime -= 1
+                self.timeToNextPrayerResult = formatTimeInterval(self.remainingTime)
             }
         }
     }
+    
+    func formatTimeInterval(_ interval: TimeInterval) -> String {
+        let hours = Int(interval) / 3600
+        let minutes = (Int(interval) % 3600) / 60
+        let seconds = Int(interval) % 60
+        
+        if hours > 0 {
+            return "\(hours) h \(minutes) min \(seconds) sec"
+        } else if minutes > 0 {
+            return "\(minutes) min \(seconds) sec"
+        } else {
+            return "\(seconds) sec"
+        }
+    }
+
     
     func fetchPrayerTimes() {
         // Fetch prayer times for the selected location
@@ -245,25 +262,6 @@ struct ContentView: View {
             case .failure(let error):
                 print("Failed to fetch prayer times: \(error)")
             }
-        }
-    }
-    
-    func updateRemainingTime() {
-        if remainingTime <= 0 {
-            timeToNextPrayerResult = "Nema više ezana danas"
-            return
-        }
-
-        let hours = Int(remainingTime) / 3600
-        let minutes = (Int(remainingTime) % 3600) / 60
-        let seconds = Int(remainingTime) % 60
-
-        if hours > 0 {
-            timeToNextPrayerResult = String(format: "%d h %02d min %02d sec", hours, minutes, seconds)
-        } else if minutes > 0 {
-            timeToNextPrayerResult = String(format: "%02d min %02d sec", minutes, seconds)
-        } else {
-            timeToNextPrayerResult = String(format: "%02d sec", seconds)
         }
     }
 }
