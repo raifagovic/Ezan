@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var selectedLocationIndex: Int = 0
     @State private var prayerTimes: [String] = []
     @State private var timeToNextPrayerResult: String? = nil
+    @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
     
     let locationsWithIndex: [(Int, String)] = [
