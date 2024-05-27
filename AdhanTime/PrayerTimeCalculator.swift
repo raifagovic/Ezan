@@ -7,7 +7,7 @@
 
 import Foundation
 
-func timeToNextPrayer(prayerTimes: [String]) -> NextPrayerTime? {
+func timeToNextPrayer(prayerTimes: [String]) -> TimeInterval? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
     dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
@@ -73,22 +73,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> NextPrayerTime? {
         timeDifferenceInSeconds += 86400 // 24 hours in seconds
     }
     
-    // Calculate hours, minutes, and seconds
-    let hours = timeDifferenceInSeconds / 3600
-    let minutes = (timeDifferenceInSeconds % 3600) / 60
-    let seconds = timeDifferenceInSeconds % 60
-    
-    // Format the output based on the remaining time
-    let formatted: String
-    if timeDifferenceInSeconds < 60 {
-        formatted = "\(nextPrayerName) je za \(seconds) sec"
-    } else if hours == 0 {
-        formatted = "\(nextPrayerName) je za \(minutes) min \(seconds) sec"
-    } else {
-        formatted = "\(nextPrayerName) je za \(hours) h \(minutes) min"
-    }
-
-    return NextPrayerTime(timeInterval: TimeInterval(timeDifferenceInSeconds), formatted: formatted)
+    return TimeInterval(timeDifferenceInSeconds)
 }
 
 
