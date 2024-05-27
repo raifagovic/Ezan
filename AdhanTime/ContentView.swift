@@ -209,7 +209,7 @@ struct ContentView: View {
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            updateRemainigTime()
+            updateRemainingTime()
         }
     }
     

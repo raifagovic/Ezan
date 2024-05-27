@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct NextPrayerTime {
+    let timeInterval: TimeInterval
+    let formatted: String
+}
+
 func timeToNextPrayer(prayerTimes: [String]) -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
