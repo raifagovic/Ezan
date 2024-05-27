@@ -146,10 +146,10 @@ struct ContentView: View {
     var selectedLocationId: Int {
         locationsWithIndex[selectedLocationIndex].0
     }
-
+    
     var body: some View {
         VStack {
-           
+            
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
@@ -209,10 +209,10 @@ struct ContentView: View {
     }
     
     func startTimer() {
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                updateRemainigTime()
-            }
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            updateRemainigTime()
         }
+    }
     
     
     func fetchPrayerTimes() {
@@ -248,6 +248,17 @@ struct ContentView: View {
             case .failure(let error):
                 print("Failed to fetch prayer times: \(error)")
             }
+        }
+    }
+    
+    func updateRemainingTime() {
+        remainingTime -= 1
+        
+        if remainingTime <= 0 {
+            fetchPrayerTimes()
+        } else {
+            let timeString = formatTimeInterval(remainingTime)
+            timeToNextPrayerResult = timeString
         }
     }
 }
