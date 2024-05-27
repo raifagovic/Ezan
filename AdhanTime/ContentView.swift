@@ -200,7 +200,6 @@ struct ContentView: View {
         .padding(.bottom, 30)
         .onAppear {
             fetchPrayerTimes()
-            startTimer()
         }
         .onDisappear {
             timer?.invalidate()
@@ -238,6 +237,7 @@ struct ContentView: View {
                     // Update the time to next prayer result
                     DispatchQueue.main.async {
                         self.timeToNextPrayerResult = nextPrayerTime
+                        self.startTimer()
                     }
                 } else {
                     // If no prayer times are available, set the result to nil
