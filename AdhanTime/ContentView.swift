@@ -236,7 +236,6 @@ struct ContentView: View {
                 if let nextPrayerTime = timeToNextPrayer(prayerTimes: times) {
                     // Update the time to next prayer result
                     DispatchQueue.main.async {
-                        self.remainingTime = nextPrayerTime.timeInterval
                         self.timeToNextPrayerResult = nextPrayerTime
                         self.startTimer()
                     }
@@ -253,27 +252,21 @@ struct ContentView: View {
     }
     
     func updateRemainingTime() {
-        remainingTime -= 1
-        
         if remainingTime <= 0 {
-            fetchPrayerTimes()
-        } else {
-            let timeString = formatTimeInterval(remainingTime)
-            timeToNextPrayerResult = timeString
+            timeToNextPrayerResult = "Nema više ezana danas"
+            return
         }
-    }
-    
-    func formatTimeInterval(_ interval: TimeInterval) -> String {
-        let hours = Int(interval) / 3600
-        let minutes = (Int(interval) % 3600) / 60
-        let seconds = Int(interval) % 60
-        
+
+        let hours = Int(remainingTime) / 3600
+        let minutes = (Int(remainingTime) % 3600) / 60
+        let seconds = Int(remainingTime) % 60
+
         if hours > 0 {
-            return "Asr je za \(hours) h \(minutes) min \(seconds) sec"
+            timeToNextPrayerResult = String(format: "%d h %02d min %02d sec", hours, minutes, seconds)
         } else if minutes > 0 {
-            return "Asr je za \(minutes) min \(seconds) sec"
+            timeToNextPrayerResult = String(format: "%02d min %02d sec", minutes, seconds)
         } else {
-            return "Asr je za \(seconds) sec"
+            timeToNextPrayerResult = String(format: "%02d sec", seconds)
         }
     }
 }
