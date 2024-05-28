@@ -254,12 +254,14 @@ struct ContentView: View {
             case .success(let times):
                 DispatchQueue.main.async {
                     self.prayerTimes = times
-                    if let nextPrayerTimeInterval = timeToNextPrayer(prayerTimes: times) {
+                    if let (nextPrayerTimeInterval, nextPrayerName) = timeToNextPrayer(prayerTimes: times) {
                         self.remainingTime = nextPrayerTimeInterval
+                        self.nextPrayerName = nextPrayerName
                         self.startTimer()
                     } else {
                         self.timeToNextPrayerResult = nil
                         self.remainingTime = 0
+                        self.nextPrayerName = nil
                     }
                 }
             case .failure(let error):
