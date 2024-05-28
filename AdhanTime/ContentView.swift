@@ -226,9 +226,9 @@ struct ContentView: View {
         let seconds = Int(interval) % 60
         
         if hours > 0 {
-            return "\(hours) h \(minutes) min \(seconds) sec"
+            return "\(hours) h \(minutes) m \(seconds) sec"
         } else if minutes > 0 {
-            return "\(minutes) min \(seconds) sec"
+            return "\(minutes) m \(seconds) sec"
         } else {
             return "\(seconds) sec"
         }
