@@ -221,20 +221,19 @@ struct ContentView: View {
     }
     
     func formatTimeInterval(_ interval: TimeInterval) -> String {
-        let hours = Int(interval) / 3600
-        let minutes = (Int(interval) % 3600) / 60
-        let seconds = Int(interval) % 60
-        
-        if hours > 0 {
-            return "\(hours) h \(minutes) m \(seconds) sec"
-        } else if minutes > 0 {
-            return "\(minutes) m \(seconds) sec"
+        if interval <= 60 {
+            return "\(Int(interval)) sec"
         } else {
-            return "\(seconds) sec"
+            let hours = Int(interval) / 3600
+            let minutes = ((Int(interval) % 3600) + 59) / 60 // Round up minutes
+            if hours > 0 {
+                return "\(hours) h \(minutes) min"
+            } else {
+                return "\(minutes) min"
+            }
         }
     }
 
-    
     func fetchPrayerTimes() {
         // Fetch prayer times for the selected location
         let currentDate = Date()
