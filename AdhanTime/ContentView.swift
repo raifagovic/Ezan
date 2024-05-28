@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var timeToNextPrayerResult: String? = nil
     @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
+    @State private var nextPrayerName: String? = nil
     
     let locationsWithIndex: [(Int, String)] = [
         (0, "Banovići"),
@@ -221,6 +222,10 @@ struct ContentView: View {
     }
     
     func formatTimeInterval(_ interval: TimeInterval) -> String {
+        guard let nextPrayerName = nextPrayerName else {
+                   return ""
+               }
+        
         if interval <= 60 {
             return "\(Int(interval)) sec"
         } else {
