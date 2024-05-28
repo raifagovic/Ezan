@@ -7,7 +7,7 @@
 
 import Foundation
 
-func timeToNextPrayer(prayerTimes: [String]) -> TimeInterval? {
+func timeToNextPrayer(prayerTimes: [String]) -> (TimeInterval, String)? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
     dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
@@ -51,7 +51,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> TimeInterval? {
     guard index < prayerNames.count else {
         return nil
     }
-        
+    
     let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").compactMap { Int($0) }
     guard nextPrayerTimeComponents.count == 2 else {
         return nil
@@ -71,7 +71,7 @@ func timeToNextPrayer(prayerTimes: [String]) -> TimeInterval? {
         timeDifferenceInSeconds += 86400 // 24 hours in seconds
     }
     
-    return TimeInterval(timeDifferenceInSeconds)
+    return (TimeInterval(timeDifferenceInSeconds), prayerNames[index])
 }
 
 
