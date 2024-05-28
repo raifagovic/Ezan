@@ -223,18 +223,18 @@ struct ContentView: View {
     
     func formatTimeInterval(_ interval: TimeInterval) -> String {
         guard let nextPrayerName = nextPrayerName else {
-                   return ""
-               }
+            return ""
+        }
         
         if interval <= 60 {
-            return "\(Int(interval)) sec"
+            return "\(nextPrayerName) je za \(Int(interval)) sec"
         } else {
             let hours = Int(interval) / 3600
-            let minutes = ((Int(interval) % 3600) + 59) / 60 // Round up minutes
+            let minutes = (Int(interval) % 3600 + 59) / 60 // Round up minutes
             if hours > 0 {
-                return "\(hours) h \(minutes) min"
+                return "\(nextPrayerName) je za \(hours) h \(minutes) min"
             } else {
-                return "\(minutes) min"
+                return "\(nextPrayerName) je za \(minutes) min"
             }
         }
     }
