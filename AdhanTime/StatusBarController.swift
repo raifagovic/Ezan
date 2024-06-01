@@ -25,7 +25,7 @@ class StatusBarController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar), userInfo: nil, repeats: true)
     }
 
-    @objc func updateStatusBar() {
+    @objc private func updateStatusBar() {
         // Call the function to fetch and format the remaining time
         if let (remainingTime, nextPrayerName) = fetchRemainingTime() {
             let timeString = formatTimeInterval(remainingTime, prayerName: nextPrayerName)
@@ -42,14 +42,14 @@ class StatusBarController {
 
     func formatTimeInterval(_ interval: TimeInterval, prayerName: String) -> String {
         if interval <= 60 {
-            return "\(prayerName) za \(Int(interval)) sec"
+            return "\(prayerName) je za \(Int(interval)) sec"
         } else {
             let hours = Int(interval) / 3600
             let minutes = (Int(interval) % 3600 + 59) / 60
             if hours > 0 {
-                return "\(prayerName) za \(hours) h \(minutes) min"
+                return "\(prayerName) je za \(hours) h \(minutes) min"
             } else {
-                return "\(prayerName) za \(minutes) min"
+                return "\(prayerName) je za \(minutes) min"
             }
         }
     }
