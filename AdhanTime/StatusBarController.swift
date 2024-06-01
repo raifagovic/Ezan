@@ -8,6 +8,8 @@
 import Cocoa
 
 class StatusBarController {
+    static let shared = StatusBarController()
+    
     private var statusItem: NSStatusItem
     private var timer: Timer?
 
