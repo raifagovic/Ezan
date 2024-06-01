@@ -31,7 +31,6 @@ class StatusBarController {
     }
 
     @objc private func updateStatusBar() {
-        // Call the function to fetch and format the remaining time
         if let (remainingTime, nextPrayerName) = fetchRemainingTime() {
             let timeString = formatTimeInterval(remainingTime, prayerName: nextPrayerName)
             statusItem.button?.title = timeString
