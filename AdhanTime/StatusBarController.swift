@@ -13,14 +13,16 @@ class StatusBarController {
     private var statusItem: NSStatusItem
     private var timer: Timer?
 
-    init() {
+    private init() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let button = statusItem.button {
             button.title = "Loading..."
         }
-        
-        startTimer()
+    }
+    
+    func updateStatusBar(title: String) {
+        statusItem.button?.title = title
     }
 
     func startTimer() {
