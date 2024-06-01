@@ -26,6 +26,7 @@ class StatusBarController {
     }
 
     func startTimer() {
+        timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar), userInfo: nil, repeats: true)
     }
 
@@ -38,10 +39,26 @@ class StatusBarController {
     }
 
     func fetchRemainingTime() -> (TimeInterval, String)? {
-        // Your logic to fetch the remaining time and next prayer name
-        // For simplicity, you can use the timeToNextPrayer function
         let prayerTimes = ["03:30", "05:00", "12:00", "15:00", "18:00", "20:00"]
-        return timeToNextPrayer(prayerTimes: prayerTimes)
+        let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
+        
+        guard let remainingTime = timeToNextPrayer(prayerTimes: prayerTimes) else {
+            return nil
+        }
+        
+        for (index, time) in prayerTimes.enumerated() {
+            let timeComponents = time.split(separator: ":").compactMap { Int($0) }
+            let prayerHour = timeComponents[0]
+            let prayerMinute = timeComponents[1]
+            let now = Calendar.current.dateComponents([.hour, .minute], from: Date())
+            
+            if (prayerHour > now.hour!) || (prayerHour == now.hour! && prayerMinute > now.minute!) {
+                return (remainingTime, prayerNames[index])
+            }
+        }
+        
+        // If no future prayer times are found, it means all today's prayer times have passed, return the first prayer of the next day.
+        return (remainingTime, prayerNames.first ?? "")
     }
 
     func formatTimeInterval(_ interval: TimeInterval, prayerName: String) -> String {
