@@ -9,7 +9,6 @@ import Cocoa
 
 class StatusBarController {
     static let shared = StatusBarController()
-    
     private var statusItem: NSStatusItem
     private var timer: Timer?
 
@@ -19,6 +18,8 @@ class StatusBarController {
         if let button = statusItem.button {
             button.title = "Loading..."
         }
+        
+        startTimer()
     }
     
     func updateStatusBar(title: String) {
