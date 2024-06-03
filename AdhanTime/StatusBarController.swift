@@ -21,11 +21,7 @@ class StatusBarController {
         
         startTimer()
     }
-    
-    func updateStatusBar(title: String) {
-        statusItem.button?.title = title
-    }
-
+ 
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
