@@ -257,6 +257,8 @@ struct ContentView: View {
                     if let (nextPrayerTimeInterval, nextPrayerName) = timeToNextPrayer(prayerTimes: times) {
                         self.remainingTime = nextPrayerTimeInterval
                         self.nextPrayerName = nextPrayerName
+                        self.timeToNextPrayerResult = formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
+                        StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
                         self.startTimer()
                     } else {
                         self.timeToNextPrayerResult = nil
