@@ -217,25 +217,21 @@ struct ContentView: View {
             } else {
                 self.remainingTime -= 1
                 self.timeToNextPrayerResult = formatTimeInterval(self.remainingTime)
-                StatusBarController.shared.updateStatusBar(timer: self.timeToNextPrayerResult ?? "")
+                StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
             }
         }
     }
     
-    func formatTimeInterval(_ interval: TimeInterval) -> String {
-        guard let nextPrayerName = nextPrayerName else {
-            return ""
-        }
-        
+    func formatTimeInterval(_ interval: TimeInterval, prayerName: String) -> String {
         if interval <= 60 {
-            return "\(nextPrayerName) je za \(Int(interval)) sec"
+            return "\(prayerName) je za \(Int(interval)) sec"
         } else {
             let hours = Int(interval) / 3600
             let minutes = (Int(interval) % 3600 + 59) / 60 // Round up minutes
             if hours > 0 {
-                return "\(nextPrayerName) je za \(hours) h \(minutes) min"
+                return "\(prayerName) je za \(hours) h \(minutes) min"
             } else {
-                return "\(nextPrayerName) je za \(minutes) min"
+                return "\(prayerName) je za \(minutes) min"
             }
         }
     }
