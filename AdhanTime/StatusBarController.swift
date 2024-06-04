@@ -42,15 +42,29 @@ class StatusBarController {
         let prayerTimes = ["03:30", "05:00", "12:00", "15:00", "18:00", "20:00"]
         let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
+        
+        let currentTimeString = dateFormatter.string(from: Date())
+        let currentTimeComponents = currentTimeString.split(separator: ":").compactMap { Int($0) }
+        guard currentTimeComponents.count == 2 else {
+            return nil
+        }
+        
+        let currentHour = currentTimeComponents[0]
+        let currentMinute = currentTimeComponents[1]
+        let currentSecond = Calendar.current.component(.second, from: Date())
+        
+        let currentTimeInSeconds = (currentHour * 3600) + (currentMinute * 60) + currentSecond
+        
         guard let nextPrayerTimeString = prayerTimes.first(where: {
             let components = $0.split(separator: ":")
             guard components.count == 2, let hour = Int(components[0]), let minute = Int(components[1]) else {
                 return false
             }
-            let calendar = Calendar.current
-            let now = Date()
-            let prayerTime = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now)!
-            return prayerTime > now
+            let prayerTimeInSeconds = (hour * 3600) + (minute * 60)
+            return prayerTimeInSeconds > currentTimeInSeconds
         }) else {
             return nil
         }
@@ -58,25 +72,20 @@ class StatusBarController {
         guard let index = prayerTimes.firstIndex(of: nextPrayerTimeString) else {
             return nil
         }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
         
-        let currentTimeString = dateFormatter.string(from: Date())
-        let currentTimeComponents = currentTimeString.split(separator: ":").compactMap { Int($0) }
-        let currentHour = currentTimeComponents[0]
-        let currentMinute = currentTimeComponents[1]
-        let currentSecond = Calendar.current.component(.second, from: Date())
-        
-        let currentTimeInSeconds = (currentHour * 3600) + (currentMinute * 60) + currentSecond
+        guard index < prayerNames.count else {
+            return nil
+        }
         
         let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").compactMap { Int($0) }
+        guard nextPrayerTimeComponents.count == 2 else {
+            return nil
+        }
+        
         let nextPrayerHour = nextPrayerTimeComponents[0]
         let nextPrayerMinute = nextPrayerTimeComponents[1]
-        let nextPrayerTimeInSeconds = (nextPrayerHour * 3600) + (nextPrayerMinute * 60)
+        var timeDifferenceInSeconds = (nextPrayerHour * 3600) + (nextPrayerMinute * 60) - currentTimeInSeconds
         
-        var timeDifferenceInSeconds = nextPrayerTimeInSeconds - currentTimeInSeconds
         if timeDifferenceInSeconds < 0 {
             timeDifferenceInSeconds += 86400 // 24 hours in seconds
         }
