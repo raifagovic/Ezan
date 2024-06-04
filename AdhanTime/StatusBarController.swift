@@ -77,5 +77,11 @@ class StatusBarController {
             }
         }
     }
+    
+    func refresh() {
+        timer?.invalidate()
+        updateStatusBar(timer: Timer())
+        startTimer()
+    }
 }
 
