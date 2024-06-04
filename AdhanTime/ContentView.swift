@@ -215,26 +215,12 @@ struct ContentView: View {
                 if self.remainingTime <= 60 {
                     self.timeToNextPrayerResult = "\(self.nextPrayerName ?? "") je za \(Int(self.remainingTime)) sec"
                 } else {
-                    self.timeToNextPrayerResult = formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
+                    self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
                 }
                 StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
             } else {
                 timer.invalidate()
                 self.fetchPrayerTimes() // Fetch next prayer times when current timer ends
-            }
-        }
-    }
-    
-    func formatTimeInterval(_ interval: TimeInterval, prayerName: String) -> String {
-        if interval <= 60 {
-            return "\(prayerName) je za \(Int(interval)) sec"
-        } else {
-            let hours = Int(interval) / 3600
-            let minutes = (Int(interval) % 3600 + 59) / 60 // Round up minutes
-            if hours > 0 {
-                return "\(prayerName) je za \(hours) h \(minutes) min"
-            } else {
-                return "\(prayerName) je za \(minutes) min"
             }
         }
     }
@@ -257,7 +243,7 @@ struct ContentView: View {
                     if let (nextPrayerTimeInterval, nextPrayerName) = timeToNextPrayer(prayerTimes: times) {
                         self.remainingTime = nextPrayerTimeInterval
                         self.nextPrayerName = nextPrayerName
-                        self.timeToNextPrayerResult = formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
+                        self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
                         StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
                         self.startTimer()
                     } else {
