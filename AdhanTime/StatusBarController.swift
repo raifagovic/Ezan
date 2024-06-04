@@ -29,7 +29,7 @@ class StatusBarController {
 
     @objc func updateStatusBar(timer: Timer) {
         if let (remainingTime, nextPrayerName) = fetchRemainingTime() {
-            let timeString = formatTimeInterval(remainingTime, prayerName: nextPrayerName)
+            let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
             statusItem.button?.title = timeString
         }
     }
@@ -109,7 +109,6 @@ class StatusBarController {
     
     func refresh() {
         startTimer()
-        updateStatusBar(timer: Timer())
     }
 }
 
