@@ -92,20 +92,6 @@ class StatusBarController {
         
         return (TimeInterval(timeDifferenceInSeconds), prayerNames[index])
     }
-
-    func formatTimeInterval(_ interval: TimeInterval, prayerName: String) -> String {
-        if interval <= 60 {
-            return "\(prayerName) je za \(Int(interval)) sec"
-        } else {
-            let hours = Int(interval) / 3600
-            let minutes = (Int(interval) % 3600 + 59) / 60
-            if hours > 0 {
-                return "\(prayerName) je za \(hours) h \(minutes) min"
-            } else {
-                return "\(prayerName) je za \(minutes) min"
-            }
-        }
-    }
     
     func refresh() {
         startTimer()
