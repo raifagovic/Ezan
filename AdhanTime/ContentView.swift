@@ -217,7 +217,7 @@ struct ContentView: View {
             } else {
                 self.remainingTime -= 1
                 self.timeToNextPrayerResult = formatTimeInterval(self.remainingTime)
-                StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
+                StatusBarController.shared.updateStatusBar(timer: self.timeToNextPrayerResult ?? "")
             }
         }
     }
