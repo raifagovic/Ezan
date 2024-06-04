@@ -27,7 +27,7 @@ class StatusBarController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
     }
 
-    @objc private func updateStatusBar(timer: Timer) {
+    @objc func updateStatusBar(timer: Timer) {
         if let (remainingTime, nextPrayerName) = fetchRemainingTime() {
             let timeString = formatTimeInterval(remainingTime, prayerName: nextPrayerName)
             statusItem.button?.title = timeString
