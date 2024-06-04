@@ -209,15 +209,18 @@ struct ContentView: View {
     }
     
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if self.remainingTime <= 0 {
-                self.timer?.invalidate()
-                self.timer = nil
-                fetchPrayerTimes() // Refresh prayer times
-            } else {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if self.remainingTime > 0 {
                 self.remainingTime -= 1
-                self.timeToNextPrayerResult = formatTimeInterval(self.remainingTime)
+                if self.remainingTime <= 60 {
+                    self.timeToNextPrayerResult = "\(self.nextPrayerName ?? "") je za \(Int(self.remainingTime)) sec"
+                } else {
+                    self.timeToNextPrayerResult = formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
+                }
                 StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
+            } else {
+                timer.invalidate()
+                self.fetchPrayerTimes() // Fetch next prayer times when current timer ends
             }
         }
     }
