@@ -33,6 +33,10 @@ class StatusBarController {
             statusItem.button?.title = timeString
         }
     }
+    
+    func updateStatusBar(title: String) {
+        statusItem.button?.title = title
+    }
 
     func fetchRemainingTime() -> (TimeInterval, String)? {
         let prayerTimes = ["03:30", "05:00", "12:00", "15:00", "18:00", "20:00"]
