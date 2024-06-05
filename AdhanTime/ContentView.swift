@@ -217,6 +217,9 @@ struct ContentView: View {
                 } else {
                     self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
                 }
+                StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
+                StatusBarController.shared.remainingTime = self.remainingTime
+                StatusBarController.shared.nextPrayerName = self.nextPrayerName
             } else {
                 timer.invalidate()
                 self.fetchPrayerTimes() // Fetch next prayer times when current timer ends
@@ -243,6 +246,9 @@ struct ContentView: View {
                         self.remainingTime = nextPrayerTimeInterval
                         self.nextPrayerName = nextPrayerName
                         self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
+                        StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
+                        StatusBarController.shared.remainingTime = self.remainingTime
+                        StatusBarController.shared.nextPrayerName = self.nextPrayerName
                         self.startTimer()
                     } else {
                         self.timeToNextPrayerResult = nil
