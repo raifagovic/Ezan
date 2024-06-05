@@ -31,7 +31,7 @@ class StatusBarController {
     }
 
     @objc func updateStatusBar(timer: Timer) {
-        if let (remainingTime, nextPrayerName) = fetchRemainingTime() {
+        if let remainingTime = remainingTime, let nextPrayerName = nextPrayerName {
             let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
             statusItem.button?.title = timeString
         }
@@ -41,61 +41,6 @@ class StatusBarController {
         statusItem.button?.title = title
     }
 
-    func fetchRemainingTime() -> (TimeInterval, String)? {
-        let prayerTimes = ["03:30", "05:00", "12:00", "15:00", "18:00", "20:00"]
-        let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
-        
-        let currentTimeString = dateFormatter.string(from: Date())
-        let currentTimeComponents = currentTimeString.split(separator: ":").compactMap { Int($0) }
-        guard currentTimeComponents.count == 2 else {
-            return nil
-        }
-        
-        let currentHour = currentTimeComponents[0]
-        let currentMinute = currentTimeComponents[1]
-        let currentSecond = Calendar.current.component(.second, from: Date())
-        
-        let currentTimeInSeconds = (currentHour * 3600) + (currentMinute * 60) + currentSecond
-        
-        guard let nextPrayerTimeString = prayerTimes.first(where: {
-            let components = $0.split(separator: ":")
-            guard components.count == 2, let hour = Int(components[0]), let minute = Int(components[1]) else {
-                return false
-            }
-            let prayerTimeInSeconds = (hour * 3600) + (minute * 60)
-            return prayerTimeInSeconds > currentTimeInSeconds
-        }) else {
-            return nil
-        }
-        
-        guard let index = prayerTimes.firstIndex(of: nextPrayerTimeString) else {
-            return nil
-        }
-        
-        guard index < prayerNames.count else {
-            return nil
-        }
-        
-        let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").compactMap { Int($0) }
-        guard nextPrayerTimeComponents.count == 2 else {
-            return nil
-        }
-        
-        let nextPrayerHour = nextPrayerTimeComponents[0]
-        let nextPrayerMinute = nextPrayerTimeComponents[1]
-        var timeDifferenceInSeconds = (nextPrayerHour * 3600) + (nextPrayerMinute * 60) - currentTimeInSeconds
-        
-        if timeDifferenceInSeconds < 0 {
-            timeDifferenceInSeconds += 86400 // 24 hours in seconds
-        }
-        
-        return (TimeInterval(timeDifferenceInSeconds), prayerNames[index])
-    }
-    
     func refresh() {
         startTimer()
     }
