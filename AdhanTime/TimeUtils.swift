@@ -16,7 +16,7 @@ struct TimeUtils {
         } else {
             let totalSeconds = Int(interval)
             let hours = totalSeconds / 3600
-            var minutes = (totalSeconds % 3600 + 59) / 60
+            let minutes = (totalSeconds % 3600 + 59) / 60
             
             // Adjust minutes if it equals 60
             if minutes == 60 {
