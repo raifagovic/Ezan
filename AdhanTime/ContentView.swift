@@ -229,7 +229,6 @@ struct ContentView: View {
     }
 
     func fetchPrayerTimes() {
-        // Fetch prayer times for the selected location
         let currentDate = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
