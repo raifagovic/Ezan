@@ -213,14 +213,11 @@ struct ContentView: View {
     }
     
     func startTimer() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             if self.remainingTime > 0 {
                 self.remainingTime -= 1
-                if self.remainingTime <= 60 {
-                    self.timeToNextPrayerResult = "\(self.nextPrayerName ?? "") je za \(Int(self.remainingTime)) sec"
-                } else {
-                    self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
-                }
+                self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
                 StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
                 StatusBarController.shared.remainingTime = self.remainingTime
                 StatusBarController.shared.nextPrayerName = self.nextPrayerName
