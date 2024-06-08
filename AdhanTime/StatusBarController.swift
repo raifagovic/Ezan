@@ -42,6 +42,14 @@ class StatusBarController {
     }
 
     func refresh() {
+        // Recalculate remaining time and next prayer name
+        if let (newRemainingTime, newNextPrayerName) = PrayerTimeCalculator.calculateRemainingTime() {
+            self.remainingTime = newRemainingTime
+            self.nextPrayerName = newNextPrayerName
+            let timeString = TimeUtils.formatTimeInterval(newRemainingTime, prayerName: newNextPrayerName)
+            updateStatusBar(title: timeString)
+        }
+        // Restart the timer
         startTimer()
     }
 }
