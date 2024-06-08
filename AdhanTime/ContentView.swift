@@ -242,7 +242,7 @@ struct ContentView: View {
             case .success(let times):
                 DispatchQueue.main.async {
                     self.prayerTimes = times
-                    if let (nextPrayerTimeInterval, nextPrayerName) = timeToNextPrayer(prayerTimes: times) {
+                    if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
                         self.remainingTime = nextPrayerTimeInterval
                         self.nextPrayerName = nextPrayerName
                         self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
