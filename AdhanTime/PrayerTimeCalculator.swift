@@ -21,32 +21,39 @@ class PrayerTimeCalculator {
         // Convert current time to seconds
         let currentTimeInSeconds = (currentHour * 3600) + (currentMinute * 60) + currentSecond
 
-        // Find the next prayer time
-        guard let nextPrayerTimeString = prayerTimes.first(where: {
-            let components = $0.split(separator: ":")
-            guard components.count == 2, let hour = Int(components[0]), let minute = Int(components[1]) else {
-                return false
-            }
-            let prayerTimeInSeconds = (hour * 3600) + (minute * 60)
-            return prayerTimeInSeconds > currentTimeInSeconds
-        }) else {
-            return nil
-        }
-
-        // Determine the index of the next prayer time
-        guard let index = prayerTimes.firstIndex(of: nextPrayerTimeString) else {
-            return nil
-        }
-
         // Define the array of prayer names
         let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
 
-        // Determine the name of the next prayer
-        guard index < prayerNames.count else {
+        // Find the next prayer time
+        var nextPrayerTimeString: String?
+        var index: Int?
+        for (i, timeString) in prayerTimes.enumerated() {
+            let components = timeString.split(separator: ":").compactMap { Int($0) }
+            guard components.count == 2 else { continue }
+            let prayerTimeInSeconds = (components[0] * 3600) + (components[1] * 60)
+            if prayerTimeInSeconds > currentTimeInSeconds {
+                nextPrayerTimeString = timeString
+                index = i
+                break
+            }
+        }
+
+        // If no future prayer time is found for today, use the first prayer time of the next day
+        if nextPrayerTimeString == nil {
+            nextPrayerTimeString = prayerTimes.first
+            index = 0
+        }
+
+        guard let validNextPrayerTimeString = nextPrayerTimeString, let validIndex = index else {
             return nil
         }
 
-        let nextPrayerTimeComponents = nextPrayerTimeString.split(separator: ":").compactMap { Int($0) }
+        // Determine the name of the next prayer
+        guard validIndex < prayerNames.count else {
+            return nil
+        }
+
+        let nextPrayerTimeComponents = validNextPrayerTimeString.split(separator: ":").compactMap { Int($0) }
         guard nextPrayerTimeComponents.count == 2 else {
             return nil
         }
@@ -60,11 +67,12 @@ class PrayerTimeCalculator {
         // Calculate time difference in seconds
         var timeDifferenceInSeconds = nextPrayerTimeInSeconds - currentTimeInSeconds
 
-        // Adjust for negative time difference (next prayer time is on the next day)
+        // Adjust for the next day's prayer time if needed
         if timeDifferenceInSeconds < 0 {
             timeDifferenceInSeconds += 86400 // 24 hours in seconds
         }
 
-        return (TimeInterval(timeDifferenceInSeconds), prayerNames[index])
+        return (TimeInterval(timeDifferenceInSeconds), prayerNames[validIndex])
     }
 }
+
