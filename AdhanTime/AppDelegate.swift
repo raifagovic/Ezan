@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func macDidWake(notification: NSNotification) {
         statusBarController?.refresh()
+        NotificationCenter.default.post(name: Notification.Name("MacDidWake"), object: nil)
     }
 }
 
