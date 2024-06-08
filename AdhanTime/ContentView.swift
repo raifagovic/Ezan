@@ -201,6 +201,10 @@ struct ContentView: View {
         .padding(.bottom, 30)
         .onAppear {
             fetchPrayerTimes()
+            // Add observer for wake notifications
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in
+                fetchPrayerTimes()
+            }
         }
         .onDisappear {
             timer?.invalidate()
