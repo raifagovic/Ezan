@@ -11,6 +11,7 @@ class StatusBarController {
     static let shared = StatusBarController()
     private var statusItem: NSStatusItem
     private var timer: Timer?
+    private var mainWindow: NSWindow?
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
