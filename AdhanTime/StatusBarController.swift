@@ -30,6 +30,17 @@ class StatusBarController {
         self.mainWindow = window
     }
     
+    @objc func statusBarButtonClicked() {
+        if let window = mainWindow {
+            if window.isVisible {
+                window.orderOut(nil)
+            } else {
+                window.makeKeyAndOrderFront(nil)
+                NSApp.activate(ignoringOtherApps: true)
+            }
+        }
+    }
+    
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
