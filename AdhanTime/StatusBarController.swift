@@ -21,6 +21,8 @@ class StatusBarController {
         
         if let button = statusItem.button {
             button.title = "Loading..."
+            button.action = #selector(statusBarButtonClicked)
+            button.target = self
         }
         
         startTimer()
