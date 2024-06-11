@@ -25,7 +25,11 @@ class StatusBarController {
         
         startTimer()
     }
- 
+    
+    func setMainWindow(_ window: NSWindow) {
+        self.mainWindow = window
+    }
+    
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
