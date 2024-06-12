@@ -37,6 +37,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWorkspace.didWakeNotification,
             object: nil
         )
+        
+        // Keep a reference to the window
+        self.window = window
     }
     
     @objc func macDidWake(notification: NSNotification) {
