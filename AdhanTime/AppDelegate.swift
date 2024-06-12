@@ -27,6 +27,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
         
+        // Set the main window reference in StatusBarController
+        statusBarController?.setMainWindow(window)
+        
         // Add observer for wake notifications
         NSWorkspace.shared.notificationCenter.addObserver(
             self,
