@@ -259,6 +259,23 @@ struct ContentView: View {
                 }
             case .failure(let error):
                 print("Failed to fetch prayer times: \(error)")
+                // Try to use cached prayer times if available
+                if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes() {
+                    self.prayerTimes = cachedPrayerTimes
+                    if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
+                        self.remainingTime = nextPrayerTimeInterval
+                        self.nextPrayerName = nextPrayerName
+                        self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
+                        StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
+                        StatusBarController.shared.remainingTime = self.remainingTime
+                        StatusBarController.shared.nextPrayerName = self.nextPrayerName
+                        self.startTimer()
+                    } else {
+                        self.timeToNextPrayerResult = nil
+                        self.remainingTime = 0
+                        self.nextPrayerName = nil
+                    }
+                }
             }
         }
     }
