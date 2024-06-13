@@ -15,6 +15,8 @@ class StatusBarController {
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
+    
+    private let prayerTimeCache = PrayerTimeCache()
 
     private init() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -49,12 +51,20 @@ class StatusBarController {
     }
 
     @objc func updateStatusBar(timer: Timer) {
-        if let remainingTime = remainingTime, let nextPrayerName = nextPrayerName {
-            let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
-            statusItem.button?.title = timeString
+        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
+            // Use cached prayer times
+            if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
+                let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
+                statusItem.button?.title = timeString
+                self.remainingTime = remainingTime
+                self.nextPrayerName = nextPrayerName
+            }
+        } else {
+            // Fallback if no cached data is available (should rarely happen)
+            statusItem.button?.title = "No cached data"
         }
     }
-    
+
     func updateStatusBar(title: String) {
         statusItem.button?.title = title
     }
