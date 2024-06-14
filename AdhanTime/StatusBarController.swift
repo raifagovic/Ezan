@@ -70,15 +70,37 @@ class StatusBarController {
     }
 
     func refresh() {
-        // Recalculate remaining time and next prayer name
-        if let (newRemainingTime, newNextPrayerName) = PrayerTimeCalculator.calculateRemainingTime() {
-            self.remainingTime = newRemainingTime
-            self.nextPrayerName = newNextPrayerName
-            let timeString = TimeUtils.formatTimeInterval(newRemainingTime, prayerName: newNextPrayerName)
-            updateStatusBar(title: timeString)
+        // Try to fetch new prayer times from the internet
+        PrayerTimeAPI.fetchPrayerTimes { result in
+            switch result {
+            case .success(let times):
+                // Cache the new prayer times
+                PrayerTimeCache.savePrayerTimes(times)
+                
+                // Update status bar
+                if let (newRemainingTime, newNextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
+                    self.remainingTime = newRemainingTime
+                    self.nextPrayerName = newNextPrayerName
+                    let timeString = TimeUtils.formatTimeInterval(newRemainingTime, prayerName: newNextPrayerName)
+                    self.updateStatusBar(title: timeString)
+                }
+            case .failure(let error):
+                print("Failed to fetch prayer times: \(error)")
+                // If fetching fails, continue using cached data if available
+                if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
+                    if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
+                        let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
+                        self.updateStatusBar(title: timeString)
+                        self.remainingTime = remainingTime
+                        self.nextPrayerName = nextPrayerName
+                    }
+                } else {
+                    // If no cached data is available and fetching fails, handle appropriately
+                    self.updateStatusBar(title: "No data available")
+                }
+            }
         }
-        // Restart the timer
-        startTimer()
     }
+
 }
 
