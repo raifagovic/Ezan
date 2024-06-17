@@ -70,8 +70,19 @@ class StatusBarController {
     }
 
     func refresh() {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        
+        guard let year = components.year, let month = components.month, let day = components.day else {
+            return
+        }
+        
+        // Assume you have a selected location ID or define a default one
+        let selectedLocationId = 77 // Example: Sarajevo location ID
+        
         // Try to fetch new prayer times from the internet
-        PrayerTimeAPI.fetchPrayerTimes { result in
+        PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month, day: day) { result in
             switch result {
             case .success(let times):
                 // Cache the new prayer times
@@ -101,6 +112,5 @@ class StatusBarController {
             }
         }
     }
-
 }
 
