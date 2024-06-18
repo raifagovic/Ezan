@@ -40,5 +40,12 @@ class PrayerTimeCache {
         
         return monthlyData.isEmpty ? nil : monthlyData
     }
+    
+    static func removeOldData(before date: Date) {
+        let dateKey = formattedDateKey(from: date)
+        var cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]] ?? [:]
+        cachedData = cachedData.filter { $0.key >= dateKey }
+        UserDefaults.standard.set(cachedData, forKey: cacheKey)
+    }
 }
 
