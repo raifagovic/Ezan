@@ -78,7 +78,7 @@ class StatusBarController {
         let nextMonth = calendar.dateComponents([.year, .month], from: nextMonthDate)
         
         // Fetch prayer times for current and next month
-        PrayerTimeAPI.fetchPrayerTimes(for: currentMonth.year!, month: currentMonth.month!) { result in
+        PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: nextMonth.year!, month: nextMonth.month!, day: 1) { result in
             switch result {
             case .success(let times):
                 // Cache the new prayer times for current month
@@ -93,12 +93,12 @@ class StatusBarController {
     }
     
     private func fetchNextMonthFirstWeek(nextMonth: DateComponents) {
-        PrayerTimeAPI.fetchPrayerTimes(for: nextMonth.year!, month: nextMonth.month!) { result in
+        PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: nextMonth.year!, month: nextMonth.month!, day: 1) { result in
             switch result {
             case .success(let times):
                 // Cache the new prayer times for next month
                 let nextMonthStart = Calendar.current.date(from: nextMonth)!
-                self.prayerTimeCache.savePrayerTimes(Array(times.prefix(7)), for: nextMonthStart)
+                PrayerTimeCache.savePrayerTimes(Array(times.prefix(7)), for: nextMonthStart)
                 self.fallbackToCachedData()
             case .failure(let error):
                 print("Failed to fetch next month's first week prayer times: \(error)")
@@ -108,7 +108,7 @@ class StatusBarController {
     }
     
     private func fallbackToCachedData() {
-        if let cachedPrayerTimes = self.prayerTimeCache.loadMonthlyCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
+        if let cachedPrayerTimes = PrayerTimeCache.loadMonthlyCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
             if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
                 let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
                 self.updateStatusBar(title: timeString)
@@ -120,5 +120,5 @@ class StatusBarController {
         }
     }
 }
-}
+
 
