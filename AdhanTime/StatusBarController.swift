@@ -12,12 +12,11 @@ class StatusBarController {
     private var statusItem: NSStatusItem
     private var timer: Timer?
     private var mainWindow: NSWindow?
+    private let prayerTimeCache = PrayerTimeCache()
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
     
-    private let prayerTimeCache = PrayerTimeCache()
-
     private init() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
@@ -51,7 +50,7 @@ class StatusBarController {
     }
 
     @objc func updateStatusBar(timer: Timer) {
-        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
+        if let cachedPrayerTimes = PrayerTimeCache.loadMonthlyCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
             // Use cached prayer times
             if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
                 let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
