@@ -69,45 +69,25 @@ class StatusBarController {
     }
 
     func refresh() {
+        // Get current and next month dates
         let currentDate = Date()
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "GMT")!
+        let currentMonth = calendar.dateComponents([.year, .month], from: currentDate)
+        let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: currentDate)!
+        let nextMonth = calendar.dateComponents([.year, .month], from: nextMonthDate)
         
-        guard let year = components.year, let month = components.month, let day = components.day else {
-            return
-        }
-        
-        // Assume you have a selected location ID or define a default one
-        let selectedLocationId = 77 // Example: Sarajevo location ID
-        
-        // Try to fetch new prayer times from the internet
-        PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month, day: day) { result in
+        // Fetch prayer times for current and next month
+        PrayerTimeAPI.fetchPrayerTimes(for: currentMonth.year!, month: currentMonth.month!) { result in
             switch result {
             case .success(let times):
-                // Cache the new prayer times
-                PrayerTimeCache.savePrayerTimes(times)
-                
-                // Update status bar
-                if let (newRemainingTime, newNextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
-                    self.remainingTime = newRemainingTime
-                    self.nextPrayerName = newNextPrayerName
-                    let timeString = TimeUtils.formatTimeInterval(newRemainingTime, prayerName: newNextPrayerName)
-                    self.updateStatusBar(title: timeString)
-                }
+                // Cache the new prayer times for current month
+                PrayerTimeCache.savePrayerTimes(times, for: currentDate)
+                // Fetch prayer times for the first week of the next month
+                self.fetchNextMonthFirstWeek(nextMonth: nextMonth)
             case .failure(let error):
                 print("Failed to fetch prayer times: \(error)")
-                // If fetching fails, continue using cached data if available
-                if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
-                    if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
-                        let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
-                        self.updateStatusBar(title: timeString)
-                        self.remainingTime = remainingTime
-                        self.nextPrayerName = nextPrayerName
-                    }
-                } else {
-                    // If no cached data is available and fetching fails, handle appropriately
-                    self.updateStatusBar(title: "No data available")
-                }
+                self.fallbackToCachedData()
             }
         }
     }
