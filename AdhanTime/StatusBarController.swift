@@ -16,6 +16,7 @@ class StatusBarController {
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
+    var locationId: Int = 77 // Default locationId
     
     private init() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
