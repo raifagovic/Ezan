@@ -106,5 +106,19 @@ class StatusBarController {
             }
         }
     }
+    
+    private func fallbackToCachedData() {
+        if let cachedPrayerTimes = self.prayerTimeCache.loadMonthlyCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
+            if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
+                let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
+                self.updateStatusBar(title: timeString)
+                self.remainingTime = remainingTime
+                self.nextPrayerName = nextPrayerName
+            }
+        } else {
+            self.updateStatusBar(title: "No data available")
+        }
+    }
+}
 }
 
