@@ -17,8 +17,10 @@ class PrayerTimeCache {
         UserDefaults.standard.set(cachedData, forKey: cacheKey)
     }
     
-    static func loadCachedPrayerTimes() -> [String]? {
-        return UserDefaults.standard.stringArray(forKey: cacheKey)
+    static func loadCachedPrayerTimes(for date: Date) -> [String]? {
+        let dateKey = formattedDateKey(from: date)
+        let cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]]
+        return cachedData?[dateKey]
     }
 }
 
