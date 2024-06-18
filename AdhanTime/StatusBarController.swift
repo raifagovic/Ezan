@@ -91,5 +91,20 @@ class StatusBarController {
             }
         }
     }
+    
+    private func fetchNextMonthFirstWeek(nextMonth: DateComponents) {
+        PrayerTimeAPI.fetchPrayerTimes(for: nextMonth.year!, month: nextMonth.month!) { result in
+            switch result {
+            case .success(let times):
+                // Cache the new prayer times for next month
+                let nextMonthStart = Calendar.current.date(from: nextMonth)!
+                self.prayerTimeCache.savePrayerTimes(Array(times.prefix(7)), for: nextMonthStart)
+                self.fallbackToCachedData()
+            case .failure(let error):
+                print("Failed to fetch next month's first week prayer times: \(error)")
+                self.fallbackToCachedData()
+            }
+        }
+    }
 }
 
