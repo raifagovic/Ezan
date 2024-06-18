@@ -47,5 +47,11 @@ class PrayerTimeCache {
         cachedData = cachedData.filter { $0.key >= dateKey }
         UserDefaults.standard.set(cachedData, forKey: cacheKey)
     }
+    
+    private static func formattedDateKey(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 }
 
