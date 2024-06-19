@@ -205,6 +205,12 @@ struct ContentView: View {
             NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in
                 fetchPrayerTimes()
             }
+            // Add observer for remaining time updates
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateRemainingTime"), object: nil, queue: .main) { notification in
+                if let timeString = notification.object as? String {
+                    self.timeToNextPrayerResult = timeString
+                }
+            }
         }
         .onDisappear {
             timer?.invalidate()
