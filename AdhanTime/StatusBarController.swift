@@ -65,9 +65,11 @@ class StatusBarController {
     }
 
     func updateStatusBar(title: String) {
-        statusItem.button?.title = title
+        DispatchQueue.main.async {
+            self.statusItem.button?.title = title
+        }
     }
-
+    
     func refresh() {
         // Get current and next month dates
         let currentDate = Date()
