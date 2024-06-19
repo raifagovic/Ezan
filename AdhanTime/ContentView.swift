@@ -260,7 +260,7 @@ struct ContentView: View {
             case .failure(let error):
                 print("Failed to fetch prayer times: \(error)")
                 // Try to use cached prayer times if available
-                if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes() {
+                if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) {
                     self.prayerTimes = cachedPrayerTimes
                     if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
                         self.remainingTime = nextPrayerTimeInterval
