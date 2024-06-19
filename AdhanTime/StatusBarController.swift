@@ -75,18 +75,26 @@ class StatusBarController {
         let currentDate = Date()
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "GMT")!
-        let currentMonth = calendar.dateComponents([.year, .month], from: currentDate)
+        let currentMonthComponents = calendar.dateComponents([.year, .month], from: currentDate)
         let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: currentDate)!
-        let nextMonth = calendar.dateComponents([.year, .month], from: nextMonthDate)
+        let nextMonthComponents = calendar.dateComponents([.year, .month], from: nextMonthDate)
         
-        // Fetch prayer times for current and next month
-        PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: nextMonth.year!, month: nextMonth.month!, day: 1) { result in
+        guard let currentYear = currentMonthComponents.year,
+              let currentMonth = currentMonthComponents.month,
+              let nextYear = nextMonthComponents.year,
+              let nextMonth = nextMonthComponents.month else {
+            return
+        }
+        
+        // Fetch prayer times for the current month
+        PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: currentYear, month: currentMonth, day: 1) { result in
             switch result {
             case .success(let times):
-                // Cache the new prayer times for current month
+                // Cache the new prayer times for the current month
                 PrayerTimeCache.savePrayerTimes(times, for: currentDate)
+                
                 // Fetch prayer times for the first week of the next month
-                self.fetchNextMonthFirstWeek(nextMonth: nextMonth)
+                self.fetchNextMonthFirstWeek(nextMonthComponents: nextMonthComponents)
             case .failure(let error):
                 print("Failed to fetch prayer times: \(error)")
                 self.fallbackToCachedData()
