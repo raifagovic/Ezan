@@ -242,7 +242,7 @@ struct ContentView: View {
             case .success(let times):
                 DispatchQueue.main.async {
                     self.prayerTimes = times
-                    PrayerTimeCache.savePrayerTimes(times)  // Save the fetched times to cache
+                    PrayerTimeCache.savePrayerTimes(times, for: currentDate)  // Save the fetched times to cache
                     if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
                         self.remainingTime = nextPrayerTimeInterval
                         self.nextPrayerName = nextPrayerName
