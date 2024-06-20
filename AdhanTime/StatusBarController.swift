@@ -69,6 +69,7 @@ class StatusBarController {
     func updateStatusBar(title: String) {
         DispatchQueue.main.async {
             self.statusItem.button?.title = title
+            self.noCachedDataShown = false // Reset the flag when explicitly updating the title
         }
     }
     
