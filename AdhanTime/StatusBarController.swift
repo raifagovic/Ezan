@@ -49,9 +49,10 @@ class StatusBarController {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
     }
-
+    
     @objc func updateStatusBar(timer: Timer) {
         if let cachedPrayerTimes = PrayerTimeCache.loadMonthlyCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
+            noCachedDataShown = false // Reset the flag if data is available
             // Use cached prayer times
             if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
                 let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
@@ -59,9 +60,9 @@ class StatusBarController {
                 self.remainingTime = remainingTime
                 self.nextPrayerName = nextPrayerName
             }
-        } else {
-            // Fallback if no cached data is available (should rarely happen)
+        } else if !noCachedDataShown { // Only update to "No cached data" once
             statusItem.button?.title = "No cached data"
+            noCachedDataShown = true
         }
     }
 
