@@ -12,7 +12,6 @@ class StatusBarController {
     private var statusItem: NSStatusItem
     private var timer: Timer?
     private var mainWindow: NSWindow?
-    private var noCachedDataShown = false // New flag to prevent repetitive updates
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
