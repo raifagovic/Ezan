@@ -121,21 +121,6 @@ class StatusBarController {
             }
         }
     }
-    
-    func fallbackToCachedData() {
-        let currentDate = Date()
-        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) {
-            if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
-                self.remainingTime = nextPrayerTimeInterval
-                self.nextPrayerName = nextPrayerName
-                let timeString = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
-                self.updateStatusBar(title: timeString)
-                self.startTimer()
-            }
-        } else {
-            print("No cached prayer times available")
-        }
-    }
 }
 
 
