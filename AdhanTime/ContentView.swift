@@ -251,6 +251,23 @@ struct ContentView: View {
         findNextPrayerTime()
     }
     
+    func fetchAndSaveNewMonthData(year: Int, month: Int) {
+        PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month) { result in
+            switch result {
+            case .success(let times):
+                DispatchQueue.main.async {
+                    self.prayerTimes = times
+                    PrayerTimeCache.savePrayerTimes(times, for: year, month: month)
+                    self.findNextPrayerTime()
+                }
+            case .failure(let error):
+                print("Failed to fetch prayer times: \(error)")
+                self.loadCachedPrayerTimes()
+                self.findNextPrayerTime()
+            }
+        }
+    }
+    
     func loadCachedPrayerTimes() {
         let currentDate = Date()
         if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) {
