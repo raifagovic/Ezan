@@ -44,38 +44,20 @@ class StatusBarController {
         }
     }
     
-    private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
-            self?.refresh()
-        }
-    }
-    
     func updateStatusBar(title: String) {
         if let button = statusItem.button {
             button.title = title
         }
     }
     
-    func refresh() {
-        ContentView().fetchPrayerTimes()
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            self?.refresh()
+        }
     }
     
-    func fetchNextMonthFirstWeek(nextMonthComponents: DateComponents) {
-        guard let nextYear = nextMonthComponents.year,
-              let nextMonth = nextMonthComponents.month else {
-            return
-        }
-        
-        // Fetch prayer times for the first week of the next month
-        PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: nextYear, month: nextMonth, day: 1) { result in
-            switch result {
-            case .success(let times):
-                let nextMonthDate = Calendar.current.date(from: nextMonthComponents)!
-                PrayerTimeCache.savePrayerTimes(times, for: nextMonthDate)
-            case .failure(let error):
-                print("Failed to fetch prayer times for the first week of the next month: \(error)")
-            }
-        }
+    func refresh() {
+        ContentView().fetchPrayerTimes()
     }
 }
 
