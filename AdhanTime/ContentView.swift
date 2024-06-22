@@ -251,6 +251,24 @@ struct ContentView: View {
         findNextPrayerTime()
     }
     
+    func findNextPrayerTime() {
+        let currentDate = Date()
+        if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: prayerTimes) {
+            self.remainingTime = nextPrayerTimeInterval
+            self.nextPrayerName = nextPrayerName
+            self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
+            StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
+            StatusBarController.shared.remainingTime = self.remainingTime
+            StatusBarController.shared.nextPrayerName = self.nextPrayerName
+            self.startTimer()
+        } else {
+            self.timeToNextPrayerResult = nil
+            self.remainingTime = 0
+            self.nextPrayerName = nil
+            StatusBarController.shared.updateStatusBar(title: "Nema više ezana danas")
+        }
+    }
+    
     func fetchNextPrayerTime() {
         findNextPrayerTime()
         
