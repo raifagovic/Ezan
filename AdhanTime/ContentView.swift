@@ -251,6 +251,10 @@ struct ContentView: View {
         findNextPrayerTime()
     }
     
+    func isNewMonth(year: Int, month: Int) -> Bool {
+        // Logic to determine if the current month is new compared to the last fetched data
+    }
+    
     func fetchAndSaveNewMonthData(year: Int, month: Int) {
         PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month) { result in
             switch result {
