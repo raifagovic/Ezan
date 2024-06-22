@@ -50,26 +50,9 @@ class StatusBarController {
         }
     }
     
-    @objc func updateStatusBar(timer: Timer) {
-        if let cachedPrayerTimes = PrayerTimeCache.loadMonthlyCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
-            noCachedDataShown = false // Reset the flag if data is available
-            // Use cached prayer times
-            if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
-                let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
-                statusItem.button?.title = timeString
-                self.remainingTime = remainingTime
-                self.nextPrayerName = nextPrayerName
-            }
-        } else if !noCachedDataShown { // Only update to "No cached data" once
-            statusItem.button?.title = "No cached data"
-            noCachedDataShown = true
-        }
-    }
-
     func updateStatusBar(title: String) {
-        DispatchQueue.main.async {
-            self.statusItem.button?.title = title
-            self.noCachedDataShown = false // Reset the flag when explicitly updating the title
+        if let button = statusItem.button {
+            button.title = title
         }
     }
     
