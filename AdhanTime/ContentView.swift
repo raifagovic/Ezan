@@ -150,7 +150,6 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
@@ -229,7 +228,7 @@ struct ContentView: View {
                 StatusBarController.shared.nextPrayerName = self.nextPrayerName
             } else {
                 timer.invalidate()
-                self.fetchPrayerTimes() // Fetch next prayer times when current timer ends
+                self.fetchNextPrayerTime() // Fetch next prayer times when current timer ends
             }
         }
     }
@@ -282,6 +281,20 @@ struct ContentView: View {
                         self.nextPrayerName = nil
                     }
                 }
+            }
+        }
+    }
+    
+    func fetchNextPrayerTime() {
+        findNextPrayerTime()
+        
+        if nextPrayerName == "Zora" {
+            let calendar = Calendar.current
+            let currentDate = Date()
+            let components = calendar.dateComponents([.year, .month], from: currentDate)
+            
+            if let year = components.year, let month = components.month, isNewMonth(year: year, month: month) {
+                fetchAndSaveNewMonthData(year: year, month: month)
             }
         }
     }
