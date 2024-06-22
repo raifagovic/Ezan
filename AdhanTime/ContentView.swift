@@ -242,47 +242,13 @@ struct ContentView: View {
             return
         }
         
-        PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month, day: day) { result in
-            switch result {
-            case .success(let times):
-                DispatchQueue.main.async {
-                    self.prayerTimes = times
-                    PrayerTimeCache.savePrayerTimes(times, for: currentDate)  // Save the fetched times to cache
-                    if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
-                        self.remainingTime = nextPrayerTimeInterval
-                        self.nextPrayerName = nextPrayerName
-                        self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
-                        StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
-                        StatusBarController.shared.remainingTime = self.remainingTime
-                        StatusBarController.shared.nextPrayerName = self.nextPrayerName
-                        self.startTimer()
-                    } else {
-                        self.timeToNextPrayerResult = nil
-                        self.remainingTime = 0
-                        self.nextPrayerName = nil
-                    }
-                }
-            case .failure(let error):
-                print("Failed to fetch prayer times: \(error)")
-                // Try to use cached prayer times if available
-                if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) {
-                    self.prayerTimes = cachedPrayerTimes
-                    if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
-                        self.remainingTime = nextPrayerTimeInterval
-                        self.nextPrayerName = nextPrayerName
-                        self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
-                        StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
-                        StatusBarController.shared.remainingTime = self.remainingTime
-                        StatusBarController.shared.nextPrayerName = self.nextPrayerName
-                        self.startTimer()
-                    } else {
-                        self.timeToNextPrayerResult = nil
-                        self.remainingTime = 0
-                        self.nextPrayerName = nil
-                    }
-                }
-            }
+        if isNewMonth(year: year, month: month) {
+            fetchAndSaveNewMonthData(year: year, month: month)
+        } else {
+            loadCachedPrayerTimes()
         }
+        
+        findNextPrayerTime()
     }
     
     func fetchNextPrayerTime() {
