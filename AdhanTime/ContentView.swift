@@ -251,6 +251,13 @@ struct ContentView: View {
         findNextPrayerTime()
     }
     
+    func loadCachedPrayerTimes() {
+        let currentDate = Date()
+        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) {
+            self.prayerTimes = cachedPrayerTimes
+        }
+    }
+    
     func findNextPrayerTime() {
         let currentDate = Date()
         if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: prayerTimes) {
