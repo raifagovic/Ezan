@@ -150,6 +150,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
@@ -228,7 +229,7 @@ struct ContentView: View {
                 StatusBarController.shared.nextPrayerName = self.nextPrayerName
             } else {
                 timer.invalidate()
-                self.fetchNextPrayerTime() // Fetch next prayer times when current timer ends
+                self.fetchPrayerTimes() // Fetch next prayer times when current timer ends
             }
         }
     }
@@ -242,73 +243,46 @@ struct ContentView: View {
             return
         }
         
-        if isNewMonth(year: year, month: month) {
-            fetchAndSaveNewMonthData(year: year, month: month)
-        } else {
-            loadCachedPrayerTimes()
-        }
-        
-        findNextPrayerTime()
-    }
-    
-    func isNewMonth(year: Int, month: Int) -> Bool {
-        // Logic to determine if the current month is new compared to the last fetched data
-    }
-    
-    func fetchAndSaveNewMonthData(year: Int, month: Int) {
-        PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month) { result in
+        PrayerTimeAPI.fetchPrayerTimes(for: selectedLocationId, year: year, month: month, day: day) { result in
             switch result {
             case .success(let times):
                 DispatchQueue.main.async {
                     self.prayerTimes = times
-                    PrayerTimeCache.savePrayerTimes(times, for: year, month: month)
-                    self.findNextPrayerTime()
+                    PrayerTimeCache.savePrayerTimes(times, for: currentDate)  // Save the fetched times to cache
+                    if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
+                        self.remainingTime = nextPrayerTimeInterval
+                        self.nextPrayerName = nextPrayerName
+                        self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
+                        StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
+                        StatusBarController.shared.remainingTime = self.remainingTime
+                        StatusBarController.shared.nextPrayerName = self.nextPrayerName
+                        self.startTimer()
+                    } else {
+                        self.timeToNextPrayerResult = nil
+                        self.remainingTime = 0
+                        self.nextPrayerName = nil
+                    }
                 }
             case .failure(let error):
                 print("Failed to fetch prayer times: \(error)")
-                self.loadCachedPrayerTimes()
-                self.findNextPrayerTime()
-            }
-        }
-    }
-    
-    func loadCachedPrayerTimes() {
-        let currentDate = Date()
-        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) {
-            self.prayerTimes = cachedPrayerTimes
-        }
-    }
-    
-    func findNextPrayerTime() {
-        let currentDate = Date()
-        if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: prayerTimes) {
-            self.remainingTime = nextPrayerTimeInterval
-            self.nextPrayerName = nextPrayerName
-            self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
-            StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
-            StatusBarController.shared.remainingTime = self.remainingTime
-            StatusBarController.shared.nextPrayerName = self.nextPrayerName
-            self.startTimer()
-        } else {
-            self.timeToNextPrayerResult = nil
-            self.remainingTime = 0
-            self.nextPrayerName = nil
-            StatusBarController.shared.updateStatusBar(title: "Nema više ezana danas")
-        }
-    }
-    
-    func fetchNextPrayerTime() {
-        findNextPrayerTime()
-        
-        if nextPrayerName == "Zora" {
-            let calendar = Calendar.current
-            let currentDate = Date()
-            let components = calendar.dateComponents([.year, .month], from: currentDate)
-            
-            if let year = components.year, let month = components.month, isNewMonth(year: year, month: month) {
-                fetchAndSaveNewMonthData(year: year, month: month)
+                // Try to use cached prayer times if available
+                if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) {
+                    self.prayerTimes = cachedPrayerTimes
+                    if let (nextPrayerTimeInterval, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
+                        self.remainingTime = nextPrayerTimeInterval
+                        self.nextPrayerName = nextPrayerName
+                        self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
+                        StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
+                        StatusBarController.shared.remainingTime = self.remainingTime
+                        StatusBarController.shared.nextPrayerName = self.nextPrayerName
+                        self.startTimer()
+                    } else {
+                        self.timeToNextPrayerResult = nil
+                        self.remainingTime = 0
+                        self.nextPrayerName = nil
+                    }
+                }
             }
         }
     }
 }
-
