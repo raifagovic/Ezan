@@ -27,6 +27,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
         
+        // Keep a reference to the window
+        self.window = window
+        
         // Set the main window reference in StatusBarController
         statusBarController?.setMainWindow(window)
         
@@ -37,9 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWorkspace.didWakeNotification,
             object: nil
         )
-        
-        // Keep a reference to the window
-        self.window = window
     }
     
     @objc func macDidWake(notification: NSNotification) {
