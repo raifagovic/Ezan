@@ -57,13 +57,8 @@ struct PrayerTimeAPI {
     
     static func parsePrayerTimes(data: Data) throws -> [String] {
         let decoder = JSONDecoder()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        
         let response = try decoder.decode(PrayerTimeResponse.self, from: data)
-        
-        // Convert date strings to formatted time strings
-        let prayerTimes = response.vakat.map { $0 }
+        let prayerTimes = response.vakat
         return prayerTimes
     }
 }
