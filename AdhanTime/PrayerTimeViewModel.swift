@@ -14,7 +14,7 @@ class PrayerTimeViewModel: ObservableObject {
         if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime() {
             prayerTimeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
         } else {
-            prayerTimeString = "Nema više ezana danas"
+            prayerTimeString = "Error"
         }
     }
 }
