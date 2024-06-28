@@ -84,8 +84,8 @@ class StatusBarController {
         
         guard let currentYear = currentMonthComponents.year,
               let currentMonth = currentMonthComponents.month,
-              let nextYear = nextMonthComponents.year,
-              let nextMonth = nextMonthComponents.month else {
+              let nextYear = nextMonthComponents.year
+        else {
             return
         }
         
@@ -138,5 +138,6 @@ class StatusBarController {
         }
     }
 }
+
 
 
