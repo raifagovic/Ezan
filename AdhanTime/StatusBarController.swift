@@ -83,8 +83,7 @@ class StatusBarController {
         let nextMonthComponents = calendar.dateComponents([.year, .month], from: nextMonthDate)
         
         guard let currentYear = currentMonthComponents.year,
-              let currentMonth = currentMonthComponents.month,
-              let nextYear = nextMonthComponents.year
+              let currentMonth = currentMonthComponents.month
         else {
             return
         }
