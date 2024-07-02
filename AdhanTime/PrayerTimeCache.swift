@@ -23,23 +23,7 @@ class PrayerTimeCache {
         return cachedData?[dateKey]
     }
     
-    static func loadMonthlyCachedPrayerTimes() -> [String]? {
-        let currentMonthKey = formattedDateKeyForMonth(from: Date())
-        let nextMonthKey = formattedDateKeyForMonth(from: Calendar.current.date(byAdding: .month, value: 1, to: Date())!)
-        let cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]]
-        
-        var monthlyData: [String] = []
-        
-        if let currentMonthData = cachedData?[currentMonthKey] {
-            monthlyData.append(contentsOf: currentMonthData)
-        }
-        
-        if let nextMonthData = cachedData?[nextMonthKey] {
-            monthlyData.append(contentsOf: nextMonthData.prefix(7))
-        }
-        
-        return monthlyData.isEmpty ? nil : monthlyData
-    }
+    
     
     static func removeOldData(before date: Date) {
         let dateKey = formattedDateKey(from: date)
