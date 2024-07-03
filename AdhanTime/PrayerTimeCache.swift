@@ -28,9 +28,9 @@ class PrayerTimeCache {
         let cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]]
         
         for month in 1...12 {
-            let dateKey = formattedDateKeyForMonthAndYear(month: month, year: year)
-            if let monthlyData = cachedData?[dateKey] {
-                yearlyData.append(contentsOf: monthlyData)
+            let monthKey = formattedDateKeyForMonthAndYear(month: month, year: year)
+            if let monthData = cachedData?[monthKey] {
+                yearlyData.append(contentsOf: monthData)
             }
         }
         
