@@ -115,7 +115,7 @@ class StatusBarController {
                 self.startTimer()
             }
         } else {
-            print("No cached prayer times available")
+            self.updateStatusBar(title: "Fetch the data!")
         }
     }
 }
