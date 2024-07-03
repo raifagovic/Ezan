@@ -74,22 +74,19 @@ class StatusBarController {
     }
     
     func refresh() {
+        // Get current date
         let currentDate = Date()
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "GMT")!
-        let currentYear = calendar.component(.year, from: currentDate)
+        let calendar = Calendar.current
         let currentMonth = calendar.component(.month, from: currentDate)
-
-        if currentMonth == 12 {
-            fetchPrayerTimes(for: currentYear) {
-                // Fetch data for the next year as well
-                self.fetchPrayerTimes(for: currentYear + 1) {
-                    print("Fetched data for current and next year")
-                }
-            }
-        } else {
-            fetchPrayerTimes(for: currentYear) {
-                print("Fetched data for current year")
+        let currentYear = calendar.component(.year, from: currentDate)
+        
+        // Fetch prayer times for the current year
+        fetchPrayerTimesForYear(year: currentYear) {
+            if currentMonth == 12 {
+                // If the current month is December, fetch prayer times for the next year
+                self.fetchPrayerTimesForYear(year: currentYear + 1, completion: {
+                    print("Fetched prayer times for the next year")
+                })
             }
         }
     }
