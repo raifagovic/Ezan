@@ -74,7 +74,7 @@ class StatusBarController {
     }
     
     func refresh() {
-        // Get current and next month dates
+        // Get current date
         let currentDate = Date()
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "GMT")!
@@ -100,24 +100,6 @@ class StatusBarController {
             case .failure(let error):
                 print("Failed to fetch prayer times: \(error)")
                 self.fallbackToCachedData()
-            }
-        }
-    }
-    
-    func fetchNextMonthFirstWeek(nextMonthComponents: DateComponents) {
-        guard let nextYear = nextMonthComponents.year,
-              let nextMonth = nextMonthComponents.month else {
-            return
-        }
-        
-        // Fetch prayer times for the first week of the next month
-        PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: nextYear, month: nextMonth, day: 1) { result in
-            switch result {
-            case .success(let times):
-                let nextMonthDate = Calendar.current.date(from: nextMonthComponents)!
-                PrayerTimeCache.savePrayerTimes(times, for: nextMonthDate)
-            case .failure(let error):
-                print("Failed to fetch prayer times for the first week of the next month: \(error)")
             }
         }
     }
