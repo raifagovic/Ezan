@@ -28,6 +28,7 @@ class StatusBarController {
         }
         
         startTimer()
+        refresh()
     }
     
     func setMainWindow(_ window: NSWindow) {
@@ -94,13 +95,16 @@ class StatusBarController {
         let currentMonth = calendar.component(.month, from: currentDate)
         let currentYear = calendar.component(.year, from: currentDate)
         
-        // Fetch prayer times for the current year
-        fetchPrayerTimesForYear(year: currentYear) {
-            if currentMonth == 12 {
-                // If the current month is December, fetch prayer times for the next year
-                self.fetchPrayerTimesForYear(year: currentYear + 1, completion: {
-                    print("Fetched prayer times for the next year")
-                })
+        // Check if data is already cached
+        if PrayerTimeCache.loadYearlyCachedPrayerTimes(for: currentYear) == nil {
+            // Fetch prayer times for the current year
+            fetchPrayerTimesForYear(year: currentYear) {
+                if currentMonth == 12 {
+                    // If the current month is December, fetch prayer times for the next year
+                    self.fetchPrayerTimesForYear(year: currentYear + 1) {
+                        print("Fetched prayer times for the next year")
+                    }
+                }
             }
         }
     }
