@@ -51,10 +51,23 @@ class StatusBarController {
     }
     
     @objc func updateStatusBar(timer: Timer) {
-        if let cachedPrayerTimes = PrayerTimeCache.loadMonthlyCachedPrayerTimes(), !cachedPrayerTimes.isEmpty {
+        let currentYear = Calendar.current.component(.year, from: Date())
+        let nextYear = currentYear + 1
+        
+        var prayerTimes: [String] = []
+        
+        if let currentYearTimes = PrayerTimeCache.loadYearlyCachedPrayerTimes(for: currentYear) {
+            prayerTimes.append(contentsOf: currentYearTimes)
+        }
+        
+        if Calendar.current.component(.month, from: Date()) == 12,
+           let nextYearTimes = PrayerTimeCache.loadYearlyCachedPrayerTimes(for: nextYear) {
+            prayerTimes.append(contentsOf: nextYearTimes)
+        }
+        
+        if !prayerTimes.isEmpty {
             noCachedDataShown = false // Reset the flag if data is available
-            // Use cached prayer times
-            if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
+            if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: prayerTimes) {
                 let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
                 statusItem.button?.title = timeString
                 self.remainingTime = remainingTime
