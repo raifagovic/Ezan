@@ -104,6 +104,28 @@ class StatusBarController {
         }
     }
     
+    func fetchPrayerTimesForYear(year: Int, completion: @escaping () -> Void) {
+            let dispatchGroup = DispatchGroup()
+            
+            for month in 1...12 {
+                dispatchGroup.enter()
+                PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: year, month: month, day: 1) { result in
+                    switch result {
+                    case .success(let times):
+                        let date = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1))!
+                        PrayerTimeCache.savePrayerTimes(times, for: date)
+                    case .failure(let error):
+                        print("Failed to fetch prayer times for year \(year), month \(month): \(error)")
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                completion()
+            }
+        }
+    
     func fallbackToCachedData() {
         let currentDate = Date()
         if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) {
