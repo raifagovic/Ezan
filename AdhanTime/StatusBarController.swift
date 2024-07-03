@@ -89,7 +89,8 @@ class StatusBarController {
     func refresh() {
         // Get current date
         let currentDate = Date()
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "GMT")!
         let currentMonth = calendar.component(.month, from: currentDate)
         let currentYear = calendar.component(.year, from: currentDate)
         
