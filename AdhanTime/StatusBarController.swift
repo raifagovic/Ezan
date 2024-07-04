@@ -44,7 +44,7 @@ class StatusBarController {
         }
     }
     
-    func startTimer() {
+    func startTimer(for interval: TimeInterval) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
     }
