@@ -136,7 +136,7 @@ class StatusBarController {
                 self.nextPrayerName = nextPrayerName
                 let timeString = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
                 self.updateStatusBar(title: timeString)
-                self.startTimer()
+                self.startTimer(for: nextPrayerTimeInterval)
             }
         } else {
             self.updateStatusBar(title: "Fetch the data!")
