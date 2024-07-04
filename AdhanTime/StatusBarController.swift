@@ -26,7 +26,7 @@ class StatusBarController {
             button.target = self
         }
         
-        startTimer()
+        refresh()
     }
     
     func setMainWindow(_ window: NSWindow) {
