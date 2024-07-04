@@ -12,7 +12,6 @@ class StatusBarController {
     private var statusItem: NSStatusItem
     private var timer: Timer?
     private var mainWindow: NSWindow?
-    private var noCachedDataShown = false // New flag to prevent repetitive updates
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
@@ -28,7 +27,6 @@ class StatusBarController {
         }
         
         startTimer()
-        refresh()
     }
     
     func setMainWindow(_ window: NSWindow) {
@@ -75,7 +73,7 @@ class StatusBarController {
                 self.nextPrayerName = nextPrayerName
             }
         } else if !noCachedDataShown { // Only update to "No cached data" once
-            statusItem.button?.title = "No cached data"
+//            statusItem.button?.title = "No cached data"
             noCachedDataShown = true
         }
     }
