@@ -70,6 +70,7 @@ class StatusBarController {
                 statusItem.button?.title = timeString
                 self.remainingTime = remainingTime
                 self.nextPrayerName = nextPrayerName
+                startTimer(for: remainingTime)
             }
         } else {
             statusItem.button?.title = "No cached data"
