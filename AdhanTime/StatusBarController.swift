@@ -125,6 +125,7 @@ class StatusBarController {
             
             dispatchGroup.notify(queue: .main) {
                 completion()
+                self.updateStatusBar(timer: Timer())
             }
         }
     
