@@ -72,7 +72,7 @@ class StatusBarController {
                 self.nextPrayerName = nextPrayerName
             }
         } else {
-//            statusItem.button?.title = "No cached data"
+            statusItem.button?.title = "No cached data"
         }
     }
 
