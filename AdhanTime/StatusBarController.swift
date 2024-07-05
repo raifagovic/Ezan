@@ -65,16 +65,14 @@ class StatusBarController {
         }
         
         if !prayerTimes.isEmpty {
-            noCachedDataShown = false // Reset the flag if data is available
             if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: prayerTimes) {
                 let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
                 statusItem.button?.title = timeString
                 self.remainingTime = remainingTime
                 self.nextPrayerName = nextPrayerName
             }
-        } else if !noCachedDataShown { // Only update to "No cached data" once
+        } else {
 //            statusItem.button?.title = "No cached data"
-            noCachedDataShown = true
         }
     }
 
