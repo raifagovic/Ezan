@@ -98,9 +98,9 @@ class StatusBarController {
             fetchPrayerTimesForYear(year: currentYear) {
                 if currentMonth == 12 {
                     // If the current month is December, fetch prayer times for the next year
-                    self.fetchPrayerTimesForYear(year: currentYear + 1) {
+                    self.fetchPrayerTimesForYear(year: currentYear + 1, completion: {
                         print("Fetched prayer times for the next year")
-                    }
+                    })
                 }
             }
         }
