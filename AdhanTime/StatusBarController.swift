@@ -188,19 +188,7 @@ class StatusBarController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCountdown), userInfo: nil, repeats: true)
     }
     
-    @objc func updateCountdown() {
-        guard var remainingTime = remainingTime else { return }
-        
-        if remainingTime > 0 {
-            remainingTime -= 1
-            let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName!)
-            statusItem.button?.title = timeString
-            self.remainingTime = remainingTime
-        } else {
-            // Fetch the next prayer time when countdown reaches zero
-            fetchNextPrayerTime()
-        }
-    }
+
     
     func fetchNextPrayerTime() {
         let currentYear = Calendar.current.component(.year, from: Date())
