@@ -38,6 +38,7 @@ class StatusBarController {
             if window.isVisible {
                 window.orderOut(nil)
             } else {
+                window.level = .modalPanel // Ensure window is above other windows
                 window.makeKeyAndOrderFront(nil)
                 NSApp.activate(ignoringOtherApps: true)
             }
