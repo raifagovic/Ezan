@@ -159,8 +159,7 @@ struct ContentView: View {
             .labelsHidden()
             .pickerStyle(MenuPickerStyle())
             .frame(width: 200)
-            .padding(.vertical, 40)
-            .padding(.bottom, 20)
+            .padding(.vertical, 50)
             .onChange(of: selectedLocationIndex) {
                 fetchPrayerTimes()
             }
