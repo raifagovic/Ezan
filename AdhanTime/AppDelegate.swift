@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.center()
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
-        window.makeKeyAndOrderFront(nil)
+        window.isReleasedWhenClosed = false // Ensure the window is not released//        window.makeKeyAndOrderFront(nil)
         
         // Keep a reference to the window
         self.window = window

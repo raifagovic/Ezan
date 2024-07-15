@@ -38,7 +38,7 @@ class StatusBarController {
             if window.isVisible {
                 window.orderOut(nil)
             } else {
-                window.level = .modalPanel // Ensure window is above other windows
+                window.level = .normal // Set window level to normal before bringing it to front
                 window.makeKeyAndOrderFront(nil)
                 NSApp.activate(ignoringOtherApps: true)
             }
