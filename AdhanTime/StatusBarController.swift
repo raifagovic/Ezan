@@ -11,7 +11,8 @@ class StatusBarController {
     static let shared = StatusBarController()
     private var statusItem: NSStatusItem
     private var timer: Timer?
-    private var mainWindow: NSWindow?
+    private var popover: NSPopover
+    private var popoverTransiencyMonitor: Any?
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
@@ -27,10 +28,6 @@ class StatusBarController {
         }
         
         refresh()
-    }
-    
-    func setMainWindow(_ window: NSWindow) {
-        self.mainWindow = window
     }
     
     @objc func statusBarButtonClicked() {
