@@ -21,7 +21,7 @@ class StatusBarController {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let button = statusItem.button {
-            button.title = "Loading..."
+            button.title = "AdhanTime"
             button.action = #selector(statusBarButtonClicked)
             button.target = self
         }
