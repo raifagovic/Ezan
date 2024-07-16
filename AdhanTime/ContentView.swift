@@ -158,9 +158,8 @@ struct ContentView: View {
             }
             .labelsHidden()
             .pickerStyle(MenuPickerStyle())
-            .frame(width: 200)
-            .padding(.vertical, 10)
-            .padding(.bottom, 5)
+            .frame(width: 150)
+            .padding(.bottom, 10)
             .onChange(of: selectedLocationIndex) {
                 fetchPrayerTimes()
             }
@@ -186,6 +185,8 @@ struct ContentView: View {
             }
         }
         .padding(.bottom, 5)
+        .cornerRadius(10) // Add rounded corners
+        .shadow(radius: 10) // Add shadow if desired
         .onAppear {
             fetchPrayerTimes()
             // Add observer for wake notifications
