@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import SwiftUI
 
 class StatusBarController {
     static let shared = StatusBarController()
@@ -26,6 +27,12 @@ class StatusBarController {
             button.action = #selector(statusBarButtonClicked)
             button.target = self
         }
+        
+        popover = NSPopover()
+        popover.contentSize = NSSize(width: 400, height: 600)
+        popover.behavior = .transient
+        popover.animates = true
+        popover.contentViewController = NSHostingController(rootView: ContentView())
         
         refresh()
     }
