@@ -38,11 +38,7 @@ class StatusBarController {
     }
     
     @objc func statusBarButtonClicked() {
-        if let window = mainWindow {
-            window.level = .normal // Set window level to normal
-            window.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
-        }
+   
     }
     
     func startTimer(for interval: TimeInterval) {
