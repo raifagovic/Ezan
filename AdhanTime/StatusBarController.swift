@@ -20,6 +20,12 @@ class StatusBarController {
     var locationId: Int = 77 // Default locationId
     
     private init() {
+        popover = NSPopover()
+        popover.contentSize = NSSize(width: 400, height: 600)
+        popover.behavior = .transient
+        popover.animates = true
+        popover.contentViewController = NSHostingController(rootView: ContentView())
+        
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let button = statusItem.button {
@@ -27,12 +33,6 @@ class StatusBarController {
             button.action = #selector(statusBarButtonClicked)
             button.target = self
         }
-        
-        popover = NSPopover()
-        popover.contentSize = NSSize(width: 400, height: 600)
-        popover.behavior = .transient
-        popover.animates = true
-        popover.contentViewController = NSHostingController(rootView: ContentView())
         
         refresh()
     }
