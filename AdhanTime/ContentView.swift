@@ -164,20 +164,6 @@ struct ContentView: View {
                 fetchPrayerTimes()
             }
             
-            
-            // Display time to next prayer
-            if let timeToNextPrayerResult = timeToNextPrayerResult {
-                Text("\(timeToNextPrayerResult)")
-                    .font(.headline)
-                    .foregroundColor(.blue)
-                    .padding(.bottom, 40)
-            } else {
-                Text("Nema više ezana danas")
-                    .font(.headline)
-                    .foregroundColor(.red)
-                    .padding(.bottom, 40)
-            }
-            
             // Display fetched prayer times with names
             if !prayerTimes.isEmpty {
                 ForEach(prayerTimes.indices, id: \.self) { index in
