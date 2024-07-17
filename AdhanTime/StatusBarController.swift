@@ -12,8 +12,6 @@ class StatusBarController {
     static let shared = StatusBarController()
     private var statusItem: NSStatusItem
     private var timer: Timer?
-    private var popover: NSPopover
-    private var popoverTransiencyMonitor: Any?
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
@@ -38,18 +36,7 @@ class StatusBarController {
     }
     
     @objc func statusBarButtonClicked() {
-        if popover.isShown {
-            popover.performClose(nil)
-        } else {
-            if let button = statusItem.button {
-                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-                
-                // Monitor for clicks outside the popover to close it
-                popoverTransiencyMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
-                    self?.popover.performClose(event)
-                }
-            }
-        }
+       
     }
     
     func startTimer(for interval: TimeInterval) {
