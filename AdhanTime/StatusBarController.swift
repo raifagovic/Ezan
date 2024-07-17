@@ -31,18 +31,10 @@ class StatusBarController {
     }
     
     @objc func statusBarButtonClicked() {
-        if let panel = panel, panel.isVisible {
-            panel.orderOut(nil)
-        } else {
-            showPanel()
-        }
-    }
-    
-    func showPanel() {
         if panel == nil {
             // Create the panel
             panel = NSPanel(contentRect: NSRect(x: 0, y: 0, width: 400, height: 600),
-                            styleMask: [.nonactivatingPanel],
+                            styleMask: [.nonactivatingPanel, .titled, .fullSizeContentView],
                             backing: .buffered, defer: true)
             panel?.isFloatingPanel = true
             panel?.level = .floating
@@ -53,20 +45,29 @@ class StatusBarController {
             panel?.hasShadow = true
             
             // Customize the panel to have rounded corners
-            
-            panel?.backgroundColor = .clear
             panel?.contentView?.wantsLayer = true
             panel?.contentView?.layer?.cornerRadius = 10
             panel?.contentView?.layer?.masksToBounds = true
+            
+            // Set the panel's background color to match the default color
+            panel?.backgroundColor = NSColor.windowBackgroundColor
         }
         
-        if let button = statusItem.button, let panel = panel {
-            let buttonFrame = button.window!.convertToScreen(button.frame)
-            let panelX = buttonFrame.midX - (panel.frame.width / 2)
-            let panelY = buttonFrame.minY - panel.frame.height
-            panel.setFrameOrigin(NSPoint(x: panelX, y: panelY))
-            panel.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
+        if let panel = panel {
+            if panel.isVisible {
+                panel.orderOut(nil)
+            } else {
+                if let button = statusItem.button {
+                    let buttonFrame = button.window!.frame
+                    let panelOrigin = NSPoint(
+                        x: buttonFrame.midX - panel.frame.width / 2,
+                        y: buttonFrame.minY - panel.frame.height
+                    )
+                    panel.setFrameOrigin(panelOrigin)
+                }
+                panel.makeKeyAndOrderFront(nil)
+                NSApp.activate(ignoringOtherApps: true)
+            }
         }
     }
     
