@@ -5,13 +5,11 @@
 //  Created by Raif Agovic on 3. 6. 2024..
 //
 
-
 import Cocoa
 import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarController: StatusBarController?
-    var window: NSWindow?
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusBarController = StatusBarController.shared
