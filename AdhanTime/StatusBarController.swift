@@ -53,6 +53,8 @@ class StatusBarController {
             panel?.hasShadow = true
             
             // Customize the panel to have rounded corners
+            
+            panel?.backgroundColor = .clear
             panel?.contentView?.wantsLayer = true
             panel?.contentView?.layer?.cornerRadius = 10
             panel?.contentView?.layer?.masksToBounds = true
