@@ -38,6 +38,31 @@ class StatusBarController {
         }
     }
     
+    func showPanel() {
+        if panel == nil {
+            // Create the panel
+            panel = NSPanel(contentRect: NSRect(x: 0, y: 0, width: 400, height: 600),
+                            styleMask: [.nonactivatingPanel],
+                            backing: .buffered, defer: true)
+            panel?.isFloatingPanel = true
+            panel?.level = .floating
+            panel?.hidesOnDeactivate = true
+            panel?.becomesKeyOnlyIfNeeded = true
+            panel?.contentViewController = NSHostingController(rootView: ContentView())
+            panel?.isOpaque = false
+            panel?.hasShadow = true
+        }
+        
+        if let button = statusItem.button, let panel = panel {
+            let buttonFrame = button.window!.convertToScreen(button.frame)
+            let panelX = buttonFrame.midX - (panel.frame.width / 2)
+            let panelY = buttonFrame.minY - panel.frame.height
+            panel.setFrameOrigin(NSPoint(x: panelX, y: panelY))
+            panel.makeKeyAndOrderFront(nil)
+            NSApp.activate(ignoringOtherApps: true)
+        }
+    }
+    
     func startTimer(for interval: TimeInterval) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
