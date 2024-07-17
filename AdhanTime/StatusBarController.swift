@@ -12,6 +12,7 @@ class StatusBarController {
     static let shared = StatusBarController()
     private var statusItem: NSStatusItem
     private var timer: Timer?
+    private var panel: NSPanel?
     
     var remainingTime: TimeInterval?
     var nextPrayerName: String?
@@ -30,7 +31,11 @@ class StatusBarController {
     }
     
     @objc func statusBarButtonClicked() {
-       
+        if let panel = panel, panel.isVisible {
+            panel.orderOut(nil)
+        } else {
+            showPanel()
+        }
     }
     
     func startTimer(for interval: TimeInterval) {
