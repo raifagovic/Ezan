@@ -49,9 +49,6 @@ class StatusBarController {
             
             // Set the content view controller
             panel?.contentViewController = NSHostingController(rootView: ContentView())
-            
-            // Set the panel's background color to match the default color
-            panel?.backgroundColor = NSColor.windowBackgroundColor
         }
         
         if let panel = panel {
