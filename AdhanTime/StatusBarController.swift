@@ -44,11 +44,6 @@ class StatusBarController {
             panel?.isOpaque = false
             panel?.hasShadow = true
             
-            // Customize the panel to have rounded corners
-            panel?.contentView?.wantsLayer = true
-            panel?.contentView?.layer?.cornerRadius = 10
-            panel?.contentView?.layer?.masksToBounds = true
-            
             // Set the panel's background color to match the default color
             panel?.backgroundColor = NSColor.windowBackgroundColor
         }
