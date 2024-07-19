@@ -40,9 +40,15 @@ class StatusBarController {
             panel?.level = .floating
             panel?.hidesOnDeactivate = true
             panel?.becomesKeyOnlyIfNeeded = true
-            panel?.contentViewController = NSHostingController(rootView: ContentView())
             panel?.isOpaque = false
             panel?.hasShadow = true
+            
+            // Make the title bar transparent
+            panel?.titleVisibility = .hidden
+            panel?.titlebarAppearsTransparent = true
+            
+            // Set the content view controller
+            panel?.contentViewController = NSHostingController(rootView: ContentView())
             
             // Set the panel's background color to match the default color
             panel?.backgroundColor = NSColor.windowBackgroundColor
