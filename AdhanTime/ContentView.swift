@@ -185,8 +185,7 @@ struct ContentView: View {
             }
         }
         .padding(.bottom, 5)
-        .cornerRadius(10) // Add rounded corners
-        .shadow(radius: 10) // Add shadow if desired
+//        .shadow(radius: 10) // Add shadow if desired
         .onAppear {
             fetchPrayerTimes()
             // Add observer for wake notifications
