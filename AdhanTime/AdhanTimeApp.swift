@@ -18,5 +18,6 @@ struct AdhanTimeApp: App {
         MenuBarExtra("AdhanTime", systemImage: "clock") {
             ContentView()
         }
+        .menuBarExtraStyle(.window) // Use the window style for rounded corners
     }
 }
