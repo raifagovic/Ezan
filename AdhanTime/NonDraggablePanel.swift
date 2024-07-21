@@ -23,4 +23,8 @@ class NonDraggablePanel: NSPanel {
     override func mouseUp(with event: NSEvent) {
         // Do nothing to disable dragging
     }
+    
+    override func performDrag(with event: NSEvent) {
+        // Override and do nothing to disable dragging
+    }
 }
