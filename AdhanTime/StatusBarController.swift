@@ -33,13 +33,14 @@ class StatusBarController {
     @objc func statusBarButtonClicked() {
         if panel == nil {
             // Create the panel
-            panel = NSPanel(contentRect: NSRect(x: 0, y: 0, width: 400, height: 600),
+            panel = NonDraggablePanel(contentRect: NSRect(x: 0, y: 0, width: 400, height: 600),
                             styleMask: [.nonactivatingPanel, .titled, .fullSizeContentView],
                             backing: .buffered, defer: true)
             panel?.isFloatingPanel = true
             panel?.level = .floating
             panel?.hidesOnDeactivate = true
             panel?.becomesKeyOnlyIfNeeded = true
+            panel?.contentViewController = NSHostingController(rootView: ContentView())
             panel?.isOpaque = false
             panel?.hasShadow = true
             
@@ -47,8 +48,10 @@ class StatusBarController {
             panel?.titleVisibility = .hidden
             panel?.titlebarAppearsTransparent = true
             
-            // Set the content view controller
-            panel?.contentViewController = NSHostingController(rootView: ContentView())
+            // Disable dragging
+            panel?.standardWindowButton(.closeButton)?.isHidden = true
+            panel?.standardWindowButton(.miniaturizeButton)?.isHidden = true
+            panel?.standardWindowButton(.zoomButton)?.isHidden = true
         }
         
         if let panel = panel {

@@ -150,7 +150,6 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
