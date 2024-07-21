@@ -210,9 +210,6 @@ struct ContentView: View {
             if self.remainingTime > 0 {
                 self.remainingTime -= 1
                 self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
-                StatusBarController.shared.updateStatusBar(title: self.timeToNextPrayerResult ?? "")
-                StatusBarController.shared.remainingTime = self.remainingTime
-                StatusBarController.shared.nextPrayerName = self.nextPrayerName
             } else {
                 timer.invalidate()
                 self.fetchPrayerTimes() // Fetch next prayer times when current timer ends
