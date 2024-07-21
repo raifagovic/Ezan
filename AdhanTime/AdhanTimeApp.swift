@@ -15,5 +15,8 @@ struct AdhanTimeApp: App {
         Settings {
             EmptyView()
         }
+        MenuBarExtra("AdhanTime", systemImage: "clock") {
+            ContentView()
+        }
     }
 }
