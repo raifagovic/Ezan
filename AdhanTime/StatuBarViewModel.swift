@@ -10,7 +10,7 @@ import Combine
 
 class StatusBarViewModel: ObservableObject {
     @Published var statusBarTitle: String = "AdhanTime"
-    @Published var remainingTime: TimeInterval = 0
+    @Published var remainingTime: TimeInterval?
     @Published var nextPrayerName: String?
     private var timer: Timer?
 
