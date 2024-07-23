@@ -27,12 +27,13 @@ class StatusBarViewModel: ObservableObject {
     }
 
     func updateStatusBar() {
-        if let nextPrayerTimeInterval = remainingTime, let nextPrayerName = nextPrayerName {
-            statusBarTitle = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
-        } else {
+        guard let nextPrayerTimeInterval = remainingTime, let nextPrayerName = nextPrayerName else {
             statusBarTitle = "Fetch the data!"
+            return
         }
-        startTimer(for: remainingTime)
+        
+        statusBarTitle = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
+        startTimer(for: nextPrayerTimeInterval)
     }
 
     func startTimer(for interval: TimeInterval) {
