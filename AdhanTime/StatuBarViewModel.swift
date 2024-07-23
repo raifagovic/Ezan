@@ -39,9 +39,13 @@ class StatusBarViewModel: ObservableObject {
     func startTimer(for interval: TimeInterval) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if self.remainingTime > 0 {
-                self.remainingTime -= 1
-                self.statusBarTitle = TimeUtils.formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
+            guard let currentRemainingTime = self.remainingTime else {
+                return
+            }
+
+            if currentRemainingTime > 0 {
+                self.remainingTime = currentRemainingTime - 1
+                self.statusBarTitle = TimeUtils.formatTimeInterval(currentRemainingTime - 1, prayerName: self.nextPrayerName ?? "")
             } else {
                 self.timer?.invalidate()
                 self.fetchPrayerTimes()
