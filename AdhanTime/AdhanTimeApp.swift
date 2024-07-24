@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct AdhanTimeApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        MenuBarExtra("AdhanTime", systemImage: "clock") {
+        MenuBarExtra(viewModel.statusBarTitle, content: {
             ContentView()
-        }
+                .environmentObject(viewModel)
+        })
         .menuBarExtraStyle(.window) // Use the window style for rounded corners
     }
 }
