@@ -19,13 +19,24 @@ class StatusBarViewModel: ObservableObject {
     }
 
     func fetchPrayerTimes() {
-        // Implement your fetch logic here
-        // For demo purposes, simulate fetched prayer times
-        self.remainingTime = 3600 // Example remaining time of 1 hour
-        self.nextPrayerName = "Fajr" // Example next prayer name
-        updateStatusBar()
+        let currentYear = Calendar.current.component(.year, from: Date())
+        let currentMonth = Calendar.current.component(.month, from: Date())
+        
+        PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: currentYear, month: currentMonth, day: 1)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Failed to fetch prayer times: \(error)")
+                    self.statusBarTitle = "Fetch failed"
+                case .finished:
+                    break
+                }
+            }, receiveValue: { times in
+                self.handleFetchedPrayerTimes(times)
+            })
+            .store(in: &cancellables)
     }
-
+    
     func updateStatusBar() {
         guard let nextPrayerTimeInterval = remainingTime, let nextPrayerName = nextPrayerName else {
             statusBarTitle = "Fetch the data!"
