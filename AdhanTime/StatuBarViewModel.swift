@@ -16,7 +16,7 @@ class StatusBarViewModel: ObservableObject {
     private var locationId: Int = 77
 
     init() {
-        fetchPrayerTimes()
+        refresh()
     }
 
     func startTimer(for interval: TimeInterval) {
