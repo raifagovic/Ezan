@@ -21,7 +21,23 @@ class StatusBarViewModel: ObservableObject {
 
     func startTimer(for interval: TimeInterval) {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            guard let currentRemainingTime = self.remainingTime else {
+                self.timer?.invalidate()
+                return
+            }
+            
+            if currentRemainingTime > 0 {
+                self.remainingTime = currentRemainingTime - 1
+                self.statusBarTitle = TimeUtils.formatTimeInterval(currentRemainingTime - 1, prayerName: self.nextPrayerName ?? "")
+            } else {
+                self.timer?.invalidate()
+                self.fetchPrayerTimesForYear(year: Calendar.current.component(.year, from: Date())) {
+                    // Update the status bar after fetching the prayer times
+                    self.updateStatusBar()
+                }
+            }
+        }
     }
     
     func updateStatusBar() {
