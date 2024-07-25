@@ -13,6 +13,7 @@ class StatusBarViewModel: ObservableObject {
     @Published var remainingTime: TimeInterval?
     @Published var nextPrayerName: String?
     private var timer: Timer?
+    private var locationId: Int = 77
 
     init() {
         fetchPrayerTimes()
