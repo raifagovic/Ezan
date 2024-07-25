@@ -18,17 +18,7 @@ class StatusBarViewModel: ObservableObject {
     init() {
         fetchPrayerTimes()
     }
-    
-    private func handleFetchedPrayerTimes(_ times: [PrayerTime]) {
-        if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
-            self.remainingTime = remainingTime
-            self.nextPrayerName = nextPrayerName
-            self.updateStatusBar()
-        } else {
-            self.statusBarTitle = "No upcoming prayers"
-        }
-    }
-    
+        
     func updateStatusBar() {
         guard let nextPrayerTimeInterval = remainingTime, let nextPrayerName = nextPrayerName else {
             statusBarTitle = "Fetch the data!"
