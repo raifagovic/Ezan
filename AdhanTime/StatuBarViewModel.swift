@@ -18,23 +18,13 @@ class StatusBarViewModel: ObservableObject {
     init() {
         fetchPrayerTimes()
     }
-        
-    func updateStatusBar() {
-        guard let nextPrayerTimeInterval = remainingTime, let nextPrayerName = nextPrayerName else {
-            statusBarTitle = "Fetch the data!"
-            return
-        }
-        
-        statusBarTitle = TimeUtils.formatTimeInterval(nextPrayerTimeInterval, prayerName: nextPrayerName)
-        startTimer(for: nextPrayerTimeInterval)
-    }
 
     func startTimer(for interval: TimeInterval) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateStatusBar(timer:)), userInfo: nil, repeats: true)
     }
     
-    @objc func updateStatusBar(timer: Timer) {
+    func updateStatusBar() {
         let currentYear = Calendar.current.component(.year, from: Date())
         let nextYear = currentYear + 1
         
@@ -51,14 +41,13 @@ class StatusBarViewModel: ObservableObject {
         
         if !prayerTimes.isEmpty {
             if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: prayerTimes) {
-                let timeString = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
-                statusItem.button?.title = timeString
                 self.remainingTime = remainingTime
                 self.nextPrayerName = nextPrayerName
+                self.statusBarTitle = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
                 startTimer(for: remainingTime)
             }
         } else {
-            statusItem.button?.title = "No cached data"
+            self.statusBarTitle = "No cached data"
         }
     }
     
