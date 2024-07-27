@@ -15,12 +15,15 @@ class PrayerTimeCache {
         var cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]] ?? [:]
         cachedData[dateKey] = prayerTimes
         UserDefaults.standard.set(cachedData, forKey: cacheKey)
+        print("Saved prayer times for \(dateKey): \(prayerTimes)")
     }
     
     static func loadCachedPrayerTimes(for date: Date) -> [String]? {
         let dateKey = formattedDateKey(from: date)
         let cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]]
-        return cachedData?[dateKey]
+        let data = cachedData?[dateKey]
+        print("Loaded cached prayer times for \(dateKey): \(data ?? [])")
+        return data
     }
     
     static func loadYearlyCachedPrayerTimes(for year: Int) -> [String]? {
@@ -31,6 +34,9 @@ class PrayerTimeCache {
             let monthKey = formattedDateKeyForMonthAndYear(month: month, year: year)
             if let monthData = cachedData?[monthKey] {
                 yearlyData.append(contentsOf: monthData)
+                print("Loaded cached prayer times for \(monthKey): \(monthData)")
+            } else {
+                print("No cached prayer times for \(monthKey)")
             }
         }
         
@@ -42,6 +48,7 @@ class PrayerTimeCache {
         var cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]] ?? [:]
         cachedData = cachedData.filter { $0.key >= dateKey }
         UserDefaults.standard.set(cachedData, forKey: cacheKey)
+        print("Removed old data before \(dateKey)")
     }
     
     private static func formattedDateKey(from date: Date) -> String {

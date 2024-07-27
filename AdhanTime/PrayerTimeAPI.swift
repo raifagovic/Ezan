@@ -7,14 +7,19 @@
 
 import Foundation
 
-struct PrayerTimeResponse: Decodable {
-    let vakat: [String]
-}
-
 enum NetworkError: Error {
     case invalidURL
     case invalidResponse
     case invalidData
+}
+
+struct PrayerTimeResponse: Decodable {
+    let vakat: [String]?
+    let mjesec: [DayPrayerTime]?
+    
+    struct DayPrayerTime: Decodable {
+        let vakat: [String]
+    }
 }
 
 struct PrayerTimeAPI {

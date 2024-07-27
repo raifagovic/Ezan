@@ -82,6 +82,8 @@ class StatusBarViewModel: ObservableObject {
                     }
                 }
             }
+        } else {
+            updateStatusBar()
         }
     }
     

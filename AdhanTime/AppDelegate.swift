@@ -11,7 +11,6 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        
         // Add observer for wake notifications
         NSWorkspace.shared.notificationCenter.addObserver(
             self,
