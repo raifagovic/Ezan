@@ -63,11 +63,17 @@ struct PrayerTimeAPI {
         task.resume()
     }
     
-    static func parsePrayerTimes(data: Data) throws -> [String] {
+    static func parsePrayerTimes(data: Data, forDay: Bool) throws -> [String] {
         let decoder = JSONDecoder()
         let response = try decoder.decode(PrayerTimeResponse.self, from: data)
-        let prayerTimes = response.vakat
-        return prayerTimes
+        
+        if forDay, let prayerTimes = response.vakat {
+            return prayerTimes
+        } else if let monthlyPrayerTimes = response.mjesec {
+            return monthlyPrayerTimes.flatMap { $0.vakat }
+        }
+        
+        throw NetworkError.invalidData
     }
 }
 
