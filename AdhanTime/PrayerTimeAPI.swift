@@ -25,8 +25,11 @@ struct PrayerTimeResponse: Decodable {
 struct PrayerTimeAPI {
     static let baseURL = "https://api.vaktija.ba/vaktija/v1"
     
-    static func fetchPrayerTimes(for locationId: Int, year: Int, month: Int, day: Int, completion: @escaping (Result<[String], Error>) -> Void) {
-        let urlString = "\(baseURL)/\(locationId)/\(year)/\(month)/\(day)"
+    static func fetchPrayerTimes(for locationId: Int, year: Int, month: Int, day: Int? = nil, completion: @escaping (Result<[String], Error>) -> Void) {
+        var urlString = "\(baseURL)/\(locationId)/\(year)/\(month)"
+        if let day = day {
+            urlString += "/\(day)"
+        }
         
         guard let url = URL(string: urlString) else {
             completion(.failure(NetworkError.invalidURL))
@@ -50,7 +53,7 @@ struct PrayerTimeAPI {
             }
             
             do {
-                let prayerTimes = try parsePrayerTimes(data: data)
+                let prayerTimes = try parsePrayerTimes(data: data, forDay: day != nil)
                 completion(.success(prayerTimes))
             } catch {
                 completion(.failure(error))
