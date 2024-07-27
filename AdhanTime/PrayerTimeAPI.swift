@@ -20,6 +20,23 @@ struct PrayerTimeResponse: Decodable {
     struct DayPrayerTime: Decodable {
         let vakat: [String]
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case vakat
+        case mjesec
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.vakat = try container.decodeIfPresent([String].self, forKey: .vakat)
+        
+        // Decode `mjesec` as an array of DayPrayerTime if present
+        if let monthData = try? container.decode([DayPrayerTime].self, forKey: .mjesec) {
+            self.mjesec = monthData
+        } else {
+            self.mjesec = nil
+        }
+    }
 }
 
 struct PrayerTimeAPI {
