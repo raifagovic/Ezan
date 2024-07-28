@@ -91,16 +91,31 @@ class StatusBarViewModel: ObservableObject {
         let dispatchGroup = DispatchGroup()
         
         for month in 1...12 {
-            dispatchGroup.enter()
-            PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: year, month: month, day: 1) { result in
-                switch result {
-                case .success(let times):
-                    let date = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1))!
-                    PrayerTimeCache.savePrayerTimes(times, for: date)
-                case .failure(let error):
-                    print("Failed to fetch prayer times for year \(year), month \(month): \(error)")
+            // Create DateComponents for the start of the month
+            var components = DateComponents()
+            components.year = year
+            components.month = month
+            
+            // Safely create a date from the components
+            guard let startOfMonth = Calendar.current.date(from: components) else {
+                print("Failed to create date for year \(year), month \(month)")
+                continue
+            }
+            // Determine the range of days for the current month
+            let daysInMonth = Calendar.current.range(of: .day, in: .month, for: startOfMonth)?.count ?? 0
+            
+            for day in 1...daysInMonth {
+                dispatchGroup.enter()
+                PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: year, month: month, day: day) { result in
+                    switch result {
+                    case .success(let times):
+                        let date = Calendar.current.date(from: DateComponents(year: year, month: month, day: day))!
+                        PrayerTimeCache.savePrayerTimes(times, for: date)
+                    case .failure(let error):
+                        print("Failed to fetch prayer times for year \(year), month \(month), day \(day): \(error)")
+                    }
+                    dispatchGroup.leave()
                 }
-                dispatchGroup.leave()
             }
         }
         

@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var nextPrayerName: String? = nil
+    @ObservedObject var viewModel = StatusBarViewModel()
     
     let locationsWithIndex: [(Int, String)] = [
         (0, "Banovići"),
@@ -186,7 +187,8 @@ struct ContentView: View {
         .padding(.bottom, 5)
 //        .shadow(radius: 10) // Add shadow if desired
         .onAppear {
-            fetchPrayerTimes()
+            viewModel.fetchPrayerTimesForYear()
+            viewModel.startTimer()
             // Add observer for wake notifications
             NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in
                 fetchPrayerTimes()
@@ -201,19 +203,6 @@ struct ContentView: View {
         .onDisappear {
             timer?.invalidate()
             timer = nil
-        }
-    }
-    
-    func startTimer() {
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.remainingTime > 0 {
-                self.remainingTime -= 1
-                self.timeToNextPrayerResult = TimeUtils.formatTimeInterval(self.remainingTime, prayerName: self.nextPrayerName ?? "")
-            } else {
-                timer.invalidate()
-                self.fetchPrayerTimes() // Fetch next prayer times when current timer ends
-            }
         }
     }
 

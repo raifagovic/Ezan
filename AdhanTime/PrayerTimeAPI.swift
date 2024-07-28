@@ -69,8 +69,19 @@ struct PrayerTimeAPI {
                 return
             }
             
+            // Debug: Print raw response data
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Raw response data: \(jsonString)")
+            } else {
+                print("Failed to convert response data to string.")
+            }
+            
             do {
                 let prayerTimes = try parsePrayerTimes(data: data, forDay: day != nil)
+                
+                // Debug: Print parsed prayer times
+                print("Parsed prayer times: \(prayerTimes)")
+                
                 completion(.success(prayerTimes))
             } catch {
                 completion(.failure(error))
@@ -83,6 +94,9 @@ struct PrayerTimeAPI {
     static func parsePrayerTimes(data: Data, forDay: Bool) throws -> [String] {
         let decoder = JSONDecoder()
         let response = try decoder.decode(PrayerTimeResponse.self, from: data)
+        
+        // Debug: Print the decoded response
+        print("Decoded PrayerTimeResponse: \(response)")
         
         if forDay, let prayerTimes = response.vakat {
             return prayerTimes
