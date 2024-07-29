@@ -48,24 +48,8 @@ class StatusBarViewModel: ObservableObject {
     }
     
     func refresh() {
-        let currentDate = Date()
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "GMT")!
-        let currentMonth = calendar.component(.month, from: currentDate)
-        let currentYear = calendar.component(.year, from: currentDate)
-        
-        if PrayerTimeCache.loadYearlyCachedPrayerTimes(for: currentYear) == nil {
-            fetchPrayerTimesForYear(year: currentYear) {
-                if currentMonth == 12 {
-                    self.fetchPrayerTimesForYear(year: currentYear + 1) {
-                        print("Fetched prayer times for the next year")
-                    }
-                }
-            }
-        } else {
-            fetchPrayerTimesForToday {
-                self.updateStatusBar()
-            }
+        fetchPrayerTimesForToday {
+            self.updateStatusBar()
         }
     }
     
