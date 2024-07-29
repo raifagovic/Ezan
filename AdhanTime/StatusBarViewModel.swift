@@ -48,9 +48,35 @@ class StatusBarViewModel: ObservableObject {
     }
     
     func refresh() {
-        fetchPrayerTimesForToday {
-            self.updateStatusBar()
+        let currentDate = Date()
+        let currentYear = Calendar.current.component(.year, from: currentDate)
+        
+        if !isYearCached(year: currentYear) {
+            fetchPrayerTimesForYear(year: currentYear) {
+                self.fetchPrayerTimesForToday {
+                    self.updateStatusBar()
+                }
+            }
+        } else {
+            fetchPrayerTimesForToday {
+                self.updateStatusBar()
+            }
         }
+    }
+    
+    func isYearCached(year: Int) -> Bool {
+        let calendar = Calendar.current
+        for month in 1...12 {
+            let daysInMonth = calendar.range(of: .day, in: .month, for: calendar.date(from: DateComponents(year: year, month: month))!)?.count ?? 0
+            for day in 1...daysInMonth {
+                let components = DateComponents(year: year, month: month, day: day)
+                if let date = calendar.date(from: components),
+                   PrayerTimeCache.loadCachedPrayerTimes(for: date) == nil {
+                    return false
+                }
+            }
+        }
+        return true
     }
     
     func fetchPrayerTimesForYear(year: Int, completion: @escaping () -> Void) {
