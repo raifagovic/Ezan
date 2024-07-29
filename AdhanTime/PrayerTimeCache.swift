@@ -39,9 +39,5 @@ class PrayerTimeCache {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
     }
-    
-    private static func formattedDateKeyForMonthAndYear(month: Int, year: Int) -> String {
-        return String(format: "%04d-%02d", year, month)
-    }
 }
 
