@@ -26,23 +26,6 @@ class PrayerTimeCache {
         return data
     }
     
-    static func loadYearlyCachedPrayerTimes(for year: Int) -> [String]? {
-        var yearlyData: [String] = []
-        let cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]]
-        
-        for month in 1...12 {
-            let monthKey = formattedDateKeyForMonthAndYear(month: month, year: year)
-            if let monthData = cachedData?[monthKey] {
-                yearlyData.append(contentsOf: monthData)
-                print("Loaded cached prayer times for \(monthKey): \(monthData)")
-            } else {
-                print("No cached prayer times for \(monthKey)")
-            }
-        }
-        
-        return yearlyData.isEmpty ? nil : yearlyData
-    }
-    
     static func removeOldData(before date: Date) {
         let dateKey = formattedDateKey(from: date)
         var cachedData = UserDefaults.standard.dictionary(forKey: cacheKey) as? [String: [String]] ?? [:]
