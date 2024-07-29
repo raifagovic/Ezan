@@ -19,7 +19,7 @@ class StatusBarViewModel: ObservableObject {
         refresh()
     }
 
-    func startTimer(for interval: TimeInterval) {
+    func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             guard let currentRemainingTime = self.remainingTime else {
