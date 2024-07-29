@@ -63,7 +63,9 @@ class StatusBarViewModel: ObservableObject {
                 }
             }
         } else {
-            updateStatusBar()
+            fetchPrayerTimesForToday {
+                self.updateStatusBar()
+            }
         }
     }
     
