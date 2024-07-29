@@ -107,4 +107,21 @@ class StatusBarViewModel: ObservableObject {
         }
     }
     
+    func fetchPrayerTimesForToday(completion: @escaping () -> Void) {
+        let today = Date()
+        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today) {
+            if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
+                self.remainingTime = remainingTime
+                self.nextPrayerName = nextPrayerName
+                startTimer()
+                completion()
+            } else {
+                print("Failed to calculate remaining time.")
+                completion()
+            }
+        } else {
+            print("No cached data for today.")
+            completion()
+        }
+    }
 }
