@@ -161,7 +161,7 @@ struct ContentView: View {
             .frame(width: 150)
             .padding(.bottom, 10)
             .onChange(of: selectedLocationIndex) {
-                fetchPrayerTimes()
+                viewModel.refresh()
             }
             
             // Display fetched prayer times with names
