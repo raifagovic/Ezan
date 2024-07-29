@@ -40,30 +40,11 @@ class StatusBarViewModel: ObservableObject {
     }
     
     func updateStatusBar() {
-        let currentYear = Calendar.current.component(.year, from: Date())
-        let nextYear = currentYear + 1
-        
-        var prayerTimes: [String] = []
-        
-        if let currentYearTimes = PrayerTimeCache.loadYearlyCachedPrayerTimes(for: currentYear) {
-            prayerTimes.append(contentsOf: currentYearTimes)
-        }
-        
-        if Calendar.current.component(.month, from: Date()) == 12,
-           let nextYearTimes = PrayerTimeCache.loadYearlyCachedPrayerTimes(for: nextYear) {
-            prayerTimes.append(contentsOf: nextYearTimes)
-        }
-        
-        if !prayerTimes.isEmpty {
-            if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: prayerTimes) {
-                self.remainingTime = remainingTime
-                self.nextPrayerName = nextPrayerName
-                self.statusBarTitle = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
-                startTimer(for: remainingTime)
-            }
-        } else {
+        guard let remainingTime = self.remainingTime, let nextPrayerName = self.nextPrayerName else {
             self.statusBarTitle = "No cached data"
+            return
         }
+        self.statusBarTitle = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
     }
     
     func refresh() {
