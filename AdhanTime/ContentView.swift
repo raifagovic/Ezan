@@ -187,11 +187,11 @@ struct ContentView: View {
         .padding(.bottom, 5)
 //        .shadow(radius: 10) // Add shadow if desired
         .onAppear {
-            viewModel.fetchPrayerTimesForYear()
+            viewModel.refresh()
             viewModel.startTimer()
             // Add observer for wake notifications
             NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in
-                fetchPrayerTimes()
+                viewModel.refresh()
             }
             // Add observer for remaining time updates
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateRemainingTime"), object: nil, queue: .main) { notification in
