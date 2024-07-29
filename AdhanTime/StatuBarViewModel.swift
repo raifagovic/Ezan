@@ -32,8 +32,7 @@ class StatusBarViewModel: ObservableObject {
                 self.statusBarTitle = TimeUtils.formatTimeInterval(currentRemainingTime - 1, prayerName: self.nextPrayerName ?? "")
             } else {
                 self.timer?.invalidate()
-                self.fetchPrayerTimesForYear(year: Calendar.current.component(.year, from: Date())) {
-                    // Update the status bar after fetching the prayer times
+                self.fetchPrayerTimesForToday {
                     self.updateStatusBar()
                 }
             }
