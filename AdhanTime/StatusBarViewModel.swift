@@ -14,6 +14,11 @@ class StatusBarViewModel: ObservableObject {
     @Published var nextPrayerName: String?
     private var timer: Timer?
     private var locationId: Int = 77
+    private var isInitialized = false
+
+    init() {
+        refresh()
+    }
 
     func startTimer() {
         timer?.invalidate()
@@ -47,18 +52,19 @@ class StatusBarViewModel: ObservableObject {
         let currentDate = Date()
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "Europe/Sarajevo")!
-        let currentYear = calendar.component(.year, from: currentDate)
         
         if PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) == nil {
             let currentYear = calendar.component(.year, from: currentDate)
             fetchPrayerTimesForYear(year: currentYear) {
                 self.fetchPrayerTimesForToday {
                     self.updateStatusBar()
+                    self.startTimer()
                 }
             }
         } else {
             fetchPrayerTimesForToday {
                 self.updateStatusBar()
+                self.startTimer()
             }
         }
     }

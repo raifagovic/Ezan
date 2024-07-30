@@ -151,6 +151,11 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            // Display the status bar title
+//            Text(viewModel.statusBarTitle)
+//                .font(.headline)
+//                .padding(.top, 10)
+            
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
@@ -187,8 +192,8 @@ struct ContentView: View {
         .padding(.bottom, 5)
 //        .shadow(radius: 10) // Add shadow if desired
         .onAppear {
-            viewModel.refresh()
-            viewModel.startTimer()
+//            viewModel.refresh()
+//            viewModel.startTimer()
             // Add observer for wake notifications
             NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in
                 viewModel.refresh()
