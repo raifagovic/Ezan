@@ -15,10 +15,6 @@ class StatusBarViewModel: ObservableObject {
     private var timer: Timer?
     private var locationId: Int = 77
 
-    init() {
-        refresh()
-    }
-
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -53,7 +49,8 @@ class StatusBarViewModel: ObservableObject {
         calendar.timeZone = TimeZone(identifier: "Europe/Sarajevo")!
         let currentYear = calendar.component(.year, from: currentDate)
         
-        if !isYearCached(year: currentYear) {
+        if PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) == nil {
+            let currentYear = calendar.component(.year, from: currentDate)
             fetchPrayerTimesForYear(year: currentYear) {
                 self.fetchPrayerTimesForToday {
                     self.updateStatusBar()
