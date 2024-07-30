@@ -81,21 +81,10 @@ class StatusBarViewModel: ObservableObject {
     
     func fetchPrayerTimesForYear(year: Int, completion: @escaping () -> Void) {
         let dispatchGroup = DispatchGroup()
+        let calendar = Calendar.current
         
         for month in 1...12 {
-            // Create DateComponents for the start of the month
-            var components = DateComponents()
-            components.year = year
-            components.month = month
-            
-            // Safely create a date from the components
-            guard let startOfMonth = Calendar.current.date(from: components) else {
-                print("Failed to create date for year \(year), month \(month)")
-                continue
-            }
-            // Determine the range of days for the current month
-            let daysInMonth = Calendar.current.range(of: .day, in: .month, for: startOfMonth)?.count ?? 0
-            
+            let daysInMonth = calendar.range(of: .day, in: .month, for: calendar.date(from: DateComponents(year: year, month: month))!)?.count ?? 0
             for day in 1...daysInMonth {
                 dispatchGroup.enter()
                 PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: year, month: month, day: day) { result in
