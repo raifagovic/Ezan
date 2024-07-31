@@ -9,6 +9,8 @@ import SwiftUI
 import Combine
 
 class StatusBarViewModel: ObservableObject {
+    static let shared = StatusBarViewModel()
+    
     @Published var statusBarTitle: String = "AdhanTime"
     @Published var remainingTime: TimeInterval?
     @Published var nextPrayerName: String?
@@ -16,9 +18,9 @@ class StatusBarViewModel: ObservableObject {
     private var locationId: Int = 77
     private var isInitialized = false
 
-    init() {
-        refresh()
-    }
+//    init() {
+//        refresh()
+//    }
 
     func startTimer() {
         timer?.invalidate()
@@ -58,13 +60,11 @@ class StatusBarViewModel: ObservableObject {
             fetchPrayerTimesForYear(year: currentYear) {
                 self.fetchPrayerTimesForToday {
                     self.updateStatusBar()
-                    self.startTimer()
                 }
             }
         } else {
             fetchPrayerTimesForToday {
                 self.updateStatusBar()
-                self.startTimer()
             }
         }
     }

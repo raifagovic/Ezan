@@ -139,6 +139,7 @@ struct ContentView: View {
     let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
     
     init() {
+//        viewModel.refresh()
         // Find the index of "Sarajevo" in the locations array
         if let index = locationsWithIndex.firstIndex(where: { $0.1 == "Sarajevo" }) {
             self._selectedLocationIndex = State(initialValue: index)
