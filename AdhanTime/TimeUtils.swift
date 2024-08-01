@@ -12,7 +12,7 @@ import Foundation
 struct TimeUtils {
     static func formatTimeInterval(_ interval: TimeInterval, prayerName: String) -> String {
         if interval <= 60 {
-            return "\(prayerName): \(Int(interval)) sec"
+            return "\(prayerName) za \(Int(interval)) sec"
         } else {
             let totalSeconds = Int(interval)
             let hours = totalSeconds / 3600
@@ -20,15 +20,15 @@ struct TimeUtils {
             
             // Adjust minutes if it equals 60
             if minutes == 60 {
-                return "\(prayerName): \(hours + 1) h"
+                return "\(prayerName) za \(hours + 1) h"
             }
 
             if hours > 0 {
                 // If hours and minutes are present
-                return "\(prayerName): \(hours) h \(minutes) min"
+                return "\(prayerName) za \(hours) h \(minutes) min"
             } else {
                 // Only minutes are present
-                return "\(prayerName): \(minutes) min"
+                return "\(prayerName) za \(minutes) min"
             }
         }
     }

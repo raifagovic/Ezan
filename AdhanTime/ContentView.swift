@@ -185,7 +185,6 @@ struct ContentView: View {
             }
         }
         .padding(.bottom, 5)
-//        .shadow(radius: 10) // Add shadow if desired
         .onAppear {
             // Add observer for wake notifications
             NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in
