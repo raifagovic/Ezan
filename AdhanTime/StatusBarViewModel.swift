@@ -18,9 +18,13 @@ class StatusBarViewModel: ObservableObject {
     private var locationId: Int = 77
     private var isInitialized = false
 
-//    init() {
-//        refresh()
-//    }
+    private init() {
+        if !isInitialized {
+            print("Initializing ViewModel and refreshing")
+            refresh()
+            isInitialized = true
+        }
+    }
 
     func startTimer() {
         timer?.invalidate()

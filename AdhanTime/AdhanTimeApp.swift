@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct AdhanTimeApp: App {
-    @StateObject private var viewModel = StatusBarViewModel()
+    @StateObject private var viewModel = StatusBarViewModel.shared
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {

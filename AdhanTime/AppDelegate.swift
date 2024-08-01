@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func macDidWake(notification: NSNotification) {
-        NotificationCenter.default.post(name: Notification.Name("MacDidWake"), object: nil)
+        StatusBarViewModel.shared.refresh()
     }
 }
 

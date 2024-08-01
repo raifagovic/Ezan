@@ -139,7 +139,6 @@ struct ContentView: View {
     let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
     
     init() {
-//        viewModel.refresh()
         // Find the index of "Sarajevo" in the locations array
         if let index = locationsWithIndex.firstIndex(where: { $0.1 == "Sarajevo" }) {
             self._selectedLocationIndex = State(initialValue: index)
@@ -152,10 +151,12 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            // Display the status bar title
-//            Text(viewModel.statusBarTitle)
-//                .font(.headline)
-//                .padding(.top, 10)
+            if let remainingTime = viewModel.remainingTime, let nextPrayerName = viewModel.nextPrayerName {
+                      Text("Next Prayer: \(nextPrayerName)")
+                      Text("Remaining Time: \(TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName))")
+                  } else {
+                      Text("No cached data")
+                  }
             
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
@@ -193,8 +194,8 @@ struct ContentView: View {
         .padding(.bottom, 5)
 //        .shadow(radius: 10) // Add shadow if desired
         .onAppear {
-//            viewModel.refresh()
-//            viewModel.startTimer()
+            viewModel.refresh()
+            viewModel.startTimer()
             // Add observer for wake notifications
             NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in
                 viewModel.refresh()
@@ -209,6 +210,7 @@ struct ContentView: View {
         .onDisappear {
             timer?.invalidate()
             timer = nil
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("MacDidWake"), object: nil)
         }
     }
 }
