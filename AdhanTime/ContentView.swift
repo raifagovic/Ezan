@@ -151,13 +151,6 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            if let remainingTime = viewModel.remainingTime, let nextPrayerName = viewModel.nextPrayerName {
-                      Text("Next Prayer: \(nextPrayerName)")
-                      Text("Remaining Time: \(TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName))")
-                  } else {
-                      Text("No cached data")
-                  }
-            
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
