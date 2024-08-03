@@ -16,6 +16,10 @@ struct AdhanTimeApp: App {
         MenuBarExtra(viewModel.statusBarTitle, content: {
             ContentView()
                 .environmentObject(viewModel)
+            Divider()
+            Button("Quit") {
+                NSApplication.shared.terminate(nil)
+            }
         })
         .menuBarExtraStyle(.window) // Use the window style for rounded corners
     }
