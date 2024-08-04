@@ -150,7 +150,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
@@ -163,7 +163,6 @@ struct ContentView: View {
             .onChange(of: selectedLocationIndex) {
                 viewModel.refresh()
             }
-            
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
