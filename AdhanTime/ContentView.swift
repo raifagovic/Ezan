@@ -164,12 +164,13 @@ struct ContentView: View {
                 viewModel.refresh()
             }
             
+            
             // Display fetched prayer times with names
-            if !prayerTimes.isEmpty {
-                ForEach(prayerTimes.indices, id: \.self) { index in
+            if !viewModel.prayerTimes.isEmpty {
+                ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
                     if index < prayerNames.count {
                         let prayerName = prayerNames[index]
-                        let prayerTime = prayerTimes[index]
+                        let prayerTime = viewModel.prayerTimes[index]
                         HStack {
                             Text(prayerName)
                                 .font(.subheadline)

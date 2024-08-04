@@ -13,7 +13,9 @@ class StatusBarViewModel: ObservableObject {
     
     @Published var statusBarTitle: String = "AdhanTime"
     @Published var remainingTime: TimeInterval?
+    @Published var prayerTimes: [String] = []
     @Published var nextPrayerName: String?
+    
     private var timer: Timer?
     private var locationId: Int = 77
     private var isInitialized = false
@@ -103,6 +105,7 @@ class StatusBarViewModel: ObservableObject {
     func fetchPrayerTimesForToday(completion: @escaping () -> Void) {
         let today = Date()
         if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today) {
+            self.prayerTimes = cachedPrayerTimes
             if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
                 self.remainingTime = remainingTime
                 self.nextPrayerName = nextPrayerName
