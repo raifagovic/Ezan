@@ -13,14 +13,23 @@ struct AdhanTimeApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        MenuBarExtra(viewModel.statusBarTitle, content: {
+        MenuBarExtra {
             ContentView()
                 .environmentObject(viewModel)
             Divider()
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }
-        })
+        } label: {
+            HStack {
+                Image(systemName: "star.circle.fill") // Use a suitable SF Symbol
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 10, height: 10)
+                Spacer().frame(width: 10)
+                Text(viewModel.statusBarTitle)
+            }
+        }
         .menuBarExtraStyle(.window) // Use the window style for rounded corners
     }
 }
