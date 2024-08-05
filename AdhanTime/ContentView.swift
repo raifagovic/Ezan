@@ -155,15 +155,13 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Picker("Lokacija", selection: $selectedLocationIndex) {
+            Picker(selection: $selectedLocationIndex, label: Text(selectedLocationName)) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
                 }
             }
             .labelsHidden()
             .pickerStyle(MenuPickerStyle())
-            .frame(width: 150)
-            .padding(.bottom, 10)
             .onChange(of: selectedLocationIndex) {
                 viewModel.refresh()
             }
