@@ -160,7 +160,6 @@ struct ContentView: View {
                     Text(locationsWithIndex[index].1)
                 }
             }
-            .labelsHidden()
             .pickerStyle(MenuPickerStyle())
             .onChange(of: selectedLocationIndex) {
                 viewModel.refresh()
