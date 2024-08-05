@@ -174,13 +174,9 @@ struct ContentView: View {
                         HStack {
                             Text(prayerName)
                                 .font(.subheadline)
-                                .frame(width: 45, alignment: .leading)
-                                .padding(.trailing, 5)
                             Text(prayerTime)
                                 .font(.subheadline)
-                                .frame(width: 45, alignment: .trailing)
                         }
-                        .padding(.bottom, 10)
                     }
                 }
             }
