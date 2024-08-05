@@ -26,7 +26,6 @@ struct AdhanTimeApp: App {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 10, height: 10)
-                Spacer().frame(width: 10)
                 Text(viewModel.statusBarTitle)
             }
         }
