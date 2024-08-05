@@ -149,8 +149,12 @@ struct ContentView: View {
         locationsWithIndex[selectedLocationIndex].0
     }
     
+    var selectedLocationName: String {
+        locationsWithIndex[selectedLocationIndex].1
+    }
+    
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack {
             Picker("Lokacija", selection: $selectedLocationIndex) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)

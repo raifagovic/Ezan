@@ -30,6 +30,5 @@ struct AdhanTimeApp: App {
                 Text(viewModel.statusBarTitle)
             }
         }
-        .menuBarExtraStyle(.window) // Use the window style for rounded corners
     }
 }
