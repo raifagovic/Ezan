@@ -21,6 +21,7 @@ struct AdhanTimeApp: App {
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }
+            .buttonStyle(QuitButtonStyle())
         } label: {
             HStack {
                 Image(systemName: "star.circle.fill") // Use a suitable SF Symbol
