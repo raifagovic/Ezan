@@ -18,11 +18,14 @@ struct AdhanTimeApp: App {
                 .environmentObject(viewModel)
                 .frame(maxWidth: .infinity)
             Divider()
-            Button("Quit") {
-                NSApplication.shared.terminate(nil)
+            HStack {
+                Button("Quit") {
+                    NSApplication.shared.terminate(nil)
+                }
+                .buttonStyle(QuitButtonStyle())
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .buttonStyle(QuitButtonStyle())
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 10)
         } label: {
             HStack {
                 Image(systemName: "star.circle.fill") // Use a suitable SF Symbol
