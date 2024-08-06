@@ -20,7 +20,6 @@ struct AdhanTimeApp: App {
                 
                 Divider()
                 
-                // Align Quit button to the left
                 HStack {
                     Button("Quit") {
                         NSApplication.shared.terminate(nil)
@@ -32,7 +31,7 @@ struct AdhanTimeApp: App {
             }
         } label: {
             HStack {
-                Image(systemName: "star.circle.fill") // Use a suitable SF Symbol
+                Image(systemName: "star.circle.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 10, height: 10)
