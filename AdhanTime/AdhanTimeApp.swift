@@ -14,18 +14,22 @@ struct AdhanTimeApp: App {
 
     var body: some Scene {
         MenuBarExtra {
-            ContentView()
-                .environmentObject(viewModel)
-                .frame(maxWidth: .infinity)
-            Divider()
-            HStack {
-                Button("Quit") {
-                    NSApplication.shared.terminate(nil)
+            VStack {
+                ContentView()
+                    .environmentObject(viewModel)
+                
+                Divider()
+                
+                // Align Quit button to the left
+                HStack {
+                    Button("Quit") {
+                        NSApplication.shared.terminate(nil)
+                    }
+                    .buttonStyle(QuitButtonStyle())
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .buttonStyle(QuitButtonStyle())
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 10) // Optional: Add padding if needed
             }
-            .padding(.leading, 10)
         } label: {
             HStack {
                 Image(systemName: "star.circle.fill") // Use a suitable SF Symbol
