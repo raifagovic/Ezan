@@ -27,10 +27,8 @@ struct AdhanTimeApp: App {
                     }
                     .buttonStyle(QuitButtonStyle())
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 0)
                 }
-                .padding(.leading, 0) // Set padding to zero or adjust as needed
-                               .padding(.trailing, 0) // Optionally adjust trailing padding
+                .padding()
             }
         } label: {
             HStack {
