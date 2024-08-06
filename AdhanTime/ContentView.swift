@@ -174,13 +174,20 @@ struct ContentView: View {
                         HStack {
                             Text(prayerName)
                                 .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Spacer()
                             Text(prayerTime)
                                 .font(.subheadline)
+                                .foregroundColor(.secondary)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                         }
+                        .padding(.vertical, 2)
                     }
                 }
             }
         }
+        .padding()
+        .frame(maxWidth: .infinity)
         .onAppear {
             // Add observer for wake notifications
             NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in

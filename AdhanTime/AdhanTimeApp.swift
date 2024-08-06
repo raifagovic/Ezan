@@ -16,6 +16,7 @@ struct AdhanTimeApp: App {
         MenuBarExtra {
             ContentView()
                 .environmentObject(viewModel)
+                .frame(maxWidth: .infinity)
             Divider()
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
@@ -29,5 +30,17 @@ struct AdhanTimeApp: App {
                 Text(viewModel.statusBarTitle)
             }
         }
+        .menuBarExtraStyle(.window)
+    }
+}
+
+struct QuitButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(10)
+            .background(configuration.isPressed ? Color.blue.opacity(0.2) : Color.clear)
+            .cornerRadius(5)
+            .foregroundColor(.primary)
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     }
 }
