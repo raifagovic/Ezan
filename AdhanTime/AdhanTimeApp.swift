@@ -27,8 +27,10 @@ struct AdhanTimeApp: App {
                     }
                     .buttonStyle(QuitButtonStyle())
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 0)
                 }
-                .padding(.leading, 10) // Optional: Add padding if needed
+                .padding(.leading, 0) // Set padding to zero or adjust as needed
+                               .padding(.trailing, 0) // Optionally adjust trailing padding
             }
         } label: {
             HStack {
@@ -46,7 +48,6 @@ struct AdhanTimeApp: App {
 struct QuitButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(10)
             .background(configuration.isPressed ? Color.blue.opacity(0.2) : Color.clear)
             .cornerRadius(5)
             .foregroundColor(.primary)
