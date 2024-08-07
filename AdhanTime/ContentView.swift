@@ -223,11 +223,11 @@ struct HoverButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.vertical, 4) // Adjust padding as needed
+            .padding(.vertical, 4)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .contentShape(Rectangle()) // Ensures the whole row is clickable
+            .contentShape(Rectangle())
             .background(isHovering ? Color.blue.opacity(0.2) : Color.clear)
-            .cornerRadius(8) // Adjust the corner radius as needed
+            .cornerRadius(8)
             .onHover { hovering in
                 isHovering = hovering
             }
