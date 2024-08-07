@@ -164,6 +164,7 @@ struct ContentView: View {
             .onChange(of: selectedLocationIndex) {
                 viewModel.refresh()
             }
+            .padding(.bottom, 10)
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
@@ -185,6 +186,15 @@ struct ContentView: View {
                     }
                 }
             }
+            Divider()
+            HStack {
+                Button("Quit") {
+                    NSApplication.shared.terminate(nil)
+                }
+                .buttonStyle(HoverButtonStyle())
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.vertical, 4)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -205,5 +215,22 @@ struct ContentView: View {
             timer = nil
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name("MacDidWake"), object: nil)
         }
+    }
+}
+
+struct HoverButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(.vertical, 4) // Adjust padding as needed
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle()) // Ensures the whole row is clickable
+            .background(configuration.isPressed ? Color.blue.opacity(0.2) : Color.clear)
+            .onHover { hovering in
+                if hovering {
+                    configuration.label.background(Color.blue.opacity(0.2))
+                } else {
+                    configuration.label.background(Color.clear)
+                }
+            }
     }
 }

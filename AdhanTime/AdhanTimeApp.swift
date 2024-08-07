@@ -47,6 +47,14 @@ struct QuitButtonStyle: ButtonStyle {
             .cornerRadius(5)
             .foregroundColor(.primary)
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .contentShape(Rectangle()) // Ensures the whole row is clickable
+            .onHover { hovering in
+                if hovering {
+                    configuration.label.background(Color.blue.opacity(0.2))
+                } else {
+                    configuration.label.background(Color.clear)
+                }
+            }
     }
 }
 
