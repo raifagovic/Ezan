@@ -22,7 +22,7 @@ struct AdhanTimeApp: App {
                     Button("Quit") {
                         NSApplication.shared.terminate(nil)
                     }
-                    .buttonStyle(QuitButtonStyle())git a
+                    .buttonStyle(QuitButtonStyle())
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding()
@@ -37,24 +37,6 @@ struct AdhanTimeApp: App {
             }
         }
         .menuBarExtraStyle(.window)
-    }
-}
-
-struct HoverButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
-            .background(configuration.isPressed ? Color.blue.opacity(0.2) : Color.clear)
-            .contentShape(Rectangle())
-            .onHover { hovering in
-                if hovering {
-                    NSCursor.pointingHand.set()
-                } else {
-                    NSCursor.arrow.set()
-                }
-            }
-            .animation(.easeInOut, value: configuration.isPressed)
     }
 }
 
