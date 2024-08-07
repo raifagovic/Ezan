@@ -219,18 +219,16 @@ struct ContentView: View {
 }
 
 struct HoverButtonStyle: ButtonStyle {
+    @State private var isHovering = false
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(.vertical, 4) // Adjust padding as needed
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle()) // Ensures the whole row is clickable
-            .background(configuration.isPressed ? Color.blue.opacity(0.2) : Color.clear)
+            .background(isHovering ? Color.blue.opacity(0.2) : Color.clear)
             .onHover { hovering in
-                if hovering {
-                    configuration.label.background(Color.blue.opacity(0.2))
-                } else {
-                    configuration.label.background(Color.clear)
-                }
+                isHovering = hovering
             }
     }
 }
