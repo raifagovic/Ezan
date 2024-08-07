@@ -17,14 +17,12 @@ struct AdhanTimeApp: App {
             VStack {
                 ContentView()
                     .environmentObject(viewModel)
-                
                 Divider()
-                
                 HStack {
                     Button("Quit") {
                         NSApplication.shared.terminate(nil)
                     }
-                    .buttonStyle(QuitButtonStyle())
+                    .buttonStyle(QuitButtonStyle())git a
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding()
@@ -51,3 +49,4 @@ struct QuitButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     }
 }
+
