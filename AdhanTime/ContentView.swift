@@ -227,6 +227,7 @@ struct HoverButtonStyle: ButtonStyle {
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle()) // Ensures the whole row is clickable
             .background(isHovering ? Color.blue.opacity(0.2) : Color.clear)
+            .cornerRadius(8) // Adjust the corner radius as needed
             .onHover { hovering in
                 isHovering = hovering
             }
