@@ -165,6 +165,7 @@ struct ContentView: View {
                 viewModel.refresh()
             }
             .padding(.bottom, 10)
+            .padding(.horizontal, 10)
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
@@ -183,10 +184,12 @@ struct ContentView: View {
                                 .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                         .padding(.vertical, 2)
+                        .padding(.horizontal, 10)
                     }
                 }
             }
             Divider()
+                .padding(.horizontal, 10)
             HStack {
                 Button("Quit") {
                     NSApplication.shared.terminate(nil)
@@ -196,7 +199,7 @@ struct ContentView: View {
             }
             .padding(.vertical, 4)
         }
-        .padding()
+        .padding(5)
         .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear {
             // Add observer for wake notifications
@@ -224,10 +227,11 @@ struct HoverButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(.vertical, 4)
+            .padding(.horizontal, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle())
-            .background(isHovering ? Color.blue.opacity(0.2) : Color.clear)
-            .cornerRadius(8)
+            .background(isHovering ? Color.black.opacity(0.2) : Color.clear)
+            .cornerRadius(4)
             .onHover { hovering in
                 isHovering = hovering
             }
