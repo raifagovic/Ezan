@@ -230,7 +230,7 @@ struct HoverButtonStyle: ButtonStyle {
             .padding(.horizontal, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle())
-            .background(isHovering ? Color.black.opacity(0.2) : Color.clear)
+            .background(isHovering ? Color.black.opacity(0.1) : Color.clear)
             .cornerRadius(4)
             .onHover { hovering in
                 isHovering = hovering
