@@ -176,12 +176,11 @@ struct ContentView: View {
                         HStack {
                             Text(prayerName)
                                 .font(.subheadline)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.secondary)
                             Spacer()
                             Text(prayerTime)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                         .padding(.vertical, 2)
                         .padding(.horizontal, 10)
@@ -190,6 +189,7 @@ struct ContentView: View {
             }
             Divider()
                 .padding(.horizontal, 10)
+            
             HStack {
                 Button("Quit") {
                     NSApplication.shared.terminate(nil)
