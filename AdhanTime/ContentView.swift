@@ -195,7 +195,6 @@ struct ContentView: View {
                     NSApplication.shared.terminate(nil)
                 }
                 .buttonStyle(HoverButtonStyle())
-                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
         .padding(5)
