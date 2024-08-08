@@ -155,17 +155,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Picker(selection: $selectedLocationIndex, label: Text(selectedLocationName)) {
-                ForEach(locationsWithIndex.indices, id: \.self) { index in
-                    Text(locationsWithIndex[index].1)
-                }
-            }
-            .pickerStyle(MenuPickerStyle())
-            .onChange(of: selectedLocationIndex) {
-                viewModel.refresh()
-            }
-            .padding(.bottom, 10)
-            .padding(.horizontal, 10)
+            
+//            .padding(.bottom, 10)
+//            .padding(.horizontal, 10)
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
@@ -182,7 +174,7 @@ struct ContentView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
-                        .padding(.vertical, 2)
+                        .padding(.vertical, 5)
                         .padding(.horizontal, 10)
                     }
                 }
@@ -225,7 +217,6 @@ struct HoverButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
             configuration.label
-                .padding(.bottom, 3)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 3)
                 .frame(maxWidth: .infinity, alignment: .leading)
