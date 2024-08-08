@@ -154,7 +154,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Picker(selection: $selectedLocationIndex, label: Text(selectedLocationName)) {
                 ForEach(locationsWithIndex.indices, id: \.self) { index in
                     Text(locationsWithIndex[index].1)
@@ -187,25 +187,15 @@ struct ContentView: View {
                     }
                 }
             }
-//            Divider()
-//                .padding(.horizontal, 10)
-//            
-//            HStack {
-//                Button("Quit") {
-//                    NSApplication.shared.terminate(nil)
-//                }
-//                .buttonStyle(HoverButtonStyle())
-//            }
-            VStack(spacing: 0) { // Ensures there’s no extra space between elements
-                Divider()
-                    .padding(.horizontal, 10) // Remove horizontal padding if needed
-
-                HStack {
-                    Button("Quit") {
-                        NSApplication.shared.terminate(nil)
-                    }
-                    .buttonStyle(HoverButtonStyle())
+            Divider()
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+            
+            HStack {
+                Button("Quit") {
+                    NSApplication.shared.terminate(nil)
                 }
+                .buttonStyle(HoverButtonStyle())
             }
         }
         .padding(5)
@@ -237,7 +227,7 @@ struct HoverButtonStyle: ButtonStyle {
             configuration.label
                 .padding(.bottom, 3)
                 .padding(.horizontal, 10)
-                .padding(.vertical, 0)
+                .padding(.vertical, 3)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
                 .background(isHovering ? Color.black.opacity(0.1) : Color.clear)
