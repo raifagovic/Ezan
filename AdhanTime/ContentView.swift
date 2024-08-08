@@ -197,7 +197,6 @@ struct ContentView: View {
                 .buttonStyle(HoverButtonStyle())
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.vertical, 4)
         }
         .padding(5)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -226,7 +225,7 @@ struct HoverButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.vertical, 4)
+            .padding(.vertical, 5)
             .padding(.horizontal, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle())
