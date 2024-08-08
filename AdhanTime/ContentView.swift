@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var nextPrayerName: String? = nil
+    @State private var showLocationMenu = false
     @EnvironmentObject var viewModel: StatusBarViewModel
     
     let locationsWithIndex: [(Int, String)] = [
@@ -155,9 +156,20 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
-//            .padding(.bottom, 10)
-//            .padding(.horizontal, 10)
+            HStack {
+                Text(locationsWithIndex[selectedLocationIndex].1)
+                Spacer()
+                Button(action: {
+                    showLocationMenu.toggle()
+                }) {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.black)
+                        .font(.headline)
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            .padding(.bottom, 10)
+            .padding(.horizontal, 10)
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
