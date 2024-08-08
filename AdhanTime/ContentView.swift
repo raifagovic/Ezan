@@ -187,14 +187,25 @@ struct ContentView: View {
                     }
                 }
             }
-            Divider()
-                .padding(.horizontal, 10)
-            
-            HStack {
-                Button("Quit") {
-                    NSApplication.shared.terminate(nil)
+//            Divider()
+//                .padding(.horizontal, 10)
+//            
+//            HStack {
+//                Button("Quit") {
+//                    NSApplication.shared.terminate(nil)
+//                }
+//                .buttonStyle(HoverButtonStyle())
+//            }
+            VStack(spacing: 0) { // Ensures there’s no extra space between elements
+                Divider()
+                    .padding(.horizontal, 10) // Remove horizontal padding if needed
+
+                HStack {
+                    Button("Quit") {
+                        NSApplication.shared.terminate(nil)
+                    }
+                    .buttonStyle(HoverButtonStyle())
                 }
-                .buttonStyle(HoverButtonStyle())
             }
         }
         .padding(5)
@@ -223,15 +234,16 @@ struct HoverButtonStyle: ButtonStyle {
     @State private var isHovering = false
     
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.vertical, 5)
-            .padding(.horizontal, 10)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .contentShape(Rectangle())
-            .background(isHovering ? Color.black.opacity(0.1) : Color.clear)
-            .cornerRadius(4)
-            .onHover { hovering in
-                isHovering = hovering
-            }
+            configuration.label
+                .padding(.bottom, 3)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 0)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .background(isHovering ? Color.black.opacity(0.1) : Color.clear)
+                .cornerRadius(4)
+                .onHover { hovering in
+                    isHovering = hovering
+                }
     }
 }
