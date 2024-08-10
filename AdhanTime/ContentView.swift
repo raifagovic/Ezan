@@ -155,9 +155,22 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-
-//            .padding(.bottom, 10)
-//            .padding(.horizontal, 10)
+            
+            Menu {
+                ForEach(locationsWithIndex, id: \.0) { location in
+                    Button(location.1) {
+                        selectedLocationIndex = location.0
+                        // Trigger update to prayer times, etc.
+                    }
+                }
+            } label: {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.blue)
+                    .padding(.trailing, 10)
+            }
+            .menuStyle(BorderlessButtonMenuStyle())
+    
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
