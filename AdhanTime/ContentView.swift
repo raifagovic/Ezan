@@ -14,7 +14,6 @@ struct ContentView: View {
     @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var nextPrayerName: String? = nil
-    @State private var showMenu = false
     @EnvironmentObject var viewModel: StatusBarViewModel
     
     let locationsWithIndex: [(Int, String)] = [
