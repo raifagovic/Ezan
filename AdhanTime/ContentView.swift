@@ -178,7 +178,8 @@ struct ContentView: View {
                 }
                 .menuStyle(BorderlessButtonMenuStyle())
             }
-    
+            .padding(.vertical, 10)
+            .padding(.horizontal, 10)
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
