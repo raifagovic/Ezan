@@ -193,18 +193,6 @@ struct ContentView: View {
         }
         .padding(5)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .onAppear {
-            // Add observer for wake notifications
-            NotificationCenter.default.addObserver(forName: NSNotification.Name("MacDidWake"), object: nil, queue: .main) { _ in
-                viewModel.refresh()
-            }
-            // Add observer for remaining time updates
-            NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateRemainingTime"), object: nil, queue: .main) { notification in
-                if let timeString = notification.object as? String {
-                    self.timeToNextPrayerResult = timeString
-                }
-            }
-        }
     }
 }
 
