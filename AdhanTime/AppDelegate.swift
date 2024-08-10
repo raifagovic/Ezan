@@ -23,5 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func macDidWake(notification: NSNotification) {
         StatusBarViewModel.shared.refresh()
     }
+    
+    func applicationWillTerminate(_ notification: Notification) {
+        // Remove observers when the app is about to terminate
+        NSWorkspace.shared.notificationCenter.removeObserver(self)
+    }
 }
 
