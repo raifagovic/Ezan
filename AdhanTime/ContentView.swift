@@ -157,7 +157,6 @@ struct ContentView: View {
         VStack(spacing: 0) {
             HStack {
                 Text(selectedLocationName)
-                    .foregroundColor(.primary)
                 
                 Spacer()
                 
