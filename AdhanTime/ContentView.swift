@@ -161,6 +161,8 @@ struct ContentView: View {
                 .foregroundColor(.primary)
                 .padding(.leading, 10)
         
+            Spacer()
+            
             Menu {
                 ForEach(locationsWithIndex, id: \.0) { location in
                     Button(location.1) {
