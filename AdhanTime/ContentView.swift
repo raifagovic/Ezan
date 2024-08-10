@@ -155,28 +155,29 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
-            Text(selectedLocationName)
-                .font(.subheadline)
-                .foregroundColor(.primary)
-                .padding(.leading, 10)
-        
-            Spacer()
-            
-            Menu {
-                ForEach(locationsWithIndex, id: \.0) { location in
-                    Button(location.1) {
-                        selectedLocationIndex = location.0
-                        // Trigger update to prayer times, etc.
+            HStack {
+                Text(selectedLocationName)
+                    .font(.subheadline)
+                    .foregroundColor(.primary)
+                    .padding(.leading, 10)
+                
+                Spacer()
+                
+                Menu {
+                    ForEach(locationsWithIndex, id: \.0) { location in
+                        Button(location.1) {
+                            selectedLocationIndex = location.0
+                            // Trigger update to prayer times, etc.
+                        }
                     }
+                } label: {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.blue)
+                        .padding(.trailing, 10)
                 }
-            } label: {
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.blue)
-                    .padding(.trailing, 10)
+                .menuStyle(BorderlessButtonMenuStyle())
             }
-            .menuStyle(BorderlessButtonMenuStyle())
     
             
             // Display fetched prayer times with names
