@@ -157,7 +157,6 @@ struct ContentView: View {
         VStack(spacing: 0) {
             HStack {
                 Text(selectedLocationName)
-                    .font(.subheadline)
                     .foregroundColor(.primary)
                     .padding(.leading, 10)
                 
