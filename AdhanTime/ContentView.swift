@@ -156,6 +156,11 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             
+            Text(selectedLocationName)
+                .font(.subheadline)
+                .foregroundColor(.primary)
+                .padding(.leading, 10)
+        
             Menu {
                 ForEach(locationsWithIndex, id: \.0) { location in
                     Button(location.1) {
