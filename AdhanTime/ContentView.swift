@@ -160,20 +160,17 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Menu {
-                    ForEach(locationsWithIndex, id: \.0) { location in
-                        Button(location.1) {
-                            selectedLocationIndex = location.0
-                            // Trigger update to prayer times, etc.
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.blue)
+                    .padding(.trailing, 10)
+                    .contextMenu {
+                        ForEach(locationsWithIndex, id: \.0) { location in
+                            Button(location.1) {
+                                selectedLocationIndex = location.0
+                            }
                         }
                     }
-                } label: {
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(.blue)
-                        .padding(.trailing, 10)
-                }
-                .menuStyle(BorderlessButtonMenuStyle())
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 10)
