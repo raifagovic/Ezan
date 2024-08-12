@@ -162,18 +162,19 @@ struct ContentView: View {
                 
                 Image(systemName: "chevron.right")
                     .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.blue)
+                    .foregroundColor(.black)
                     .padding(.trailing, 10)
-                    .contextMenu {
-                        ForEach(locationsWithIndex, id: \.0) { location in
-                            Button(location.1) {
-                                selectedLocationIndex = location.0
-                            }
-                        }
-                    }
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 10)
+            .contextMenu {
+                ForEach(locationsWithIndex, id: \.0) { location in
+                    Button(location.1) {
+                        selectedLocationIndex = location.0
+                    }
+                }
+            }
+
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
