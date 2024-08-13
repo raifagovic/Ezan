@@ -156,8 +156,27 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
-            
+            // Entire row for location selection
+            Button(action: {
+                showLocationsMenu.toggle()
+            }) {
+                HStack {
+                    Text(selectedLocationName)  // Selected location on the left
+                        .font(.subheadline)
+                    Spacer()
+                    Image(systemName: "chevron.right")  // Right arrow on the right
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+            }
+            .background(Color.clear)
+            .contentShape(Rectangle())
+            .popover(isPresented: $showLocationsMenu) {
+                MenuBarExtraView(
+                    selectedLocationIndex: $selectedLocationIndex,
+                    locationsWithIndex: locationsWithIndex
+                )
+            }
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
                 ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
