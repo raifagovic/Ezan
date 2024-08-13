@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var nextPrayerName: String? = nil
+    @State private var showDropdown = false
     @EnvironmentObject var viewModel: StatusBarViewModel
     
     let locationsWithIndex: [(Int, String)] = [
@@ -155,26 +156,49 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text(selectedLocationName)
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.black)
-                    .padding(.trailing, 10)
-            }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 10)
-            .contextMenu {
-                ForEach(locationsWithIndex, id: \.0) { location in
-                    Button(location.1) {
-                        selectedLocationIndex = location.0
+            Button(action: {
+                            withAnimation {
+                                showDropdown.toggle()
+                            }
+                        }) {
+                            HStack {
+                                Text(selectedLocationName)
+                                Spacer()
+                                Image(systemName: "chevron.right") // Custom right arrow
+                                    .font(.system(size: 12, weight: .bold))
+                                    .foregroundColor(.black)
+                            }
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 10)
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(8)
+                        }
+                        .buttonStyle(PlainButtonStyle())// Ensures the button style doesn't override the row look
+
+            if showDropdown {
+                VStack(spacing: 0) {
+                    ForEach(locationsWithIndex, id: \.0) { location in
+                        Button(action: {
+                            selectedLocationIndex = location.0 // Update the index, not the name
+                            withAnimation {
+                                showDropdown = false
+                            }
+                        }) {
+                            Text(location.1)
+                                .padding()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(Color.white)
+                        }
+                        .buttonStyle(PlainButtonStyle()) // No button style to keep it simple
                     }
                 }
+                .frame(maxHeight: 200) // Set a maximum height to make it scrollable
+                .background(Color.white)
+                .cornerRadius(8)
+                .shadow(radius: 5)
             }
-
+//            .padding(.vertical, 10)
+//            .padding(.horizontal, 10)
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
