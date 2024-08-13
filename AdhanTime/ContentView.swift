@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var nextPrayerName: String? = nil
-    @State private var showDropdown = false
+    @State private var showLocationsMenu = false
     @EnvironmentObject var viewModel: StatusBarViewModel
     
     let locationsWithIndex: [(Int, String)] = [
@@ -156,51 +156,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Button(action: {
-                            withAnimation {
-                                showDropdown.toggle()
-                            }
-                        }) {
-                            HStack {
-                                Text(selectedLocationName)
-                                Spacer()
-                                Image(systemName: "chevron.right") // Custom right arrow
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.black)
-                            }
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 10)
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(8)
-                        }
-                        .buttonStyle(PlainButtonStyle())// Ensures the button style doesn't override the row look
-
-            if showDropdown {
-                ScrollView {
-                    VStack(spacing: 0) {
-                        ForEach(locationsWithIndex, id: \.0) { location in
-                            Button(action: {
-                                selectedLocationIndex = location.0 // Update the index, not the name
-                                withAnimation {
-                                    showDropdown = false
-                                }
-                            }) {
-                                Text(location.1)
-                                    .padding()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(Color.white)
-                            }
-                            .buttonStyle(PlainButtonStyle()) // No button style to keep it simple
-                        }
-                    }
-                }
-                .frame(maxHeight: 200) // Set a maximum height to make it scrollable
-                .background(Color.white)
-                .cornerRadius(8)
-                .shadow(radius: 5)
-            }
-//            .padding(.vertical, 10)
-//            .padding(.horizontal, 10)
+            
             
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
@@ -235,6 +191,34 @@ struct ContentView: View {
         }
         .padding(5)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct MenuBarExtraView: View {
+    @Binding var selectedLocationIndex: Int
+    let locationsWithIndex: [(Int, String)]
+    
+    var body: some View {
+        VStack {
+            ForEach(locationsWithIndex, id: \.0) { index, location in
+                Button(action: {
+                    selectedLocationIndex = index
+                }) {
+                    HStack {
+                        Text(location)
+                        Spacer()
+                        if selectedLocationIndex == index {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                    .padding()
+                }
+                .background(Color.clear)
+                .contentShape(Rectangle())
+            }
+        }
+        .frame(maxHeight: .infinity) // Use maximum height
+        .menuBarExtraStyle(.menu) // Style this view as a menu
     }
 }
 
