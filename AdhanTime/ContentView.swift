@@ -176,20 +176,22 @@ struct ContentView: View {
                         .buttonStyle(PlainButtonStyle())// Ensures the button style doesn't override the row look
 
             if showDropdown {
-                VStack(spacing: 0) {
-                    ForEach(locationsWithIndex, id: \.0) { location in
-                        Button(action: {
-                            selectedLocationIndex = location.0 // Update the index, not the name
-                            withAnimation {
-                                showDropdown = false
+                ScrollView {
+                    VStack(spacing: 0) {
+                        ForEach(locationsWithIndex, id: \.0) { location in
+                            Button(action: {
+                                selectedLocationIndex = location.0 // Update the index, not the name
+                                withAnimation {
+                                    showDropdown = false
+                                }
+                            }) {
+                                Text(location.1)
+                                    .padding()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color.white)
                             }
-                        }) {
-                            Text(location.1)
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(Color.white)
+                            .buttonStyle(PlainButtonStyle()) // No button style to keep it simple
                         }
-                        .buttonStyle(PlainButtonStyle()) // No button style to keep it simple
                     }
                 }
                 .frame(maxHeight: 200) // Set a maximum height to make it scrollable
