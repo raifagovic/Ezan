@@ -213,31 +213,27 @@ struct ContentView: View {
     }
 }
 
-struct MenuBarExtraView: View {
+struct LocationMenuView: View {
     @Binding var selectedLocationIndex: Int
     let locationsWithIndex: [(Int, String)]
     
     var body: some View {
-        VStack {
-            ForEach(locationsWithIndex, id: \.0) { index, location in
-                Button(action: {
-                    selectedLocationIndex = index
-                }) {
-                    HStack {
-                        Text(location)
-                        Spacer()
-                        if selectedLocationIndex == index {
-                            Image(systemName: "checkmark")
-                        }
+        List(locationsWithIndex, id: \.0) { index, location in
+            Button(action: {
+                selectedLocationIndex = index
+            }) {
+                HStack {
+                    Text(location)
+                    Spacer()
+                    if selectedLocationIndex == index {
+                        Image(systemName: "checkmark")
                     }
-                    .padding()
                 }
-                .background(Color.clear)
-                .contentShape(Rectangle())
+                .padding()
             }
+            .background(Color.clear)
+            .contentShape(Rectangle())
         }
-        .frame(maxHeight: .infinity) // Use maximum height
-        .menuBarExtraStyle(.menu) // Style this view as a menu
     }
 }
 
