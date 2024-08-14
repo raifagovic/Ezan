@@ -157,25 +157,37 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Entire row for location selection
-            Button(action: {
-                showLocationsMenu.toggle()
-            }) {
-                HStack {
-                    Text(selectedLocationName)  // Selected location on the left
-                        .font(.subheadline)
-                    Spacer()
-                    Image(systemName: "chevron.right")  // Right arrow on the right
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
+            
+            HStack {
+                Text(selectedLocationName)
+                    .padding(.leading, 10)
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .padding(.trailing, 10)
             }
-            .background(Color.clear)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle())
-            .popover(isPresented: $showLocationsMenu) {
-                MenuBarExtraView(
+            .onTapGesture {
+                showLocationsMenu.toggle()
+            }
+            .background(Color.clear) // Keep the background clear
+            
+            if showLocationsMenu {
+                LocationMenuView(
                     selectedLocationIndex: $selectedLocationIndex,
                     locationsWithIndex: locationsWithIndex
                 )
+                .frame(width: 200, height: 300) // Adjust size as needed
+                .background(Color(NSColor.windowBackgroundColor))
+                .cornerRadius(10)
+                .shadow(radius: 10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+                .padding(.horizontal, 10)
             }
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
@@ -213,27 +225,37 @@ struct ContentView: View {
     }
 }
 
-struct LocationMenuView: View {
+struct SecondaryMenuBarExtra: View {
     @Binding var selectedLocationIndex: Int
     let locationsWithIndex: [(Int, String)]
-    
+
     var body: some View {
-        List(locationsWithIndex, id: \.0) { index, location in
-            Button(action: {
-                selectedLocationIndex = index
-            }) {
-                HStack {
-                    Text(location)
-                    Spacer()
-                    if selectedLocationIndex == index {
-                        Image(systemName: "checkmark")
+        MenuBarExtra {
+            ScrollView {
+                VStack {
+                    ForEach(locationsWithIndex, id: \.0) { index, location in
+                        Button(action: {
+                            selectedLocationIndex = index
+                        }) {
+                            HStack {
+                                Text(location)
+                                Spacer()
+                                if selectedLocationIndex == index {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                            .padding()
+                        }
+                        .background(Color.clear)
+                        .contentShape(Rectangle())
                     }
                 }
-                .padding()
             }
-            .background(Color.clear)
-            .contentShape(Rectangle())
+            .frame(width: 200, height: 300) // Adjust size as needed
+        } label: {
+            EmptyView() // Label is empty because it will be triggered from ContentView
         }
+        .menuBarExtraStyle(.menu)
     }
 }
 
