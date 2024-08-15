@@ -222,11 +222,13 @@ struct ContentView: View {
     }
     
     private func showLocationMenu() {
+        let coordinator = Coordinator(parent: self)
         let menu = NSMenu()
         
         for (index, location) in locationsWithIndex {
-            let menuItem = NSMenuItem(title: location, action: #selector(selectLocation(_:)), keyEquivalent: "")
+            let menuItem = NSMenuItem(title: location, action: #selector(Coordinator.selectLocation(_:)), keyEquivalent: "")
             menuItem.tag = index
+            menuItem.target = coordinator
             menu.addItem(menuItem)
         }
         
@@ -237,10 +239,19 @@ struct ContentView: View {
         }
     }
     
-    @objc private func selectLocation(_ sender: NSMenuItem) {
-        selectedLocationIndex = sender.tag
-        showLocationsMenu = false
-    }
+    // Coordinator Class for handling the menu actions
+        class Coordinator: NSObject {
+            var parent: ContentView
+            
+            init(parent: ContentView) {
+                self.parent = parent
+            }
+            
+            @objc func selectLocation(_ sender: NSMenuItem) {
+                parent.selectedLocationIndex = sender.tag
+                parent.showLocationsMenu = false
+            }
+        }
 }
 
 struct HoverButtonStyle: ButtonStyle {
