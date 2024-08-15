@@ -156,28 +156,36 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Menu {
-                        Button("Quit") {
-                            NSApplication.shared.terminate(nil)
+            HStack {
+                Text(selectedLocationName)  // Selected location on the left
+                    .font(.body)
+                    .padding(.leading, 8)
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")  // Right arrow on the right
+                    .padding(.trailing, 8)
+            }
+            .contentShape(Rectangle())  // Ensure the entire row is clickable
+            .onTapGesture {
+                showLocationsMenu.toggle()  // Toggle the menu when clicked
+            }
+            .background(Color.clear)  // No background color for the row
+            .padding(.vertical, 5)  // Add vertical padding for a cleaner look
+            
+            if showLocationsMenu {
+                Menu {
+                    ForEach(locationsWithIndex, id: \.0) { index, location in
+                        Button(location) {
+                            selectedLocationIndex = index
+                            showLocationsMenu = false  // Hide the menu after selection
                         }
-
-                        Menu("Select Location") {
-                            ForEach(locationsWithIndex, id: \.0) { index, location in
-                                Button(location) {
-                                    selectedLocationIndex = index
-                                    // Handle selection
-                                }
-                            }
-                        }
-                    } label: {
-                        HStack {
-                            Text(locationsWithIndex[selectedLocationIndex].1) // Selected location
-                            Spacer()
-                            Image(systemName: "chevron.right") // Arrow
-                        }
-                        .padding()
-                        .contentShape(Rectangle())
                     }
+                } label: {
+                    EmptyView()  // EmptyView to trigger the menu programmatically
+                }
+                .fixedSize()  // Adjust size as necessary
+            }
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
                 ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
@@ -211,6 +219,22 @@ struct ContentView: View {
         }
         .padding(5)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private func showLocationMenu() {
+        let menu = NSMenu()
+        
+        for (index, location) in locationsWithIndex {
+            let menuItem = NSMenuItem(title: location, action: #selector(selectLocation(_:)), keyEquivalent: "")
+            menuItem.tag = index
+            menu.addItem(menuItem)
+        }
+        
+        if let window = NSApplication.shared.keyWindow {
+            let mouseLocation = NSEvent.mouseLocation
+            let locationInWindow = window.convertFromScreen(NSRect(origin: mouseLocation, size: .zero)).origin
+            menu.popUp(positioning: nil, at: locationInWindow, in: window.contentView)
+        }
     }
 }
 
