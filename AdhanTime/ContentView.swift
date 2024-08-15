@@ -236,6 +236,11 @@ struct ContentView: View {
             menu.popUp(positioning: nil, at: locationInWindow, in: window.contentView)
         }
     }
+    
+    @objc private func selectLocation(_ sender: NSMenuItem) {
+        selectedLocationIndex = sender.tag
+        showLocationsMenu = false
+    }
 }
 
 struct HoverButtonStyle: ButtonStyle {
