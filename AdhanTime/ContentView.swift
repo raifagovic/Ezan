@@ -157,35 +157,22 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text(selectedLocationName)  // Selected location on the left
+                Text(selectedLocationName)
                     .font(.body)
                     .padding(.leading, 8)
                 
                 Spacer()
                 
-                Image(systemName: "chevron.right")  // Right arrow on the right
+                Image(systemName: "chevron.right")
                     .padding(.trailing, 8)
             }
-            .contentShape(Rectangle())  // Ensure the entire row is clickable
+            .contentShape(Rectangle())
             .onTapGesture {
-                showLocationsMenu.toggle()  // Toggle the menu when clicked
+                showLocationMenu()
             }
-            .background(Color.clear)  // No background color for the row
-            .padding(.vertical, 5)  // Add vertical padding for a cleaner look
+            .background(Color.clear)
+            .padding(.vertical, 5)
             
-            if showLocationsMenu {
-                Menu {
-                    ForEach(locationsWithIndex, id: \.0) { index, location in
-                        Button(location) {
-                            selectedLocationIndex = index
-                            showLocationsMenu = false  // Hide the menu after selection
-                        }
-                    }
-                } label: {
-                    EmptyView()  // EmptyView to trigger the menu programmatically
-                }
-                .fixedSize()  // Adjust size as necessary
-            }
             // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
                 ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
@@ -232,10 +219,11 @@ struct ContentView: View {
             menu.addItem(menuItem)
         }
         
-        if let window = NSApplication.shared.keyWindow {
-            let mouseLocation = NSEvent.mouseLocation
-            let locationInWindow = window.convertFromScreen(NSRect(origin: mouseLocation, size: .zero)).origin
-            menu.popUp(positioning: nil, at: locationInWindow, in: window.contentView)
+        // Find the window and calculate the position of the row
+        if let window = NSApplication.shared.keyWindow, let rowView = window.contentView?.subviews.first(where: { $0 is NSHostingView<ContentView> }) {
+            let rowFrame = rowView.convert(rowView.bounds, to: nil)
+            let menuOrigin = CGPoint(x: rowFrame.minX, y: rowFrame.minY - menu.size.height)
+            menu.popUp(positioning: nil, at: menuOrigin, in: window.contentView)
         }
     }
     
