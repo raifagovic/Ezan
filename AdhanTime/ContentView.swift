@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var nextPrayerName: String? = nil
-    @State private var showLocationsMenu = false
+    @State private var showPrayerTimes = false
     @EnvironmentObject var viewModel: StatusBarViewModel
     
     let locationsWithIndex: [(Int, String)] = [
@@ -174,25 +174,62 @@ struct ContentView: View {
             .padding(.vertical, 5)
             
             // Display fetched prayer times with names
-            if !viewModel.prayerTimes.isEmpty {
-                ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
-                    if index < prayerNames.count {
-                        let prayerName = prayerNames[index]
-                        let prayerTime = viewModel.prayerTimes[index]
-                        HStack {
-                            Text(prayerName)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            Spacer()
-                            Text(prayerTime)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+//            if !viewModel.prayerTimes.isEmpty {
+//                ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
+//                    if index < prayerNames.count {
+//                        let prayerName = prayerNames[index]
+//                        let prayerTime = viewModel.prayerTimes[index]
+//                        HStack {
+//                            Text(prayerName)
+//                                .font(.subheadline)
+//                                .foregroundColor(.secondary)
+//                            Spacer()
+//                            Text(prayerTime)
+//                                .font(.subheadline)
+//                                .foregroundColor(.secondary)
+//                        }
+//                        .padding(.vertical, 5)
+//                        .padding(.horizontal, 10)
+//                    }
+//                }
+//            }
+            // Prayer Times Row
+                        DisclosureGroup(isExpanded: $showPrayerTimes) {
+                            ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
+                                if index < prayerNames.count {
+                                    let prayerName = prayerNames[index]
+                                    let prayerTime = viewModel.prayerTimes[index]
+                                    HStack {
+                                        Text(prayerName)
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                        Spacer()
+                                        Image(systemName: "lock.fill")  // Example padlock icon
+                                        Text(prayerTime)
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.vertical, 5)
+                                    .padding(.horizontal, 10)
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                Text("Show Prayer Times")
+                                    .font(.body)
+                                    .padding(.leading, 8)
+                                
+                                Spacer()
+                                
+                                Image(systemName: showPrayerTimes ? "chevron.down" : "chevron.right")
+                                    .padding(.trailing, 8)
+                            }
+                            .contentShape(Rectangle())
+                            .background(Color.clear)
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
+                        .background(Color.clear)
                         .padding(.horizontal, 10)
-                    }
-                }
-            }
             Divider()
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
@@ -219,11 +256,10 @@ struct ContentView: View {
             menu.addItem(menuItem)
         }
         
-        // Find the window and calculate the position of the row
-        if let window = NSApplication.shared.keyWindow, let rowView = window.contentView?.subviews.first(where: { $0 is NSHostingView<ContentView> }) {
-            let rowFrame = rowView.convert(rowView.bounds, to: nil)
-            let menuOrigin = CGPoint(x: rowFrame.minX, y: rowFrame.minY - menu.size.height)
-            menu.popUp(positioning: nil, at: menuOrigin, in: window.contentView)
+        if let window = NSApplication.shared.keyWindow {
+            let mouseLocation = NSEvent.mouseLocation
+            let locationInWindow = window.convertFromScreen(NSRect(origin: mouseLocation, size: .zero)).origin
+            menu.popUp(positioning: nil, at: locationInWindow, in: window.contentView)
         }
     }
     
@@ -237,7 +273,6 @@ struct ContentView: View {
             
             @objc func selectLocation(_ sender: NSMenuItem) {
                 parent.selectedLocationIndex = sender.tag
-                parent.showLocationsMenu = false
             }
         }
 }
