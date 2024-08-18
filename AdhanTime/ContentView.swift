@@ -156,9 +156,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Button(action: {
-                showLocationMenu()
-            }) {
+            Button(action: {}) {
                 HStack {
                     Text(selectedLocationName)
                         .font(.body)
