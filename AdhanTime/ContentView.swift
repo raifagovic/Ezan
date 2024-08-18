@@ -277,3 +277,20 @@ struct HoverButtonStyle: ButtonStyle {
                 }
     }
 }
+
+struct LocationHoverButtonStyle: ButtonStyle {
+    @State private var isHovering = false
+    
+    func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .padding(.horizontal, 10)
+                .padding(.vertical, 3)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .background(isHovering ? Color.black.opacity(0.1) : Color.clear)
+                .cornerRadius(4)
+                .onHover { hovering in
+                    isHovering = hovering
+                }
+    }
+}
