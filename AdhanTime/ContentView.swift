@@ -279,7 +279,8 @@ struct ContentView: View {
     
     struct LocationHoverButtonStyle: ButtonStyle {
         @State private var isHovering = false
-        let onHoverAction: () -> Void
+        let onHoverIn: () -> Void
+        let onHoverOut: () -> Void
         
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
@@ -292,7 +293,9 @@ struct ContentView: View {
                 .onHover { hovering in
                     isHovering = hovering
                     if hovering {
-                        onHoverAction()
+                        onHoverIn()  // Show the menu when hovering in
+                    } else {
+                        onHoverOut() // Hide the menu when hovering out
                     }
                 }
         }
