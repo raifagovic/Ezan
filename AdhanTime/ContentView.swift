@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var timer: Timer?
     @State private var nextPrayerName: String? = nil
     @State private var showLocationsMenu = false
+    @State private var locationMenu: NSMenu?
     @EnvironmentObject var viewModel: StatusBarViewModel
     
     let locationsWithIndex: [(Int, String)] = [
@@ -172,7 +173,7 @@ struct ContentView: View {
                     showLocationMenu() // Show menu on hover in
                 },
                 onHoverOut: {
-                    NSMenu.popUpContextMenu(NSMenu(), with: NSEvent(), for: NSView()) // Hide the menu on hover out
+                    hideLocationMenu() // Hide the menu on hover out
                 }
             ))
             
@@ -251,7 +252,14 @@ struct ContentView: View {
             
             // Open the menu at the adjusted position
             menu.popUp(positioning: nil, at: NSPoint(x: locationInWindow.x, y: adjustedY), in: window.contentView)
+            
+            locationMenu = menu
         }
+    }
+    
+    private func hideLocationMenu() {
+        locationMenu?.cancelTracking()
+        locationMenu = nil
     }
     
     // Coordinator Class for handling the menu actions
@@ -285,9 +293,10 @@ struct ContentView: View {
     }
     
     struct LocationHoverButtonStyle: ButtonStyle {
-        @State private var isHovering = false
         let onHoverIn: () -> Void
         let onHoverOut: () -> Void
+        
+        @State private var isHovering = false
         
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
