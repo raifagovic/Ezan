@@ -167,7 +167,14 @@ struct ContentView: View {
                         .padding(.trailing, 8)
                 }
             }
-            .buttonStyle(LocationHoverButtonStyle(onHoverAction: showLocationMenu))
+            .buttonStyle(LocationHoverButtonStyle(
+                onHoverIn: {
+                    showLocationMenu() // Show menu on hover in
+                },
+                onHoverOut: {
+                    NSMenu.popUpContextMenu(NSMenu(), with: NSEvent(), for: NSView()) // Hide the menu on hover out
+                }
+            ))
             
             Divider()
                 .padding(.horizontal, 10)
