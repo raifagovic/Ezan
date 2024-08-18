@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var remainingTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var nextPrayerName: String? = nil
-    @State private var showPrayerTimes = false
+    @State private var showLocationsMenu = false
     @EnvironmentObject var viewModel: StatusBarViewModel
     
     let locationsWithIndex: [(Int, String)] = [
@@ -173,63 +173,39 @@ struct ContentView: View {
             .background(Color.clear)
             .padding(.vertical, 5)
             
-            // Display fetched prayer times with names
-//            if !viewModel.prayerTimes.isEmpty {
-//                ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
-//                    if index < prayerNames.count {
-//                        let prayerName = prayerNames[index]
-//                        let prayerTime = viewModel.prayerTimes[index]
-//                        HStack {
-//                            Text(prayerName)
-//                                .font(.subheadline)
-//                                .foregroundColor(.secondary)
-//                            Spacer()
-//                            Text(prayerTime)
-//                                .font(.subheadline)
-//                                .foregroundColor(.secondary)
-//                        }
-//                        .padding(.vertical, 5)
-//                        .padding(.horizontal, 10)
-//                    }
-//                }
-//            }
-            // Prayer Times Row
-                        DisclosureGroup(isExpanded: $showPrayerTimes) {
-                            ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
-                                if index < prayerNames.count {
-                                    let prayerName = prayerNames[index]
-                                    let prayerTime = viewModel.prayerTimes[index]
-                                    HStack {
-                                        Text(prayerName)
-                                            .font(.subheadline)
-                                            .foregroundColor(.secondary)
-                                        Spacer()
-                                        Image(systemName: "lock.fill")  // Example padlock icon
-                                        Text(prayerTime)
-                                            .font(.subheadline)
-                                            .foregroundColor(.secondary)
-                                    }
-                                    .padding(.vertical, 5)
-                                    .padding(.horizontal, 10)
-                                }
-                            }
-                        } label: {
-                            HStack {
-                                Text("Show Prayer Times")
-                                    .font(.body)
-                                    .padding(.leading, 8)
-                                
-                                Spacer()
-                                
-                                Image(systemName: showPrayerTimes ? "chevron.down" : "chevron.right")
-                                    .padding(.trailing, 8)
-                            }
-                            .contentShape(Rectangle())
-                            .background(Color.clear)
-                            .padding(.vertical, 5)
+//             Display fetched prayer times with names
+            if !viewModel.prayerTimes.isEmpty {
+                ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
+                    if index < prayerNames.count {
+                        let prayerName = prayerNames[index]
+                        let prayerTime = viewModel.prayerTimes[index]
+                        HStack {
+                            Text(prayerName)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            Text(prayerTime)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                         }
-                        .background(Color.clear)
+                        .padding(.vertical, 5)
                         .padding(.horizontal, 10)
+                    }
+                }
+            }
+            
+            Divider()
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+            
+            // Settings Button
+            HStack {
+                Button("Settings") {
+//                    openSettingsWindow()
+                }
+                .buttonStyle(HoverButtonStyle())
+            }
+            
             Divider()
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
