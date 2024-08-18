@@ -156,22 +156,25 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text(selectedLocationName)
-                    .font(.body)
-                    .padding(.leading, 8)
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .padding(.trailing, 8)
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
+            Button(action: {
                 showLocationMenu()
+            }) {
+                HStack {
+                    Text(selectedLocationName)
+                        .font(.body)
+                        .padding(.leading, 8)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .padding(.trailing, 8)
+                }
             }
-            .background(Color.clear)
-            .padding(.vertical, 5)
+                        .padding(.vertical, 5)
+            
+            Divider()
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
             
 //             Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
