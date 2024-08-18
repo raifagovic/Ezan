@@ -170,7 +170,8 @@ struct ContentView: View {
                         .padding(.trailing, 8)
                 }
             }
-                        .padding(.vertical, 5)
+            .buttonStyle(HoverButtonStyle())
+            .padding(.vertical, 5)
             
             Divider()
                 .padding(.horizontal, 10)
