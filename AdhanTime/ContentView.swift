@@ -220,7 +220,7 @@ struct ContentView: View {
             }
         }
         .padding(5)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: 180, alignment: .leading)
     }
     
     private func showLocationMenu() {
