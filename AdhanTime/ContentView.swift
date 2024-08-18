@@ -162,7 +162,6 @@ struct ContentView: View {
                 HStack {
                     Text(selectedLocationName)
                         .font(.body)
-                        .padding(.leading, 8)
                     
                     Spacer()
                     
@@ -171,7 +170,6 @@ struct ContentView: View {
                 }
             }
             .buttonStyle(HoverButtonStyle())
-            .padding(.vertical, 5)
             
             Divider()
                 .padding(.horizontal, 10)
