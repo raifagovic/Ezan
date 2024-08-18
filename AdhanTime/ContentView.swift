@@ -235,9 +235,17 @@ struct ContentView: View {
         }
         
         if let window = NSApplication.shared.keyWindow {
+            // Get the location of the mouse in the screen coordinates
             let mouseLocation = NSEvent.mouseLocation
+            
+            // Convert the screen coordinates to the window's content view coordinates
             let locationInWindow = window.convertFromScreen(NSRect(origin: mouseLocation, size: .zero)).origin
-            menu.popUp(positioning: nil, at: locationInWindow, in: window.contentView)
+            
+            // Adjust the y-coordinate to open the menu just below the clicked row
+            let adjustedY = locationInWindow.y - window.contentView!.frame.height + 25 // 25 is an example adjustment
+            
+            // Open the menu at the adjusted position
+            menu.popUp(positioning: nil, at: NSPoint(x: locationInWindow.x, y: adjustedY), in: window.contentView)
         }
     }
     
