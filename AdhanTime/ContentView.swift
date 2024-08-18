@@ -173,7 +173,7 @@ struct ContentView: View {
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
             
-//             Display fetched prayer times with names
+            //             Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
                 ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
                     if index < prayerNames.count {
@@ -201,7 +201,7 @@ struct ContentView: View {
             // Settings Button
             HStack {
                 Button("Settings") {
-//                    openSettingsWindow()
+                    //                    openSettingsWindow()
                 }
                 .buttonStyle(HoverButtonStyle())
             }
@@ -248,23 +248,22 @@ struct ContentView: View {
     }
     
     // Coordinator Class for handling the menu actions
-        class Coordinator: NSObject {
-            var parent: ContentView
-            
-            init(parent: ContentView) {
-                self.parent = parent
-            }
-            
-            @objc func selectLocation(_ sender: NSMenuItem) {
-                parent.selectedLocationIndex = sender.tag
-            }
+    class Coordinator: NSObject {
+        var parent: ContentView
+        
+        init(parent: ContentView) {
+            self.parent = parent
         }
-}
-
-struct HoverButtonStyle: ButtonStyle {
-    @State private var isHovering = false
+        
+        @objc func selectLocation(_ sender: NSMenuItem) {
+            parent.selectedLocationIndex = sender.tag
+        }
+    }
     
-    func makeBody(configuration: Configuration) -> some View {
+    struct HoverButtonStyle: ButtonStyle {
+        @State private var isHovering = false
+        
+        func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .padding(.horizontal, 10)
                 .padding(.vertical, 3)
@@ -275,13 +274,14 @@ struct HoverButtonStyle: ButtonStyle {
                 .onHover { hovering in
                     isHovering = hovering
                 }
+        }
     }
-}
-
-struct LocationHoverButtonStyle: ButtonStyle {
-    @State private var isHovering = false
     
-    func makeBody(configuration: Configuration) -> some View {
+    struct LocationHoverButtonStyle: ButtonStyle {
+        @State private var isHovering = false
+        let onHoverAction: () -> Void
+        
+        func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .padding(.horizontal, 10)
                 .padding(.vertical, 3)
@@ -291,6 +291,11 @@ struct LocationHoverButtonStyle: ButtonStyle {
                 .cornerRadius(4)
                 .onHover { hovering in
                     isHovering = hovering
+                    if hovering {
+                        onHoverAction()
+                    }
                 }
+        }
     }
+    
 }
