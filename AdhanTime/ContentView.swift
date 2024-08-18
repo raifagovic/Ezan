@@ -167,7 +167,7 @@ struct ContentView: View {
                         .padding(.trailing, 8)
                 }
             }
-            .buttonStyle(HoverButtonStyle())
+            .buttonStyle(LocationHoverButtonStyle(onHoverAction: showLocationMenu))
             
             Divider()
                 .padding(.horizontal, 10)
