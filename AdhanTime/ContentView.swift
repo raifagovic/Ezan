@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var nextPrayerName: String? = nil
     @State private var showLocationsMenu = false
     @State private var locationMenu: NSMenu?
+    @State private var trackingArea: NSTrackingArea?
     @EnvironmentObject var viewModel: StatusBarViewModel
     
     let locationsWithIndex: [(Int, String)] = [
@@ -173,7 +174,7 @@ struct ContentView: View {
                     showLocationMenu() // Show menu on hover in
                 },
                 onHoverOut: {
-                    hideLocationMenu() // Hide the menu on hover out
+                    mouseExited() // Hide the menu on hover out
                 }
             ))
             
@@ -250,15 +251,31 @@ struct ContentView: View {
             // Adjust the y-coordinate to open the menu just below the clicked row
             let adjustedY = locationInWindow.y - window.contentView!.frame.height + 25 // 25 is an example adjustment
             
+            locationMenu = menu
             // Open the menu at the adjusted position
             menu.popUp(positioning: nil, at: NSPoint(x: locationInWindow.x, y: adjustedY), in: window.contentView)
             
-            locationMenu = menu
+            // Start tracking mouse exit
+            startTrackingMouseExit()
         }
     }
     
+    private func startTrackingMouseExit() {
+        if let window = NSApplication.shared.keyWindow, trackingArea == nil {
+            let trackingRect = window.contentView!.bounds
+            let trackingOptions: NSTrackingArea.Options = [.mouseEnteredAndExited, .activeInKeyWindow]
+            
+            trackingArea = NSTrackingArea(rect: trackingRect, options: trackingOptions, owner: self, userInfo: nil)
+            window.contentView?.addTrackingArea(trackingArea!)
+        }
+    }
+
+    private func mouseExited() {
+        hideLocationMenu()
+    }
+    
     private func hideLocationMenu() {
-        locationMenu?.cancelTracking()
+        locationMenu?.cancelTrackingWithoutAnimation()
         locationMenu = nil
     }
     
