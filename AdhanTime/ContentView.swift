@@ -330,11 +330,12 @@ struct ContentView: View {
                 .background(isHovering ? Color.black.opacity(0.1) : Color.clear)
                 .cornerRadius(4)
                 .onHover { hovering in
-                    isHovering = hovering
-                    if hovering {
-                        onHoverIn()  // Show the menu when hovering in
-                    } else {
-                        onHoverOut() // Hide the menu when hovering out
+                    if hovering && !isHovering {
+                        isHovering = true
+                        onHoverIn()
+                    } else if !hovering && isHovering {
+                        isHovering = false
+                        onHoverOut()
                     }
                 }
         }
