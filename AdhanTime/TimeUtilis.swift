@@ -1,8 +1,8 @@
 //
-//  TimeUtils.swift
+//  TimeUtilis.swift
 //  AdhanTime
 //
-//  Created by Raif Agovic on 4. 6. 2024..
+//  Created by Raif Agovic on 24. 8. 2024..
 //
 
 // TimeUtils.swift
@@ -22,7 +22,7 @@ struct TimeUtils {
             if minutes == 60 {
                 return "\(prayerName) za \(hours + 1) h"
             }
-
+            
             if hours > 0 {
                 // If hours and minutes are present
                 return "\(prayerName) za \(hours) h \(minutes) min"
@@ -33,5 +33,3 @@ struct TimeUtils {
         }
     }
 }
-
-
