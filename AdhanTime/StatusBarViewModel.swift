@@ -2,7 +2,7 @@
 //  StatusBarViewModel.swift
 //  AdhanTime
 //
-//  Created by Raif Agovic on 24. 8. 2024..
+//  Created by Raif Agovic on 25. 8. 2024..
 //
 
 import SwiftUI
