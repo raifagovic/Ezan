@@ -9,14 +9,22 @@ import SwiftUI
 
 @main
 struct AdhanTimeApp: App {
-    @StateObject private var viewModel = StatusBarViewModel()
+    @StateObject private var viewModel = StatusBarViewModel.shared
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     
     var body: some Scene {
-        MenuBarExtra(viewModel.statusBarTitle, content: {
+        MenuBarExtra {
             ContentView()
                 .environmentObject(viewModel)
-        })
+        } label: {
+            HStack {
+                Image(systemName: "star.circle.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 10, height: 10)
+                Text(viewModel.statusBarTitle)
+            }
+        }
         .menuBarExtraStyle(.window)
     }
 }
