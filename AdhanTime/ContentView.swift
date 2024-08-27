@@ -158,9 +158,36 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Button(action: {}) {
+            //            Button(action: {}) {
+            //                HStack {
+            //                    Text(selectedLocationName)
+            //                        .font(.body)
+            //                    
+            //                    Spacer()
+            //                    
+            //                    Image(systemName: "chevron.right")
+            //                        .padding(.trailing, 8)
+            //                }
+            //            }
+            //            .background(TrackingAreaView())
+            //            .buttonStyle(LocationHoverButtonStyle(
+            //                onHoverIn: {
+            //                    showLocationMenu() // Show menu on hover in
+            //                },
+            //                onHoverOut: {
+            //                    mouseExited() // Hide the menu on hover out
+            //                }
+            //            ))
+            MenuBarExtra {
+                // Location selection menu
+                ForEach(viewModel.locationsWithIndex, id: \.0) { index, name in
+                    Button(name) {
+                        viewModel.selectedLocationIndex = index
+                    }
+                }
+            } label: {
                 HStack {
-                    Text(selectedLocationName)
+                    Text(viewModel.selectedLocationName)
                         .font(.body)
                     
                     Spacer()
@@ -168,15 +195,17 @@ struct ContentView: View {
                     Image(systemName: "chevron.right")
                         .padding(.trailing, 8)
                 }
+                .background(TrackingAreaView())
+                .buttonStyle(LocationHoverButtonStyle(
+                    onHoverIn: {
+                        viewModel.isLocationMenuVisible = true
+                    },
+                    onHoverOut: {
+                        viewModel.isLocationMenuVisible = false
+                    }
+                ))
             }
-            .buttonStyle(LocationHoverButtonStyle(
-                onHoverIn: {
-                    showLocationMenu() // Show menu on hover in
-                },
-                onHoverOut: {
-                    mouseExited() // Hide the menu on hover out
-                }
-            ))
+            .menuBarExtraStyle(.menu)
             
             Divider()
                 .padding(.horizontal, 10)
@@ -256,7 +285,7 @@ struct ContentView: View {
             menu.popUp(positioning: nil, at: NSPoint(x: locationInWindow.x, y: adjustedY), in: window.contentView)
         }
     }
-
+    
     private func mouseExited() {
         hideLocationMenu()
     }
@@ -339,5 +368,42 @@ struct TrackingAreaView: NSViewRepresentable {
             )
             nsView.addTrackingArea(trackingArea)
         }
+    }
+}
+
+import SwiftUI
+
+struct LocationMenuView: View {
+    @ObservedObject var viewModel: StatusBarViewModel
+
+    var body: some View {
+        MenuBarExtra {
+            // Location selection menu
+            ForEach(viewModel.locationsWithIndex, id: \.0) { index, name in
+                Button(name) {
+                    viewModel.selectedLocationIndex = index
+                }
+            }
+        } label: {
+            HStack {
+                Text(viewModel.selectedLocationName)
+                    .font(.body)
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .padding(.trailing, 8)
+            }
+            .background(TrackingAreaView())
+            .buttonStyle(LocationHoverButtonStyle(
+                onHoverIn: {
+                    viewModel.isLocationMenuVisible = true
+                },
+                onHoverOut: {
+                    viewModel.isLocationMenuVisible = false
+                }
+            ))
+        }
+        .menuBarExtraStyle(.menu)
     }
 }
