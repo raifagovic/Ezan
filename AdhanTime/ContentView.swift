@@ -254,19 +254,6 @@ struct ContentView: View {
             locationMenu = menu
             // Open the menu at the adjusted position
             menu.popUp(positioning: nil, at: NSPoint(x: locationInWindow.x, y: adjustedY), in: window.contentView)
-            
-            // Start tracking mouse exit
-            startTrackingMouseExit()
-        }
-    }
-    
-    private func startTrackingMouseExit() {
-        if let window = NSApplication.shared.keyWindow, trackingArea == nil {
-            let trackingRect = window.contentView!.bounds
-            let trackingOptions: NSTrackingArea.Options = [.mouseEnteredAndExited, .activeInKeyWindow]
-            
-            trackingArea = NSTrackingArea(rect: trackingRect, options: trackingOptions, owner: self, userInfo: nil)
-            window.contentView?.addTrackingArea(trackingArea!)
         }
     }
 
@@ -340,5 +327,4 @@ struct ContentView: View {
                 }
         }
     }
-    
 }
