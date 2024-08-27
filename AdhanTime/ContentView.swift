@@ -264,12 +264,6 @@ struct ContentView: View {
     private func hideLocationMenu() {
         locationMenu?.cancelTrackingWithoutAnimation()
         locationMenu = nil
-        
-        // Remove tracking area
-        if let window = NSApplication.shared.keyWindow, let area = trackingArea {
-            window.contentView?.removeTrackingArea(area)
-            trackingArea = nil
-        }
     }
     
     // Coordinator Class for handling the menu actions
