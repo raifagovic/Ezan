@@ -158,54 +158,14 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            //            Button(action: {}) {
-            //                HStack {
-            //                    Text(selectedLocationName)
-            //                        .font(.body)
-            //                    
-            //                    Spacer()
-            //                    
-            //                    Image(systemName: "chevron.right")
-            //                        .padding(.trailing, 8)
-            //                }
-            //            }
-            //            .background(TrackingAreaView())
-            //            .buttonStyle(LocationHoverButtonStyle(
-            //                onHoverIn: {
-            //                    showLocationMenu() // Show menu on hover in
-            //                },
-            //                onHoverOut: {
-            //                    mouseExited() // Hide the menu on hover out
-            //                }
-            //            ))
-            MenuBarExtra {
-                // Location selection menu
-                ForEach(viewModel.locationsWithIndex, id: \.0) { index, name in
-                    Button(name) {
-                        viewModel.selectedLocationIndex = index
-                    }
-                }
-            } label: {
+            Button(action: {}) {
                 HStack {
-                    Text(viewModel.selectedLocationName)
-                        .font(.body)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .padding(.trailing, 8)
+                    Text(selectedLocationName)
+//                        .font(.body)
                 }
-                .background(TrackingAreaView())
-                .buttonStyle(LocationHoverButtonStyle(
-                    onHoverIn: {
-                        viewModel.isLocationMenuVisible = true
-                    },
-                    onHoverOut: {
-                        viewModel.isLocationMenuVisible = false
-                    }
-                ))
             }
-            .menuBarExtraStyle(.menu)
+            .buttonStyle(HoverButtonStyle())
+            
             
             Divider()
                 .padding(.horizontal, 10)
@@ -257,33 +217,6 @@ struct ContentView: View {
         }
         .padding(5)
         .frame(maxWidth: 180, alignment: .leading)
-    }
-    
-    private func showLocationMenu() {
-        let coordinator = Coordinator(parent: self)
-        let menu = NSMenu()
-        
-        for (index, location) in locationsWithIndex {
-            let menuItem = NSMenuItem(title: location, action: #selector(Coordinator.selectLocation(_:)), keyEquivalent: "")
-            menuItem.tag = index
-            menuItem.target = coordinator
-            menu.addItem(menuItem)
-        }
-        
-        if let window = NSApplication.shared.keyWindow {
-            // Get the location of the mouse in the screen coordinates
-            let mouseLocation = NSEvent.mouseLocation
-            
-            // Convert the screen coordinates to the window's content view coordinates
-            let locationInWindow = window.convertFromScreen(NSRect(origin: mouseLocation, size: .zero)).origin
-            
-            // Adjust the y-coordinate to open the menu just below the clicked row
-            let adjustedY = locationInWindow.y - window.contentView!.frame.height + 25 // 25 is an example adjustment
-            
-            locationMenu = menu
-            // Open the menu at the adjusted position
-            menu.popUp(positioning: nil, at: NSPoint(x: locationInWindow.x, y: adjustedY), in: window.contentView)
-        }
     }
     
     private func mouseExited() {
@@ -371,39 +304,3 @@ struct TrackingAreaView: NSViewRepresentable {
     }
 }
 
-import SwiftUI
-
-struct LocationMenuView: View {
-    @ObservedObject var viewModel: StatusBarViewModel
-
-    var body: some View {
-        MenuBarExtra {
-            // Location selection menu
-            ForEach(viewModel.locationsWithIndex, id: \.0) { index, name in
-                Button(name) {
-                    viewModel.selectedLocationIndex = index
-                }
-            }
-        } label: {
-            HStack {
-                Text(viewModel.selectedLocationName)
-                    .font(.body)
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .padding(.trailing, 8)
-            }
-            .background(TrackingAreaView())
-            .buttonStyle(LocationHoverButtonStyle(
-                onHoverIn: {
-                    viewModel.isLocationMenuVisible = true
-                },
-                onHoverOut: {
-                    viewModel.isLocationMenuVisible = false
-                }
-            ))
-        }
-        .menuBarExtraStyle(.menu)
-    }
-}
