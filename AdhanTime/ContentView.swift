@@ -219,28 +219,6 @@ struct ContentView: View {
         .frame(maxWidth: 180, alignment: .leading)
     }
     
-    private func mouseExited() {
-        hideLocationMenu()
-    }
-    
-    private func hideLocationMenu() {
-        locationMenu?.cancelTrackingWithoutAnimation()
-        locationMenu = nil
-    }
-    
-    // Coordinator Class for handling the menu actions
-    class Coordinator: NSObject {
-        var parent: ContentView
-        
-        init(parent: ContentView) {
-            self.parent = parent
-        }
-        
-        @objc func selectLocation(_ sender: NSMenuItem) {
-            parent.selectedLocationIndex = sender.tag
-        }
-    }
-    
     struct HoverButtonStyle: ButtonStyle {
         @State private var isHovering = false
         
