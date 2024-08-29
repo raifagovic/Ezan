@@ -263,22 +263,3 @@ struct ContentView: View {
     }
 }
 
-struct TrackingAreaView: NSViewRepresentable {
-    func makeNSView(context: Context) -> NSView {
-        let view = NSView(frame: .zero)
-        return view
-    }
-    
-    func updateNSView(_ nsView: NSView, context: Context) {
-        if nsView.trackingAreas.isEmpty {
-            let trackingArea = NSTrackingArea(
-                rect: nsView.bounds,
-                options: [.mouseEnteredAndExited, .activeInKeyWindow, .inVisibleRect],
-                owner: nsView,
-                userInfo: nil
-            )
-            nsView.addTrackingArea(trackingArea)
-        }
-    }
-}
-
