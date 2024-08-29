@@ -235,31 +235,5 @@ struct ContentView: View {
                 }
         }
     }
-    
-    struct LocationHoverButtonStyle: ButtonStyle {
-        let onHoverIn: () -> Void
-        let onHoverOut: () -> Void
-        
-        @State private var isHovering = false
-        
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .padding(.horizontal, 10)
-                .padding(.vertical, 3)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .background(isHovering ? Color.black.opacity(0.1) : Color.clear)
-                .cornerRadius(4)
-                .onHover { hovering in
-                    if hovering && !isHovering {
-                        isHovering = true
-                        onHoverIn()
-                    } else if !hovering && isHovering {
-                        isHovering = false
-                        onHoverOut()
-                    }
-                }
-        }
-    }
 }
 
