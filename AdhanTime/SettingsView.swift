@@ -26,3 +26,21 @@ struct SettingsView: View {
         .frame(width: 300, height: 200)
     }
 }
+
+struct LocationPickerView: View {
+    @EnvironmentObject var viewModel: StatusBarViewModel
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Select Location:")
+                .font(.headline)
+            Picker("Location", selection: $viewModel.selectedLocationIndex) {
+                ForEach(viewModel.locationsWithIndex, id: \.0) { index, name in
+                    Text(name).tag(index)
+                }
+            }
+            .pickerStyle(MenuPickerStyle())
+        }
+        .padding()
+    }
+}
