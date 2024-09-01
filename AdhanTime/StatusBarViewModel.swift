@@ -14,9 +14,9 @@ class StatusBarViewModel: ObservableObject {
     @Published var remainingTime: TimeInterval?
     @Published var prayerTimes: [String] = []
     @Published var nextPrayerName: String?
+    @Published var locationId: Int = 77
 
     private var timer: Timer?
-    private var locationId: Int = 77
     private var isInitialized = false
     private init() {
         if !isInitialized {
