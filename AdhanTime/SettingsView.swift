@@ -44,3 +44,14 @@ struct LocationPickerView: View {
         .padding()
     }
 }
+
+struct TextView: View {
+    var body: some View {
+        VStack {
+            Text("This is a simple text view.")
+                .font(.headline)
+            Spacer()
+        }
+        .padding()
+    }
+}
