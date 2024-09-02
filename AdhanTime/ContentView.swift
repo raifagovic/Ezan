@@ -161,7 +161,7 @@ struct ContentView: View {
             HStack {
                 Text(selectedLocationName)
                     .foregroundColor(.secondary)
-                    .bold()
+//                    .bold()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 10)
