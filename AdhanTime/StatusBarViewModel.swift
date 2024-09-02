@@ -15,6 +15,7 @@ class StatusBarViewModel: ObservableObject {
     @Published var prayerTimes: [String] = []
     @Published var nextPrayerName: String?
     @Published var selectedLocationIndex: Int = 0
+    @Published var isShortFormat: Bool = false
     
     let locationsWithIndex: [(Int, String)] = [
         (0, "Banovići"),
@@ -182,7 +183,7 @@ class StatusBarViewModel: ObservableObject {
             self.statusBarTitle = "No cached data"
             return
         }
-        self.statusBarTitle = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName)
+        self.statusBarTitle = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName, isShortFormat: isShortFormat)
     }
     
     func refresh() {
