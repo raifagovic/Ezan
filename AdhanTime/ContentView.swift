@@ -158,14 +158,14 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Button(action: {}) {
-                HStack {
-                    Text(selectedLocationName)
-//                        .font(.body)
-                }
+            HStack {
+                Text(selectedLocationName)
+                    .foregroundColor(.secondary)
+                    .bold()
             }
-            .buttonStyle(HoverButtonStyle())
-            
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
             
             Divider()
                 .padding(.horizontal, 10)
