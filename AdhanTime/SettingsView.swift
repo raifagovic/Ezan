@@ -11,16 +11,14 @@ struct SettingsView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
 
     var body: some View {
-        TabView {
+        VStack(alignment: .leading, spacing: 20) {
+            // Location Picker Section
             LocationPickerView()
-                .tabItem {
-                    Label("Locations", systemImage: "location")
-                }
-
+            
+            // Text Section
             TextView()
-                .tabItem {
-                    Label("Text", systemImage: "text.bubble")
-                }
+
+            Spacer() // Pushes content to the top
         }
         .padding()
         .frame(width: 300, height: 200)
@@ -41,17 +39,12 @@ struct LocationPickerView: View {
             }
             .pickerStyle(MenuPickerStyle())
         }
-        .padding()
     }
 }
 
 struct TextView: View {
     var body: some View {
-        VStack {
-            Text("This is a simple text view.")
-                .font(.headline)
-            Spacer()
-        }
-        .padding()
+        Text("This is a simple text view.")
+            .font(.headline)
     }
 }
