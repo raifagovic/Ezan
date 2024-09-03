@@ -137,26 +137,31 @@ class StatusBarViewModel: ObservableObject {
         (116, "Sjenica"),
         (117, "Tutin")
     ]
-
+    
+    let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
+    
     private var timer: Timer?
         private(set) var locationId: Int
         private var isInitialized = false
 
-        private init() {
-            // Assigning a default locationId value before initialization to avoid accessing self in the closure
-            self.locationId = 77 // Default value, e.g., Sarajevo's ID
-
-            // Find the index for the initial locationId without using self
-            if let index = locationsWithIndex.firstIndex(where: { $0.0 == locationId }) {
-                self.selectedLocationIndex = index
-            }
-
-            if !isInitialized {
-                print("Initializing ViewModel and refreshing")
-                refresh()
-                isInitialized = true
-            }
+    private init() {
+        self.locationId = 77 // Default value, e.g., Sarajevo's ID
+        
+        // Find the index for the initial locationId without using self
+        if let index = locationsWithIndex.firstIndex(where: { $0.0 == locationId }) {
+            self.selectedLocationIndex = index
         }
+        
+        if !isInitialized {
+            print("Initializing ViewModel and refreshing")
+            refresh()
+            isInitialized = true
+        }
+    }
+    
+    var selectedLocationName: String {
+        locationsWithIndex[selectedLocationIndex].1
+    }
     
     func startTimer() {
         timer?.invalidate()

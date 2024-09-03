@@ -16,7 +16,7 @@ struct SettingsView: View {
             LocationPickerView()
             
             // Text Section
-            TextView()
+            FormatSelectorView()
 
             Spacer() // Pushes content to the top
         }
@@ -52,6 +52,7 @@ struct FormatSelectorView: View {
 
             Toggle("Short Format", isOn: $viewModel.isShortFormat)
                 .padding()
+                .toggleStyle(SwitchToggleStyle())
         }
     }
 }
