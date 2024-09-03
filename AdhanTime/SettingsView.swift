@@ -42,9 +42,16 @@ struct LocationPickerView: View {
     }
 }
 
-struct TextView: View {
+struct FormatSelectorView: View {
+    @EnvironmentObject var viewModel: StatusBarViewModel
+
     var body: some View {
-        Text("This is a simple text view.")
-            .font(.headline)
+        VStack(alignment: .leading) {
+            Text("Select Status Bar Format:")
+                .font(.headline)
+
+            Toggle("Short Format", isOn: $viewModel.isShortFormat)
+                .padding()
+        }
     }
 }
