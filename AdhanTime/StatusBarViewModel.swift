@@ -168,7 +168,11 @@ class StatusBarViewModel: ObservableObject {
             
             if currentRemainingTime > 0 {
                 self.remainingTime = currentRemainingTime - 1
-                self.statusBarTitle = TimeUtils.formatTimeInterval(currentRemainingTime - 1, prayerName: self.nextPrayerName ?? "")
+                self.statusBarTitle = TimeUtils.formatTimeInterval(
+                    currentRemainingTime - 1,
+                    prayerName: self.nextPrayerName ?? "",
+                    isShortFormat: self.isShortFormat
+                )
             } else {
                 self.timer?.invalidate()
                 self.fetchPrayerTimesForToday {
