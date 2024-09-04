@@ -34,10 +34,13 @@ class PrayerTimeCache {
         print("Removed old data before \(dateKey)")
     }
 
-    private static func formattedDateKey(from date: Date) -> String {
+    private static func formattedDateKey(from date: Date, locationId: Int?) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
-    }
-}
+        var dateKey = formatter.string(from: date)
+        if let locationId = locationId {
+            dateKey += "-\(locationId)"
+        }
+        return dateKey
+    }}
 
