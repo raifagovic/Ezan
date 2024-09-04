@@ -163,6 +163,29 @@ class StatusBarViewModel: ObservableObject {
         locationsWithIndex[selectedLocationIndex].1
     }
     
+    var adjustedPrayerTimes: [(name: String, time: String)] {
+        // Make sure there are enough prayer times
+        guard prayerTimes.count >= 2 else { return [] }
+        
+        var adjustedTimes = [(name: String, time: String)]()
+        
+        // Calculate "Sabah" time by subtracting 45 minutes from "Izlazak Sunca"
+        if let izlazakSuncaIndex = prayerNames.firstIndex(of: "Izlazak Sunca"),
+           let izlazakSuncaTime = PrayerTimeCalculator.subtractMinutes(from: prayerTimes[izlazakSuncaIndex], minutes: 45) {
+            adjustedTimes.append(("Sabah", izlazakSuncaTime))
+        }
+        
+        // Add remaining prayer names and times, skipping "Zora" and "Izlazak Sunca"
+        let remainingPrayerNames = Array(prayerNames[2...])
+        let remainingPrayerTimes = Array(prayerTimes[2...])
+        
+        for (name, time) in zip(remainingPrayerNames, remainingPrayerTimes) {
+            adjustedTimes.append((name, time))
+        }
+        
+        return adjustedTimes
+    }
+    
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
