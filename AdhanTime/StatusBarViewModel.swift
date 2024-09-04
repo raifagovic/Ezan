@@ -266,7 +266,7 @@ class StatusBarViewModel: ObservableObject {
     
     func fetchPrayerTimesForToday(completion: @escaping () -> Void) {
         let today = Date()
-        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today) {
+        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today, locationId: self.locationId) {
             self.prayerTimes = cachedPrayerTimes
             if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
                 self.remainingTime = remainingTime
