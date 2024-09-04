@@ -74,5 +74,15 @@ class PrayerTimeCalculator {
 
         return (TimeInterval(timeDifferenceInSeconds), prayerNames[validIndex])
     }
+    
+    static func subtractMinutes(from time: String, minutes: Int) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        guard let date = dateFormatter.date(from: time) else { return nil }
+        let newDate = Calendar.current.date(byAdding: .minute, value: -minutes, to: date)!
+        
+        return dateFormatter.string(from: newDate)
+    }
 }
 
