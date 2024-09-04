@@ -25,24 +25,21 @@ struct ContentView: View {
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
             
-            //             Display fetched prayer times with names
+            // Display fetched prayer times with names
             if !viewModel.prayerTimes.isEmpty {
-                ForEach(viewModel.prayerTimes.indices, id: \.self) { index in
-                    if index < viewModel.prayerNames.count {
-                        let prayerName = viewModel.prayerNames[index]
-                        let prayerTime = viewModel.prayerTimes[index]
-                        HStack {
-                            Text(prayerName)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            Spacer()
-                            Text(prayerTime)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 10)
+                ForEach(viewModel.adjustedPrayerTimes.indices, id: \.self) { index in
+                    let prayer = viewModel.adjustedPrayerTimes[index]
+                    HStack {
+                        Text(prayer.name)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text(prayer.time)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
                     }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 10)
                 }
             }
             
