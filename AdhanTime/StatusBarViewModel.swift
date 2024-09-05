@@ -275,20 +275,43 @@ class StatusBarViewModel: ObservableObject {
     
     func fetchPrayerTimesForToday(completion: @escaping () -> Void) {
         let today = Date()
+        
+        // First, check if cached prayer times for today are available
         if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today, locationId: self.locationId) {
+            // Use cached data if available
             self.prayerTimes = cachedPrayerTimes
             if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
                 self.remainingTime = remainingTime
                 self.nextPrayerName = nextPrayerName
                 startTimer()
-                completion()
-            } else {
-                print("Failed to calculate remaining time.")
+            }
+            completion()
+        } else {
+            // If no cached data, fetch today's data from the API
+            let calendar = Calendar.current
+            let year = calendar.component(.year, from: today)
+            let month = calendar.component(.month, from: today)
+            let day = calendar.component(.day, from: today)
+            
+            PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: year, month: month, day: day) { result in
+                switch result {
+                case .success(let times):
+                    // Save fetched prayer times to the cache
+                    PrayerTimeCache.savePrayerTimes(times, for: today, locationId: self.locationId)
+                    
+                    // Update the ViewModel with the fetched data
+                    self.prayerTimes = times
+                    if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
+                        self.remainingTime = remainingTime
+                        self.nextPrayerName = nextPrayerName
+                        self.startTimer()
+                    }
+                    
+                case .failure(let error):
+                    print("Failed to fetch today's prayer times: \(error)")
+                }
                 completion()
             }
-        } else {
-            print("No cached data for today.")
-            completion()
         }
     }
     
