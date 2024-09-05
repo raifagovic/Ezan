@@ -14,8 +14,17 @@ class StatusBarViewModel: ObservableObject {
     @Published var remainingTime: TimeInterval?
     @Published var prayerTimes: [String] = []
     @Published var nextPrayerName: String?
-    @Published var selectedLocationIndex: Int = 0
     @Published var isShortFormat: Bool = false
+    
+    @Published var selectedLocationIndex: Int = 0 {
+        didSet {
+            // Update locationId based on the new selectedLocationIndex
+            self.locationId = locationsWithIndex[selectedLocationIndex].0
+            
+            // Refresh the prayer times for the new location
+            refresh()
+        }
+    }
     
     let locationsWithIndex: [(Int, String)] = [
         (0, "Banovići"),
@@ -223,7 +232,7 @@ class StatusBarViewModel: ObservableObject {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "Europe/Sarajevo")!
         
-        if PrayerTimeCache.loadCachedPrayerTimes(for: currentDate) == nil {
+        if PrayerTimeCache.loadCachedPrayerTimes(for: currentDate, locationId: self.locationId) == nil {
             let currentYear = calendar.component(.year, from: currentDate)
             fetchPrayerTimesForYear(year: currentYear) {
                 self.fetchPrayerTimesForToday {
@@ -249,7 +258,7 @@ class StatusBarViewModel: ObservableObject {
                     switch result {
                     case .success(let times):
                         let date = Calendar.current.date(from: DateComponents(year: year, month: month, day: day))!
-                        PrayerTimeCache.savePrayerTimes(times, for: date)
+                        PrayerTimeCache.savePrayerTimes(times, for: date, locationId: self.locationId)
                     case .failure(let error):
                         print("Failed to fetch prayer times for year \(year), month \(month), day \(day): \(error)")
                     }
@@ -281,5 +290,18 @@ class StatusBarViewModel: ObservableObject {
             print("No cached data for today.")
             completion()
         }
+    }
+    
+    func isYearDataCached(for year: Int) -> Bool {
+        let calendar = Calendar.current
+        // Check the first day of each month to determine if the year's data is cached
+        for month in 1...12 {
+            let date = calendar.date(from: DateComponents(year: year, month: month, day: 1))!
+            if PrayerTimeCache.loadCachedPrayerTimes(for: date, locationId: self.locationId) == nil {
+                // If any month is missing cached data, return false
+                return false
+            }
+        }
+        return true
     }
 }
