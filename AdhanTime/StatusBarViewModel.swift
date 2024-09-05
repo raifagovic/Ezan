@@ -232,16 +232,22 @@ class StatusBarViewModel: ObservableObject {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "Europe/Sarajevo")!
         
-        if PrayerTimeCache.loadCachedPrayerTimes(for: currentDate, locationId: self.locationId) == nil {
-            let currentYear = calendar.component(.year, from: currentDate)
-            fetchPrayerTimesForYear(year: currentYear) {
-                self.fetchPrayerTimesForToday {
-                    self.updateStatusBar()
+        // Fetch today's prayer times first, either from cache or API
+        fetchPrayerTimesForToday {
+            self.updateStatusBar()
+        }
+        
+        // Check if the data for the year has already been fetched
+        let currentYear = calendar.component(.year, from: currentDate)
+        if !isYearDataCached(for: currentYear) {
+            // Fetch the entire year's prayer times in the background only if not cached
+            DispatchQueue.global(qos: .background).async {
+                self.fetchPrayerTimesForYear(year: currentYear) {
+                    DispatchQueue.main.async {
+                        // Optionally, update the UI or show a message when year data is fully fetched
+                        print("Background fetch for the year completed.")
+                    }
                 }
-            }
-        } else {
-            fetchPrayerTimesForToday {
-                self.updateStatusBar()
             }
         }
     }
