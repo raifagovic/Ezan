@@ -8,6 +8,7 @@
 import Cocoa
 import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
+    var settingsWindow: NSWindow!
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Add observer for wake notifications
@@ -22,9 +23,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func macDidWake(notification: NSNotification) {
         StatusBarViewModel.shared.refresh()
     }
-
+    
     func applicationWillTerminate(_ notification: Notification) {
         // Remove observers when the app is about to terminate
         NSWorkspace.shared.notificationCenter.removeObserver(self)
+    }
+    
+    func openSettingsWindow() {
+        if settingsWindow == nil {
+            let settingsView = SettingsView()
+                .environmentObject(StatusBarViewModel.shared)
+            
+            let hostingController = NSHostingController(rootView: settingsView)
+            settingsWindow = NSWindow(
+                contentViewController: hostingController
+            )
+            settingsWindow.title = "Settings"
+            settingsWindow.setContentSize(NSSize(width: 300, height: 300))
+            settingsWindow.styleMask = [.titled, .closable, .resizable]
+            settingsWindow.center()
+        }
+        
+        settingsWindow.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
 }
