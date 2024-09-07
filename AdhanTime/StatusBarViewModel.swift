@@ -220,11 +220,30 @@ class StatusBarViewModel: ObservableObject {
     }
     
     func updateStatusBar() {
-        guard let remainingTime = self.remainingTime, let nextPrayerName = self.nextPrayerName else {
-            self.statusBarTitle = "No cached data"
-            return
+        // Retrieve the remaining time and next prayer
+        if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: self.prayerTimes) {
+            self.remainingTime = remainingTime
+            
+            var displayPrayerName: String
+
+            // Skip "Zora" and show "Sabah", skip "Izlazak Sunca" and show "Podne"
+            if nextPrayerName == "Zora" {
+                displayPrayerName = "Sabah"
+            } else if nextPrayerName == "Izlazak Sunca" {
+                displayPrayerName = "Podne"
+            } else {
+                displayPrayerName = nextPrayerName
+            }
+
+            // Update the status bar title using the formatted time
+            if isShortFormat {
+                // Short format omits prayer name and shows only remaining time
+                self.statusBarTitle = "\(TimeUtils.formatTimeInterval(self.remainingTime ?? 0, prayerName: "", isShortFormat: true))"
+            } else {
+                // Long format includes prayer name and remaining time
+                self.statusBarTitle = "\(selectedLocationName): \(displayPrayerName) za \(TimeUtils.formatTimeInterval(self.remainingTime ?? 0, prayerName: displayPrayerName, isShortFormat: false))"
+            }
         }
-        self.statusBarTitle = TimeUtils.formatTimeInterval(remainingTime, prayerName: nextPrayerName, isShortFormat: isShortFormat)
     }
     
     func refresh() {
