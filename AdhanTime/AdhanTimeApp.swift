@@ -14,7 +14,7 @@ struct AdhanTimeApp: App {
     
     var body: some Scene {
         MenuBarExtra {
-            ContentView()
+            ContentView(appDelegate: appDelegate)
                 .environmentObject(viewModel)
         } label: {
             HStack {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
+    var appDelegate: AppDelegate
     
     var body: some View {
         VStack(spacing: 0) {
@@ -49,7 +50,7 @@ struct ContentView: View {
             // Settings Button
             HStack {
                 Button("Settings") {
-                    openSettingsWindow()
+                    appDelegate.openSettingsWindow()
                 }
                 .buttonStyle(HoverButtonStyle())
             }
@@ -86,17 +87,17 @@ struct ContentView: View {
         }
     }
     
-    private func openSettingsWindow() {
-        let settingsView = SettingsView().environmentObject(viewModel)
-        let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 300, height: 200),
-            styleMask: [.titled, .closable, .resizable, .miniaturizable],
-            backing: .buffered, defer: false)
-        window.center()
-        window.setFrameAutosaveName("Settings")
-        window.contentView = NSHostingView(rootView: settingsView)
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
-    }
+//    private func openSettingsWindow() {
+//        let settingsView = SettingsView().environmentObject(viewModel)
+//        let window = NSWindow(
+//            contentRect: NSRect(x: 0, y: 0, width: 300, height: 200),
+//            styleMask: [.titled, .closable, .resizable, .miniaturizable],
+//            backing: .buffered, defer: false)
+//        window.center()
+//        window.setFrameAutosaveName("Settings")
+//        window.contentView = NSHostingView(rootView: settingsView)
+//        window.makeKeyAndOrderFront(nil)
+//        NSApp.activate(ignoringOtherApps: true)
+//    }
 }
 
