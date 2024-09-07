@@ -11,14 +11,27 @@ struct SettingsView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            // Location Picker Section
-            LocationPickerView()
+        TabView {
+            // First tab: Location and Format
+            VStack(alignment: .leading, spacing: 20) {
+                LocationPickerView()
+                FormatSelectorView()
+                Spacer() // Pushes content to the top
+            }
+            .tabItem {
+                Label("Settings", systemImage: "gearshape")
+            }
             
-            // Text Section
-            FormatSelectorView()
-
-            Spacer() // Pushes content to the top
+            // Second tab: Software Update
+            VStack {
+                Text("Software Update")
+                    .font(.headline)
+                Text("No updates available at this moment.") // Placeholder text
+                Spacer()
+            }
+            .tabItem {
+                Label("Software Update", systemImage: "arrow.down.circle")
+            }
         }
         .padding()
         .frame(width: 300, height: 200)
