@@ -86,18 +86,5 @@ struct ContentView: View {
                 }
         }
     }
-    
-//    private func openSettingsWindow() {
-//        let settingsView = SettingsView().environmentObject(viewModel)
-//        let window = NSWindow(
-//            contentRect: NSRect(x: 0, y: 0, width: 300, height: 200),
-//            styleMask: [.titled, .closable, .resizable, .miniaturizable],
-//            backing: .buffered, defer: false)
-//        window.center()
-//        window.setFrameAutosaveName("Settings")
-//        window.contentView = NSHostingView(rootView: settingsView)
-//        window.makeKeyAndOrderFront(nil)
-//        NSApp.activate(ignoringOtherApps: true)
-//    }
 }
 
