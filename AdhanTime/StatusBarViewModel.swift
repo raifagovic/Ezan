@@ -15,6 +15,7 @@ class StatusBarViewModel: ObservableObject {
     @Published var prayerTimes: [String] = []
     @Published var nextPrayerName: String?
     @Published var isShortFormat: Bool = false
+    @Published var sabahSubtractionMinutes: Int = 45
     
     @Published var selectedLocationIndex: Int = 0 {
         didSet {
