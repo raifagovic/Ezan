@@ -69,3 +69,21 @@ struct FormatSelectorView: View {
         }
     }
 }
+
+struct SubtractionSliderView: View {
+    @Binding var selectedMinutes: Int
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Select Minutes to Subtract:")
+                .font(.headline)
+
+            Slider(value: $selectedMinutes, in: 0...60, step: 5)
+                .padding()
+
+            Text("Selected: \(selectedMinutes) minutes")
+                .font(.subheadline)
+        }
+        .padding()
+    }
+}
