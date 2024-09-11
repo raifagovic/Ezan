@@ -16,6 +16,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 20) {
                 LocationPickerView()
                 FormatSelectorView()
+                SubtractionSliderView()
                 Spacer() // Pushes content to the top
             }
             .tabItem {
