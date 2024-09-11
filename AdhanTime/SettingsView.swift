@@ -35,7 +35,7 @@ struct SettingsView: View {
             }
         }
         .padding()
-        .frame(width: 300, height: 300)
+        .frame(width: 300, height: 400)
     }
 }
 
