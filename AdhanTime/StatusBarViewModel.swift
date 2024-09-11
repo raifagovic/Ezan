@@ -181,7 +181,7 @@ class StatusBarViewModel: ObservableObject {
         
         // Calculate "Sabah" time by subtracting 45 minutes from "Izlazak Sunca"
         if let izlazakSuncaIndex = prayerNames.firstIndex(of: "Izlazak Sunca"),
-           let izlazakSuncaTime = PrayerTimeCalculator.subtractMinutes(from: prayerTimes[izlazakSuncaIndex], minutes: 45) {
+           let izlazakSuncaTime = PrayerTimeCalculator.subtractMinutes(from: prayerTimes[izlazakSuncaIndex], minutes: sabahSubtractionMinutes) {
             adjustedTimes.append(("Sabah", izlazakSuncaTime))
         }
         
