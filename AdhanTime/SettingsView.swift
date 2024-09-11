@@ -71,18 +71,28 @@ struct FormatSelectorView: View {
 }
 
 struct SubtractionSliderView: View {
-    @Binding var selectedMinutes: Int
+    @EnvironmentObject var viewModel: StatusBarViewModel
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Select Minutes to Subtract:")
+            Text("Adjust Sabah Time:")
                 .font(.headline)
 
-            Slider(value: $selectedMinutes, in: 0...60, step: 5)
-                .padding()
+            HStack {
+                Text("Subtract \(viewModel.sabahSubtractionMinutes) min from Izlazak Sunca")
+                    .font(.subheadline)
 
-            Text("Selected: \(selectedMinutes) minutes")
-                .font(.subheadline)
+                Spacer()
+                
+                Text("\(viewModel.sabahSubtractionMinutes) min")
+                    .font(.subheadline)
+                    .padding(.trailing)
+            }
+
+            Slider(value: Binding(
+                get: { Double(viewModel.sabahSubtractionMinutes) },
+                set: { viewModel.sabahSubtractionMinutes = Int($0) }
+            ), in: 0...60, step: 5)
         }
         .padding()
     }
