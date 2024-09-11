@@ -242,7 +242,7 @@ class StatusBarViewModel: ObservableObject {
                 self.statusBarTitle = "\(TimeUtils.formatTimeInterval(self.remainingTime ?? 0, prayerName: "", isShortFormat: true))"
             } else {
                 // Long format includes prayer name and remaining time
-                self.statusBarTitle = "\(selectedLocationName): \(displayPrayerName) za \(TimeUtils.formatTimeInterval(self.remainingTime ?? 0, prayerName: displayPrayerName, isShortFormat: false))"
+                self.statusBarTitle = "\(TimeUtils.formatTimeInterval(self.remainingTime ?? 0, prayerName: displayPrayerName, isShortFormat: false))"
             }
         }
     }
