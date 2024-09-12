@@ -85,9 +85,9 @@ class PrayerTimeCalculator {
         return dateFormatter.string(from: newDate)
     }
     
-    func getStandardPodneTime(_ time: String) -> String {
-        let components = time.split(separator: ":").compactMap { Int($0) }
-        guard components.count == 2 else { return time }
+    static func getStandardPodneTime(prayerTime: String) -> String {
+        let components = prayerTime.split(separator: ":").compactMap { Int($0) }
+        guard components.count == 2 else { return prayerTime }
         
         let hour = components[0]
         let minute = components[1]
@@ -95,9 +95,9 @@ class PrayerTimeCalculator {
         if hour == 11 {
             return "12:00"
         } else if hour == 12 && minute < 10 {
-            return time
+            return String(format: "12:%02d", minute)
         } else if hour == 13 && minute < 10 {
-            return time
+            return String(format: "13:%02d", minute)
         } else {
             return "13:00"
         }
