@@ -16,7 +16,7 @@ class StatusBarViewModel: ObservableObject {
     @Published var nextPrayerName: String?
     @Published var isShortFormat: Bool = false
     @Published var sabahSubtractionMinutes: Int = 45
-    @Published var useStandardPodneTime: Bool = false
+    @Published var isStandardPodneEnabled: Bool = false
     
     @Published var selectedLocationIndex: Int = 0 {
         didSet {
