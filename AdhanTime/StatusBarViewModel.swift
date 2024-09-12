@@ -180,7 +180,7 @@ class StatusBarViewModel: ObservableObject {
         
         var adjustedTimes = [(name: String, time: String)]()
         
-        // Calculate "Sabah" time by subtracting 45 minutes from "Izlazak Sunca"
+        // Calculate "Sabah" time by subtracting minutes from "Izlazak Sunca"
         if let izlazakSuncaIndex = prayerNames.firstIndex(of: "Izlazak Sunca"),
            let izlazakSuncaTime = PrayerTimeCalculator.subtractMinutes(from: prayerTimes[izlazakSuncaIndex], minutes: sabahSubtractionMinutes) {
             adjustedTimes.append(("Sabah", izlazakSuncaTime))
@@ -190,8 +190,18 @@ class StatusBarViewModel: ObservableObject {
         let remainingPrayerNames = Array(prayerNames[2...])
         let remainingPrayerTimes = Array(prayerTimes[2...])
         
+//        for (name, time) in zip(remainingPrayerNames, remainingPrayerTimes) {
+//            adjustedTimes.append((name, time))
+//        }
         for (name, time) in zip(remainingPrayerNames, remainingPrayerTimes) {
-            adjustedTimes.append((name, time))
+            var adjustedTime = time
+            
+            // Check if 'Podne' and if the standard time option is enabled
+            if name == "Podne", isStandardPodneEnabled {
+                adjustedTime = PrayerTimeCalculator.getStandardPodneTime(prayerTime: time)
+            }
+            
+            adjustedTimes.append((name, adjustedTime))
         }
         
         return adjustedTimes
