@@ -17,6 +17,7 @@ struct SettingsView: View {
                 LocationPickerView()
                 FormatSelectorView()
                 SubtractionSliderView()
+                StandardPodneToggleView()
                 Spacer() // Pushes content to the top
             }
             .tabItem {
@@ -100,7 +101,7 @@ struct SubtractionSliderView: View {
 }
 
 struct StandardPodneToggleView: View {
-    @ObservedObject var viewModel: StatusBarViewModel
+    @EnvironmentObject var viewModel: StatusBarViewModel
 
     var body: some View {
         Toggle("Use Standard Podne Time", isOn: $viewModel.isStandardPodneEnabled)
