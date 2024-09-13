@@ -232,12 +232,15 @@ class StatusBarViewModel: ObservableObject {
     }
     
     func updateStatusBar() {
-        // Retrieve the remaining time and next prayer
-        if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: self.prayerTimes) {
+        // Retrieve the remaining time and next prayer, pass isStandardPodneEnabled
+        if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
+            prayerTimes: self.prayerTimes,
+            isStandardPodneEnabled: self.isStandardPodneEnabled
+        ) {
             self.remainingTime = remainingTime
             
             var displayPrayerName: String
-
+            
             // Skip "Zora" and show "Sabah", skip "Izlazak Sunca" and show "Podne"
             if nextPrayerName == "Zora" {
                 displayPrayerName = "Sabah"
@@ -246,7 +249,7 @@ class StatusBarViewModel: ObservableObject {
             } else {
                 displayPrayerName = nextPrayerName
             }
-
+            
             // Update the status bar title using the formatted time
             if isShortFormat {
                 // Short format omits prayer name and shows only remaining time
