@@ -100,13 +100,10 @@ struct SubtractionSliderView: View {
 }
 
 struct StandardPodneToggleView: View {
-    @Binding var useStandardPodneTime: Bool
-    
+    @ObservedObject var viewModel: StatusBarViewModel
+
     var body: some View {
-        Toggle(isOn: $useStandardPodneTime) {
-            Text("Use Standard Podne Time")
-        }
-        .toggleStyle(SwitchToggleStyle())
-        .padding()
+        Toggle("Use Standard Podne Time", isOn: $viewModel.isStandardPodneEnabled)
+            .toggleStyle(SwitchToggleStyle())
     }
 }
