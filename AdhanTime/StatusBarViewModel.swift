@@ -320,7 +320,10 @@ class StatusBarViewModel: ObservableObject {
             if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today, locationId: self.locationId) {
                 // Use cached data if available
                 self.prayerTimes = cachedPrayerTimes
-                if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: cachedPrayerTimes) {
+                if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
+                    prayerTimes: cachedPrayerTimes,
+                    isStandardPodneEnabled: self.isStandardPodneEnabled
+                ) {
                     self.remainingTime = remainingTime
                     self.nextPrayerName = nextPrayerName
                     startTimer()
@@ -341,7 +344,10 @@ class StatusBarViewModel: ObservableObject {
                         
                         // Update the ViewModel with the fetched data
                         self.prayerTimes = times
-                        if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(prayerTimes: times) {
+                        if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
+                            prayerTimes: times,
+                            isStandardPodneEnabled: self.isStandardPodneEnabled
+                        ) {
                             self.remainingTime = remainingTime
                             self.nextPrayerName = nextPrayerName
                             self.startTimer()
