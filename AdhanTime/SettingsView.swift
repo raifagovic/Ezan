@@ -98,3 +98,15 @@ struct SubtractionSliderView: View {
         .padding()
     }
 }
+
+struct StandardPodneToggleView: View {
+    @Binding var useStandardPodneTime: Bool
+    
+    var body: some View {
+        Toggle(isOn: $useStandardPodneTime) {
+            Text("Use Standard Podne Time")
+        }
+        .toggleStyle(SwitchToggleStyle())
+        .padding()
+    }
+}
