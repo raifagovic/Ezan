@@ -231,8 +231,7 @@ class StatusBarViewModel: ObservableObject {
     func updateStatusBar() {
         // Retrieve the remaining time and next prayer, pass isStandardPodneEnabled
         if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
-            prayerTimes: self.prayerTimes,
-            isStandardPodneEnabled: self.isStandardPodneEnabled
+            prayerTimes: self.adjustedPrayerTimes.map { $0.time }, isStandardPodneEnabled: self.isStandardPodneEnabled
         ) {
             self.remainingTime = remainingTime
             
