@@ -190,9 +190,6 @@ class StatusBarViewModel: ObservableObject {
         let remainingPrayerNames = Array(prayerNames[2...])
         let remainingPrayerTimes = Array(prayerTimes[2...])
         
-//        for (name, time) in zip(remainingPrayerNames, remainingPrayerTimes) {
-//            adjustedTimes.append((name, time))
-//        }
         for (name, time) in zip(remainingPrayerNames, remainingPrayerTimes) {
             var adjustedTime = time
             
