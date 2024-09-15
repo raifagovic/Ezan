@@ -314,10 +314,8 @@ class StatusBarViewModel: ObservableObject {
             
             // First, check if cached prayer times for today are available
             if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today, locationId: self.locationId) {
-                // Adjust cached prayer times
-                let adjustedTimes = adjustPrayerTimes(cachedPrayerTimes)
-                self.prayerTimes = adjustedTimes
-                
+                // Use adjusted prayer times
+                self.prayerTimes = self.adjustedPrayerTimes.map { $0.time }
                 
                 if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
                     prayerTimes: cachedPrayerTimes,
