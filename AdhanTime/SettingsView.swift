@@ -15,8 +15,8 @@ struct SettingsView: View {
             // First tab: Location and Format
             VStack(alignment: .leading, spacing: 20) {
                 LocationPickerView()
-                FormatSelectorView()
                 SubtractionSliderView()
+                FormatSelectorView()
                 StandardPodneToggleView()
                 Spacer() // Pushes content to the top
             }
@@ -57,21 +57,6 @@ struct LocationPickerView: View {
     }
 }
 
-struct FormatSelectorView: View {
-    @EnvironmentObject var viewModel: StatusBarViewModel
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Select Status Bar Format:")
-                .font(.headline)
-
-            Toggle("Short Format", isOn: $viewModel.isShortFormat)
-                .padding()
-                .toggleStyle(SwitchToggleStyle())
-        }
-    }
-}
-
 struct SubtractionSliderView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
 
@@ -97,6 +82,21 @@ struct SubtractionSliderView: View {
             ), in: 15...60, step: 5)
         }
         .padding()
+    }
+}
+
+struct FormatSelectorView: View {
+    @EnvironmentObject var viewModel: StatusBarViewModel
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Select Status Bar Format:")
+                .font(.headline)
+
+            Toggle("Short Format", isOn: $viewModel.isShortFormat)
+                .padding()
+                .toggleStyle(SwitchToggleStyle())
+        }
     }
 }
 
