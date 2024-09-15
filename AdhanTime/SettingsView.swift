@@ -94,7 +94,7 @@ struct SubtractionSliderView: View {
             Slider(value: Binding(
                 get: { Double(viewModel.sabahSubtractionMinutes) },
                 set: { viewModel.sabahSubtractionMinutes = Int($0) }
-            ), in: 0...60, step: 5)
+            ), in: 10...60, step: 5)
         }
         .padding()
     }
