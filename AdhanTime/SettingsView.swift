@@ -45,8 +45,6 @@ struct LocationPickerView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Select Location:")
-                .font(.headline)
             Picker("Location", selection: $viewModel.selectedLocationIndex) {
                 ForEach(viewModel.locationsWithIndex, id: \.0) { index, name in
                     Text(name).tag(index)
