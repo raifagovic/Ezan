@@ -60,9 +60,6 @@ struct SubtractionSliderView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Adjust Sabah Time:")
-                .font(.headline)
-
             HStack {
                 Text("Subtract \(viewModel.sabahSubtractionMinutes) min from Izlazak Sunca")
                     .font(.subheadline)
