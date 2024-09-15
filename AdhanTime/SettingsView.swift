@@ -88,9 +88,6 @@ struct FormatSelectorView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Select Status Bar Format:")
-                .font(.headline)
-
             Toggle("Short Format", isOn: $viewModel.isShortFormat)
                 .padding()
                 .toggleStyle(SwitchToggleStyle())
