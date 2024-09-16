@@ -25,6 +25,7 @@ class PrayerTimeCache {
         print("Loaded cached prayer times for \(dateKey): \(data ?? [])")
         return data
     }
+ 
     
     static func removeOldData(before date: Date) {
         let dateKey = formattedDateKey(from: date, locationId: nil) // No need for locationId here

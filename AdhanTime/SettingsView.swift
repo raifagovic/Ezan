@@ -96,7 +96,7 @@ struct StandardPodneToggleView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
 
     var body: some View {
-        Toggle("Use Standard Podne Time", isOn: $viewModel.isStandardPodneEnabled)
+        Toggle("Standard Podne Time", isOn: $viewModel.isStandardPodneEnabled)
             .toggleStyle(SwitchToggleStyle())
     }
 }
