@@ -1,7 +1,7 @@
 import Foundation
 
 class PrayerTimeCalculator {
-    static func calculateRemainingTime(prayerTimes: [String] = ["04:30", "06:00", "12:45", "15:30", "18:45", "20:00"], isStandardPodneEnabled: Bool) -> (TimeInterval, String)? {
+    static func calculateRemainingTime(adjustedPrayerTimes: [String], isStandardPodneEnabled: Bool) -> (TimeInterval, String)? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
@@ -22,12 +22,12 @@ class PrayerTimeCalculator {
         let currentTimeInSeconds = (currentHour * 3600) + (currentMinute * 60) + currentSecond
         
         // Define the array of prayer names
-        let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
+        let prayerNames = ["Sabah", "Podne", "Ikindija", "Akšam", "Jacija"]
         
         // Find the next prayer time
         var nextPrayerTimeString: String?
         var index: Int?
-        for (i, timeString) in prayerTimes.enumerated() {
+        for (i, timeString) in adjustedPrayerTimes.enumerated() {
             var adjustedTimeString = timeString
             
             // Apply the standard Podne time if enabled
@@ -47,7 +47,7 @@ class PrayerTimeCalculator {
         
         // If no future prayer time is found for today, use the first prayer time of the next day
         if nextPrayerTimeString == nil {
-            nextPrayerTimeString = prayerTimes.first
+            nextPrayerTimeString = adjustedPrayerTimes.first
             index = 0
         }
         

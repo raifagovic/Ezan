@@ -152,8 +152,8 @@ class StatusBarViewModel: ObservableObject {
     let prayerNames = ["Zora", "Izlazak Sunca", "Podne", "Ikindija", "Akšam", "Jacija"]
     
     private var timer: Timer?
-        private(set) var locationId: Int
-        private var isInitialized = false
+    private(set) var locationId: Int
+    private var isInitialized = false
 
     private init() {
         self.locationId = 77 // Default value, e.g., Sarajevo's ID
@@ -231,7 +231,7 @@ class StatusBarViewModel: ObservableObject {
     func updateStatusBar() {
         // Retrieve the remaining time and next prayer, pass isStandardPodneEnabled
         if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
-            prayerTimes: self.adjustedPrayerTimes.map { $0.time }, isStandardPodneEnabled: self.isStandardPodneEnabled
+            adjustedPrayerTimes: self.adjustedPrayerTimes.map { $0.time }, isStandardPodneEnabled: self.isStandardPodneEnabled
         ) {
             self.remainingTime = remainingTime
             
@@ -318,9 +318,9 @@ class StatusBarViewModel: ObservableObject {
                 // Use cached data if available
                 self.prayerTimes = cachedPrayerTimes
                 
+                // Update prayer times to cache prayer times to get correct adjusted prayer times because they depend on the prayer times
                 if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
-                    prayerTimes: cachedPrayerTimes,
-                    isStandardPodneEnabled: self.isStandardPodneEnabled
+                    adjustedPrayerTimes: adjustedPrayerTimes.map { $0.time }, isStandardPodneEnabled: self.isStandardPodneEnabled
                 ) {
                     self.remainingTime = remainingTime
                     self.nextPrayerName = nextPrayerName
@@ -343,7 +343,7 @@ class StatusBarViewModel: ObservableObject {
                         // Update the ViewModel with the fetched data
                         self.prayerTimes = times
                         if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
-                            prayerTimes: times,
+                            adjustedPrayerTimes: self.adjustedPrayerTimes.map { $0.time },
                             isStandardPodneEnabled: self.isStandardPodneEnabled
                         ) {
                             self.remainingTime = remainingTime
