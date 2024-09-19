@@ -86,14 +86,26 @@ struct SubtractionSliderView: View {
     }
 }
 
+//struct FormatSelectorView: View {
+//    @EnvironmentObject var viewModel: StatusBarViewModel
+//
+//    var body: some View {
+//        VStack(alignment: .leading) {
+//            Toggle("Short Format", isOn: $viewModel.isShortFormat)
+//                .toggleStyle(SwitchToggleStyle())
+//        }
+//    }
+//}
+
 struct FormatSelectorView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Toggle("Short Format", isOn: $viewModel.isShortFormat)
-                .padding()
-                .toggleStyle(SwitchToggleStyle())
+        HStack {
+            Text("Short Format")
+            Spacer()
+            Toggle("", isOn: $viewModel.isShortFormat)
+                .toggleStyle(SwitchToggleStyle()) // The label for the toggle is empty
         }
     }
 }
