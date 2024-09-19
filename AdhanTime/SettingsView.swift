@@ -14,11 +14,19 @@ struct SettingsView: View {
         TabView {
             // First tab: Location and Format
             VStack(alignment: .leading, spacing: 20) {
-                LocationPickerView()
-                SubtractionSliderView()
-                FormatSelectorView()
-                StandardPodneToggleView()
-                Spacer() // Pushes content to the top
+                GroupBox {
+                    VStack(alignment: .leading, spacing: 10) {
+                        LocationPickerView()
+                        Divider()
+                        SubtractionSliderView()
+                        Divider()
+                        FormatSelectorView()
+                        Divider()
+                        StandardPodneToggleView()
+                    }
+                    .padding()
+                }
+                Spacer()
             }
             .tabItem {
                 Label("Settings", systemImage: "gearshape")
