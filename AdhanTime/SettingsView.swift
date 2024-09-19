@@ -105,7 +105,7 @@ struct FormatSelectorView: View {
             Text("Short Format")
             Spacer()
             Toggle("", isOn: $viewModel.isShortFormat)
-                .toggleStyle(SwitchToggleStyle()) // The label for the toggle is empty
+                .toggleStyle(SwitchToggleStyle())
         }
     }
 }
@@ -114,7 +114,11 @@ struct StandardPodneToggleView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
 
     var body: some View {
-        Toggle("Standard Podne Time", isOn: $viewModel.isStandardPodneEnabled)
-            .toggleStyle(SwitchToggleStyle())
+        HStack {
+            Text("Standard Podne Time")
+            Spacer()
+            Toggle("", isOn: $viewModel.isStandardPodneEnabled)
+                .toggleStyle(SwitchToggleStyle())
+        }
     }
 }
