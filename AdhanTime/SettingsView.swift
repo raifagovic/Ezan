@@ -48,16 +48,20 @@ struct SettingsView: View {
 
 struct LocationPickerView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
-
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Picker("Location", selection: $viewModel.selectedLocationIndex) {
-                ForEach(viewModel.locationsWithIndex, id: \.0) { index, name in
-                    Text(name).tag(index)
+            HStack {
+                Text("Lokacija")
+                Spacer()
+                Picker("", selection: $viewModel.selectedLocationIndex) {
+                    ForEach(viewModel.locationsWithIndex, id: \.0) { index, name in
+                        Text(name).tag(index)
+                    }
                 }
-            }
-            .pickerStyle(MenuPickerStyle())
-        }
+                .pickerStyle(MenuPickerStyle())
+                .frame(maxWidth: 150) // Limit width for the picker to keep it compact
+            }        }
     }
 }
 
