@@ -42,7 +42,7 @@ struct SettingsView: View {
             }
         }
         .padding()
-        .frame(width: 300, height: 400)
+        .frame(width: 350, height: 400)
     }
 }
 
@@ -82,27 +82,15 @@ struct SubtractionSliderView: View {
                 set: { viewModel.sabahSubtractionMinutes = Int($0) }
             ), in: 15...60, step: 5)
         }
-        .padding()
     }
 }
-
-//struct FormatSelectorView: View {
-//    @EnvironmentObject var viewModel: StatusBarViewModel
-//
-//    var body: some View {
-//        VStack(alignment: .leading) {
-//            Toggle("Short Format", isOn: $viewModel.isShortFormat)
-//                .toggleStyle(SwitchToggleStyle())
-//        }
-//    }
-//}
 
 struct FormatSelectorView: View {
     @EnvironmentObject var viewModel: StatusBarViewModel
 
     var body: some View {
         HStack {
-            Text("Short Format")
+            Text("Skraćeni prikaz u Menu Baru")
             Spacer()
             Toggle("", isOn: $viewModel.isShortFormat)
                 .toggleStyle(SwitchToggleStyle())
@@ -115,7 +103,7 @@ struct StandardPodneToggleView: View {
 
     var body: some View {
         HStack {
-            Text("Standard Podne Time")
+            Text("Standardno vrijeme za Podne")
             Spacer()
             Toggle("", isOn: $viewModel.isStandardPodneEnabled)
                 .toggleStyle(SwitchToggleStyle())
