@@ -59,9 +59,10 @@ struct LocationPickerView: View {
                         Text(name).tag(index)
                     }
                 }
-                .pickerStyle(MenuPickerStyle())
+                .pickerStyle(DefaultPickerStyle())
                 .frame(maxWidth: 150) // Limit width for the picker to keep it compact
-            }        }
+            }
+        }
     }
 }
 
@@ -70,17 +71,14 @@ struct SubtractionSliderView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("Subtract \(viewModel.sabahSubtractionMinutes) min from Izlazak Sunca")
-                    .font(.subheadline)
-
-                Spacer()
+            Text("Vrijeme Sabah namaza")
                 
-                Text("\(viewModel.sabahSubtractionMinutes) min")
-                    .font(.subheadline)
-                    .padding(.trailing)
-            }
-
+            Spacer()
+            
+            Text("\(viewModel.sabahSubtractionMinutes) min prije izlaska Sunca")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+            
             Slider(value: Binding(
                 get: { Double(viewModel.sabahSubtractionMinutes) },
                 set: { viewModel.sabahSubtractionMinutes = Int($0) }
