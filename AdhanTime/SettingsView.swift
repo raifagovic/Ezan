@@ -27,18 +27,18 @@ struct SettingsView: View {
                 Spacer()
             }
             .tabItem {
-                Label("Settings", systemImage: "gearshape")
+                Label("Postavke", systemImage: "gearshape")
             }
             
             // Second tab: Software Update
             VStack {
-                Text("Kontakt")
-                    .font(.headline)
-                Text("No updates available at this moment.") // Placeholder text
+                Text("Kontakt:")
+                Text("raif.agovic.dev@gmail.com") // Placeholder text
                 Spacer()
             }
+            .padding()
             .tabItem {
-                Label("Software Update", systemImage: "arrow.down.circle")
+                Label("Prijavi grešku", systemImage: "arrow.down.circle")
             }
         }
         .padding()
