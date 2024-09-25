@@ -21,6 +21,7 @@ struct SettingsView: View {
                 FormatSelectorView()
                 Divider()
                 StandardPodneToggleView()
+                Spacer()
             }
             .padding()
             .tabItem {
