@@ -365,7 +365,6 @@ class StatusBarViewModel: ObservableObject {
         for month in 1...12 {
             let date = calendar.date(from: DateComponents(year: year, month: month, day: 1))!
             if PrayerTimeCache.loadCachedPrayerTimes(for: date, locationId: self.locationId) == nil {
-            
                 // If any month is missing cached data, return false
                 return false
             }

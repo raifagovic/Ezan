@@ -32,7 +32,7 @@ struct SettingsView: View {
             
             // Second tab: Software Update
             VStack {
-                Text("Software Update")
+                Text("Kontakt")
                     .font(.headline)
                 Text("No updates available at this moment.") // Placeholder text
                 Spacer()
