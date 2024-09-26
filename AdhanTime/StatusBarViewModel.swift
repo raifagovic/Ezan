@@ -204,23 +204,61 @@ class StatusBarViewModel: ObservableObject {
         return adjustedTimes
     }
     
+//    func startTimer() {
+//        timer?.invalidate()
+//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+//            guard let currentRemainingTime = self.remainingTime else {
+//                self.timer?.invalidate()
+//                return
+//            }
+//            
+//            if currentRemainingTime > 0 {
+//                self.remainingTime = currentRemainingTime - 1
+//                self.statusBarTitle = TimeUtils.formatTimeInterval(
+//                    currentRemainingTime - 1,
+//                    prayerName: self.nextPrayerName ?? "",
+//                    isShortFormat: self.isShortFormat
+//                )
+//            } else {
+//                self.timer?.invalidate()
+//                self.fetchPrayerTimesForToday {
+//                    self.updateStatusBar()
+//                }
+//            }
+//        }
+//    }
+    
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            guard let currentRemainingTime = self.remainingTime else {
+            // Get the current time in Sarajevo
+            let currentTime = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            dateFormatter.timeZone = TimeZone(identifier: "Europe/Sarajevo")
+            
+            let currentTimeString = dateFormatter.string(from: currentTime)
+            print("Current time in Sarajevo: \(currentTimeString)")
+            
+            // Recalculate the remaining time dynamically
+            let prayerTimesOnly = self.adjustedPrayerTimes.map { $0.time }
+            guard let (remainingTime, nextPrayer) = PrayerTimeCalculator.calculateRemainingTime(adjustedPrayerTimes: prayerTimesOnly, isStandardPodneEnabled: self.isStandardPodneEnabled) else {
                 self.timer?.invalidate()
                 return
             }
             
-            if currentRemainingTime > 0 {
-                self.remainingTime = currentRemainingTime - 1
-                self.statusBarTitle = TimeUtils.formatTimeInterval(
-                    currentRemainingTime - 1,
-                    prayerName: self.nextPrayerName ?? "",
-                    isShortFormat: self.isShortFormat
-                )
-            } else {
-                self.timer?.invalidate()
+            self.remainingTime = remainingTime
+            self.nextPrayerName = nextPrayer
+            
+            // Update the status bar title based on the new remaining time
+            self.statusBarTitle = TimeUtils.formatTimeInterval(
+                remainingTime,
+                prayerName: nextPrayer,
+                isShortFormat: self.isShortFormat
+            )
+            
+            // If no time is left for the current prayer, fetch the next prayer time
+            if remainingTime <= 0 {
                 self.fetchPrayerTimesForToday {
                     self.updateStatusBar()
                 }
