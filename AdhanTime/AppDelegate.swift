@@ -40,7 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let window = NSWindow(
                 contentViewController: hostingController
             )
-            window.title = "Settings"
+            window.title = "Postavke"
             window.setContentSize(NSSize(width: 300, height: 300))
             window.styleMask = [.titled, .closable]
             window.isReleasedWhenClosed = false
