@@ -49,7 +49,7 @@ struct ContentView: View {
             
             // Settings Button
             HStack {
-                Button("Settings") {
+                Button("Postavke") {
                     appDelegate.openSettingsWindow()
                 }
                 .buttonStyle(HoverButtonStyle())
@@ -60,7 +60,7 @@ struct ContentView: View {
                 .padding(.vertical, 5)
             
             HStack {
-                Button("Quit") {
+                Button("Izlaz") {
                     NSApplication.shared.terminate(nil)
                 }
                 .buttonStyle(HoverButtonStyle())
