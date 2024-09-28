@@ -387,10 +387,11 @@ class StatusBarViewModel: ObservableObject {
     }
     
     func saveSettingsToUserDefaults() {
-        UserDefaults.standard.set(selectedLocationIndex, forKey: "selectedLocationIndex")
-        UserDefaults.standard.set(sabahSubtractionMinutes, forKey: "sabahSubtractionMinutes")
-        UserDefaults.standard.set(isShortFormat, forKey: "isShortFormat")
-        UserDefaults.standard.set(isStandardPodneEnabled, forKey: "isStandardPodneEnabled")
+        let defaults = UserDefaults.standard
+        defaults.set(isShortFormat, forKey: "isShortFormat")
+        defaults.set(sabahSubtractionMinutes, forKey: "sabahSubtractionMinutes")
+        defaults.set(isStandardPodneEnabled, forKey: "isStandardPodneEnabled")
+        defaults.set(selectedLocationIndex, forKey: "selectedLocationIndex")
     }
     
     func loadSettingsFromUserDefaults() {
