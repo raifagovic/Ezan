@@ -204,30 +204,6 @@ class StatusBarViewModel: ObservableObject {
         return adjustedTimes
     }
     
-//    func startTimer() {
-//        timer?.invalidate()
-//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-//            guard let currentRemainingTime = self.remainingTime else {
-//                self.timer?.invalidate()
-//                return
-//            }
-//            
-//            if currentRemainingTime > 0 {
-//                self.remainingTime = currentRemainingTime - 1
-//                self.statusBarTitle = TimeUtils.formatTimeInterval(
-//                    currentRemainingTime - 1,
-//                    prayerName: self.nextPrayerName ?? "",
-//                    isShortFormat: self.isShortFormat
-//                )
-//            } else {
-//                self.timer?.invalidate()
-//                self.fetchPrayerTimesForToday {
-//                    self.updateStatusBar()
-//                }
-//            }
-//        }
-//    }
-    
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -408,5 +384,12 @@ class StatusBarViewModel: ObservableObject {
             }
         }
         return true
+    }
+    
+    func saveSettingsToUserDefaults() {
+        UserDefaults.standard.set(selectedLocationIndex, forKey: "selectedLocationIndex")
+        UserDefaults.standard.set(sabahSubtractionMinutes, forKey: "sabahSubtractionMinutes")
+        UserDefaults.standard.set(isShortFormat, forKey: "isShortFormat")
+        UserDefaults.standard.set(isStandardPodneEnabled, forKey: "isStandardPodneEnabled")
     }
 }
