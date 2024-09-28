@@ -11,6 +11,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var settingsWindow: NSWindow!
     
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Load settings from UserDefaults when the app starts
+        StatusBarViewModel.shared.loadSettingsFromUserDefaults()
+        
         // Add observer for wake notifications
         NSWorkspace.shared.notificationCenter.addObserver(
             self,
