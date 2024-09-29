@@ -210,6 +210,24 @@ class StatusBarViewModel: ObservableObject {
         return adjustedTimes
     }
     
+    func setupAutoSave() {
+        $isShortFormat
+            .sink { [weak self] _ in self?.saveSettingsToUserDefaults() }
+            .store(in: &cancellables)
+        
+        $sabahSubtractionMinutes
+            .sink { [weak self] _ in self?.saveSettingsToUserDefaults() }
+            .store(in: &cancellables)
+        
+        $isStandardPodneEnabled
+            .sink { [weak self] _ in self?.saveSettingsToUserDefaults() }
+            .store(in: &cancellables)
+        
+        $selectedLocationIndex
+            .sink { [weak self] _ in self?.saveSettingsToUserDefaults() }
+            .store(in: &cancellables)
+    }
+    
     func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
