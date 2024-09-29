@@ -154,6 +154,7 @@ class StatusBarViewModel: ObservableObject {
     private var timer: Timer?
     private(set) var locationId: Int
     private var isInitialized = false
+    private var cancellables = Set<AnyCancellable>()
 
     private init() {
         self.locationId = 77 // Default value, e.g., Sarajevo's ID
