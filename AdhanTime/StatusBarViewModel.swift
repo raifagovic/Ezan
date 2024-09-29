@@ -163,6 +163,12 @@ class StatusBarViewModel: ObservableObject {
             self.selectedLocationIndex = index
         }
         
+        // Load settings from UserDefaults when ViewModel is initialized
+        loadSettingsFromUserDefaults()
+        
+        // Automatically save settings whenever any of the @Published properties change
+        setupAutoSave()
+        
         if !isInitialized {
             print("Initializing ViewModel and refreshing")
             refresh()
