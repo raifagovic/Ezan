@@ -158,14 +158,20 @@ class StatusBarViewModel: ObservableObject {
 
     private init() {
         self.locationId = 77 // Default value, e.g., Sarajevo's ID
+        self.sabahSubtractionMinutes = 45 // Default subtraction for Sabah
+        
+        // Load settings from UserDefaults when ViewModel is initialized
+        loadSettingsFromUserDefaults()
         
         // Find the index for the initial locationId without using self
         if let index = locationsWithIndex.firstIndex(where: { $0.0 == locationId }) {
             self.selectedLocationIndex = index
         }
         
-        // Load settings from UserDefaults when ViewModel is initialized
-        loadSettingsFromUserDefaults()
+        // If no sabahSubtractionMinutes was loaded from UserDefaults, keep it at 45
+        if sabahSubtractionMinutes == 0 {
+            self.sabahSubtractionMinutes = 45
+        }
         
         // Automatically save settings whenever any of the @Published properties change
         setupAutoSave()
