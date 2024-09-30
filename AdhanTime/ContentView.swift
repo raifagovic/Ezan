@@ -31,7 +31,7 @@ struct ContentView: View {
                     let prayer = viewModel.adjustedPrayerTimes[index]
                     HStack {
                         Text(prayer.name)
-                            .font(.subheadline)
+                            .font(.callout)
                             .foregroundColor(.secondary)
                         Spacer()
                         Text(prayer.time)
