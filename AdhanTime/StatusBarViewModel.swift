@@ -198,7 +198,6 @@ class StatusBarViewModel: ObservableObject {
         if defaults.object(forKey: "selectedLocationIndex") == nil {
             if let index = locationsWithIndex.firstIndex(where: { $0.0 == 77 }) {
                 self.selectedLocationIndex = index
-                self.locationId = 77 // Sarajevo's ID
             }
         }
 
