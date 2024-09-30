@@ -156,26 +156,60 @@ class StatusBarViewModel: ObservableObject {
     private var isInitialized = false
     private var cancellables = Set<AnyCancellable>()
 
+//    private init() {
+//        self.locationId = 77 // Default value, e.g., Sarajevo's ID
+//        self.sabahSubtractionMinutes = 45 // Default subtraction for Sabah
+//        
+//        // Load settings from UserDefaults when ViewModel is initialized
+//        loadSettingsFromUserDefaults()
+//        
+//        // If no location was loaded from UserDefaults, set Sarajevo as default
+//        if selectedLocationIndex == 0, let index = locationsWithIndex.firstIndex(where: { $0.0 == locationId }) {
+//            self.selectedLocationIndex = index
+//            self.locationId = 77 // Sarajevo's ID
+//        }
+//        
+//        // If no sabahSubtractionMinutes was loaded from UserDefaults, keep it at 45
+//        if sabahSubtractionMinutes == 0 {
+//            self.sabahSubtractionMinutes = 45
+//        }
+//        
+//        // Automatically save settings whenever any of the @Published properties change
+//        setupAutoSave()
+//        
+//        if !isInitialized {
+//            print("Initializing ViewModel and refreshing")
+//            refresh()
+//            isInitialized = true
+//        }
+//    }
+    
     private init() {
+        // Initialize the stored properties first
         self.locationId = 77 // Default value, e.g., Sarajevo's ID
         self.sabahSubtractionMinutes = 45 // Default subtraction for Sabah
         
-        // Load settings from UserDefaults when ViewModel is initialized
+        // After initializing stored properties, load settings from UserDefaults
         loadSettingsFromUserDefaults()
         
-        // Find the index for the initial locationId without using self
-        if let index = locationsWithIndex.firstIndex(where: { $0.0 == locationId }) {
-            self.selectedLocationIndex = index
+        let defaults = UserDefaults.standard
+
+        // Check if location was loaded from UserDefaults; if not, set the default Sarajevo location
+        if defaults.object(forKey: "selectedLocationIndex") == nil {
+            if let index = locationsWithIndex.firstIndex(where: { $0.0 == 77 }) {
+                self.selectedLocationIndex = index
+                self.locationId = 77 // Sarajevo's ID
+            }
         }
-        
-        // If no sabahSubtractionMinutes was loaded from UserDefaults, keep it at 45
-        if sabahSubtractionMinutes == 0 {
-            self.sabahSubtractionMinutes = 45
+
+        // Check if sabahSubtractionMinutes was loaded from UserDefaults; if not, set the default value
+        if defaults.object(forKey: "sabahSubtractionMinutes") == nil {
+            self.sabahSubtractionMinutes = 45 // Default subtraction for Sabah
         }
-        
+
         // Automatically save settings whenever any of the @Published properties change
         setupAutoSave()
-        
+
         if !isInitialized {
             print("Initializing ViewModel and refreshing")
             refresh()
