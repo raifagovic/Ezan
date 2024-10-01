@@ -35,7 +35,7 @@ struct ContentView: View {
                             .foregroundColor(.secondary)
                         Spacer()
                         Text(prayer.time)
-                            .font(.subheadline)
+                            .font(.subheadline.monospacedDigit())
                             .foregroundColor(.secondary)
                     }
                     .padding(.vertical, 5)
