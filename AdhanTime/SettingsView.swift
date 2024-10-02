@@ -30,7 +30,6 @@ struct SettingsView: View {
             
             // Second tab: Software Update
             VStack(spacing: 10) {
-                Text("Pošalji prijedlog, prijavi bug: ")
                 Text("raif.agovic.dev@gmail.com") // Placeholder text
                 Spacer()
             }
