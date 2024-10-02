@@ -29,7 +29,7 @@ struct SettingsView: View {
             }
             
             // Second tab: Software Update
-            VStack(spacing: 10) {
+            VStack() {
                 Text("raif.agovic.dev@gmail.com") // Placeholder text
                 Spacer()
             }
@@ -39,7 +39,7 @@ struct SettingsView: View {
             }
         }
         .padding()
-        .frame(width: 350, height: 300)
+        .frame(width: 350, height: 350)
     }
 }
 
@@ -69,8 +69,6 @@ struct SubtractionSliderView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Vrijeme Sabah namaza")
-            
-            Spacer()
                             
             Text("\(viewModel.sabahSubtractionMinutes) min prije izlaska Sunca")
                 .font(.subheadline)
