@@ -73,11 +73,13 @@ struct SubtractionSliderView: View {
             Text("\(viewModel.sabahSubtractionMinutes) min prije izlaska Sunca")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
+                .padding(.top, 2)
             
             Slider(value: Binding(
                 get: { Double(viewModel.sabahSubtractionMinutes) },
                 set: { viewModel.sabahSubtractionMinutes = Int($0) }
             ), in: 15...60, step: 5)
+            .padding(.top, 5)
         }
     }
 }
