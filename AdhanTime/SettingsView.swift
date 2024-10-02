@@ -30,13 +30,13 @@ struct SettingsView: View {
             
             // Second tab: Software Update
             VStack(spacing: 10) {
-                Text("Kontakt:")
+                Text("Pošalji prijedlog, prijavi bug: ")
                 Text("raif.agovic.dev@gmail.com") // Placeholder text
                 Spacer()
             }
             .padding()
             .tabItem {
-                Label("Prijavi grešku", systemImage: "arrow.down.circle")
+                Label("Kontakt", systemImage: "arrow.down.circle")
             }
         }
         .padding()
