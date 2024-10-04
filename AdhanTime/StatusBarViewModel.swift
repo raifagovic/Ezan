@@ -363,31 +363,34 @@ class StatusBarViewModel: ObservableObject {
     }
     
     func fetchPrayerTimesForToday(completion: @escaping () -> Void) {
-            let today = Date()
-            
-            // First, check if cached prayer times for today are available
-            if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today, locationId: self.locationId) {
+        let today = Date()
         
+        // First, check if cached prayer times for today are available
+        if let cachedPrayerTimes = PrayerTimeCache.loadCachedPrayerTimes(for: today, locationId: self.locationId) {
+            
+            DispatchQueue.main.async {
                 // Use cached data if available
                 self.prayerTimes = cachedPrayerTimes
                 
                 // Update prayer times to cache prayer times to get correct adjusted prayer times because they depend on the prayer times
                 if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
-                    adjustedPrayerTimes: adjustedPrayerTimes.map { $0.time }, isStandardPodneEnabled: self.isStandardPodneEnabled
+                    adjustedPrayerTimes: self.adjustedPrayerTimes.map { $0.time }, isStandardPodneEnabled: self.isStandardPodneEnabled
                 ) {
                     self.remainingTime = remainingTime
                     self.nextPrayerName = nextPrayerName
-                    startTimer()
+                    self.startTimer()
                 }
                 completion()
-            } else {
-                // If no cached data, fetch today's data from the API
-                let calendar = Calendar.current
-                let year = calendar.component(.year, from: today)
-                let month = calendar.component(.month, from: today)
-                let day = calendar.component(.day, from: today)
-                
-                PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: year, month: month, day: day) { result in
+            }
+        } else {
+            // If no cached data, fetch today's data from the API
+            let calendar = Calendar.current
+            let year = calendar.component(.year, from: today)
+            let month = calendar.component(.month, from: today)
+            let day = calendar.component(.day, from: today)
+            
+            PrayerTimeAPI.fetchPrayerTimes(for: locationId, year: year, month: month, day: day) { result in
+                DispatchQueue.main.async {
                     switch result {
                     case .success(let times):
                         // Save fetched prayer times to the cache
@@ -411,6 +414,7 @@ class StatusBarViewModel: ObservableObject {
                 }
             }
         }
+    }
     
     func isYearDataCached(for year: Int) -> Bool {
         let calendar = Calendar.current
