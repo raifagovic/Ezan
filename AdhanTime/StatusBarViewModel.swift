@@ -284,26 +284,28 @@ class StatusBarViewModel: ObservableObject {
         if let (remainingTime, nextPrayerName) = PrayerTimeCalculator.calculateRemainingTime(
             adjustedPrayerTimes: self.adjustedPrayerTimes.map { $0.time }, isStandardPodneEnabled: self.isStandardPodneEnabled
         ) {
-            self.remainingTime = remainingTime
-            
-            var displayPrayerName: String
-            
-            // Skip "Zora" and show "Sabah", skip "Izlazak Sunca" and show "Podne"
-            if nextPrayerName == "Zora" {
-                displayPrayerName = "Sabah"
-            } else if nextPrayerName == "Izlazak Sunca" {
-                displayPrayerName = "Podne"
-            } else {
-                displayPrayerName = nextPrayerName
-            }
-            
-            // Update the status bar title using the formatted time
-            if isShortFormat {
-                // Short format omits prayer name and shows only remaining time
-                self.statusBarTitle = "\(TimeUtils.formatTimeInterval(self.remainingTime ?? 0, prayerName: "", isShortFormat: true))"
-            } else {
-                // Long format includes prayer name and remaining time
-                self.statusBarTitle = "\(TimeUtils.formatTimeInterval(self.remainingTime ?? 0, prayerName: displayPrayerName, isShortFormat: false))"
+            DispatchQueue.main.async { [weak self] in
+                self?.remainingTime = remainingTime
+
+                var displayPrayerName: String
+
+                // Skip "Zora" and show "Sabah", skip "Izlazak Sunca" and show "Podne"
+                if nextPrayerName == "Zora" {
+                    displayPrayerName = "Sabah"
+                } else if nextPrayerName == "Izlazak Sunca" {
+                    displayPrayerName = "Podne"
+                } else {
+                    displayPrayerName = nextPrayerName
+                }
+
+                // Update the status bar title using the formatted time
+                if self?.isShortFormat == true {
+                    // Short format omits prayer name and shows only remaining time
+                    self?.statusBarTitle = "\(TimeUtils.formatTimeInterval(self?.remainingTime ?? 0, prayerName: "", isShortFormat: true))"
+                } else {
+                    // Long format includes prayer name and remaining time
+                    self?.statusBarTitle = "\(TimeUtils.formatTimeInterval(self?.remainingTime ?? 0, prayerName: displayPrayerName, isShortFormat: false))"
+                }
             }
         }
     }
