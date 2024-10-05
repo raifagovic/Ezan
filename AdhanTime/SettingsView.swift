@@ -30,6 +30,7 @@ struct SettingsView: View {
             
             // Second tab: Software Update
             VStack() {
+                Text("Ukoliko imate prijedlog ili želite da prijavite bug, obratite se na: ")
                 Text("raif.agovic.dev@gmail.com") // Placeholder text
                 Spacer()
             }
