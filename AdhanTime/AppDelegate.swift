@@ -58,12 +58,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         settingsWindow?.close()
         settingsWindow = nil
     }
-    
-    func applicationShouldSaveApplicationState(_ application: NSApplication) -> Bool {
-        return false
-    }
-
-    func applicationShouldRestoreApplicationState(_ application: NSApplication) -> Bool {
-        return false
-    }
 }
