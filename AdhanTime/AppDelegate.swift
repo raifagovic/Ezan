@@ -32,11 +32,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSWorkspace.shared.notificationCenter.removeObserver(self)
     }
     
+//    func openSettingsWindow() {
+//        if let settingsWindow = settingsWindow {
+//            settingsWindow.makeKeyAndOrderFront(nil)
+//            NSApp.activate(ignoringOtherApps: true)
+//        } else {
+//            let settingsView = SettingsView().environmentObject(StatusBarViewModel.shared)
+//            let hostingController = NSHostingController(rootView: settingsView)
+//            
+//            let window = NSWindow(
+//                contentViewController: hostingController
+//            )
+//            window.title = "Ezan"
+//            window.setContentSize(NSSize(width: 300, height: 300))
+//            window.styleMask = [.titled, .closable]
+//            window.isReleasedWhenClosed = false
+//            
+//            settingsWindow = window
+//            window.makeKeyAndOrderFront(nil)
+//            NSApp.activate(ignoringOtherApps: true)
+//        }
+//    }
+    
     func openSettingsWindow() {
         if let settingsWindow = settingsWindow {
+            // If the window already exists, bring it to the front and activate it
             settingsWindow.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
         } else {
+            // If the window doesn't exist, create it
             let settingsView = SettingsView().environmentObject(StatusBarViewModel.shared)
             let hostingController = NSHostingController(rootView: settingsView)
             
