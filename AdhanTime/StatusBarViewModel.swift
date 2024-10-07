@@ -439,9 +439,19 @@ class StatusBarViewModel: ObservableObject {
     
     func loadSettingsFromUserDefaults() {
         let defaults = UserDefaults.standard
-        selectedLocationIndex = defaults.integer(forKey: "selectedLocationIndex")
-        sabahSubtractionMinutes = defaults.integer(forKey: "sabahSubtractionMinutes")
-        isShortFormat = defaults.bool(forKey: "isShortFormat")
-        isStandardPodneEnabled = defaults.bool(forKey: "isStandardPodneEnabled")
+        
+        if let savedLocationIndex = defaults.object(forKey: "selectedLocationIndex") as? Int {
+            self.selectedLocationIndex = savedLocationIndex
+        }
+        if let savedIsShortFormat = defaults.object(forKey: "isShortFormat") as? Bool {
+            self.isShortFormat = savedIsShortFormat
+        }
+        if let savedSabahSubtractionMinutes = defaults.object(forKey: "sabahSubtractionMinutes") as? Int {
+            self.sabahSubtractionMinutes = savedSabahSubtractionMinutes
+        }
+        if let savedIsStandardPodneEnabled = defaults.object(forKey: "isStandardPodneEnabled") as? Bool {
+            self.isStandardPodneEnabled = savedIsStandardPodneEnabled
+        }
+        print("Settings loaded from UserDefaults")
     }
 }
