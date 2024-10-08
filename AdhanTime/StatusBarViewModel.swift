@@ -452,6 +452,5 @@ class StatusBarViewModel: ObservableObject {
         if let savedIsStandardPodneEnabled = defaults.object(forKey: "isStandardPodneEnabled") as? Bool {
             self.isStandardPodneEnabled = savedIsStandardPodneEnabled
         }
-        print("Settings loaded from UserDefaults")
     }
 }
