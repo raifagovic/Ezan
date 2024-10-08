@@ -28,6 +28,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillTerminate(_ notification: Notification) {
+        // Save settings before the app terminates
+        StatusBarViewModel.shared.saveSettingsToUserDefaults()
+        
         // Remove observers when the app is about to terminate
         NSWorkspace.shared.notificationCenter.removeObserver(self)
     }
