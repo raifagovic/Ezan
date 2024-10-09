@@ -17,9 +17,10 @@ struct AdhanTimeApp: App {
             ContentView(appDelegate: appDelegate)
                 .environmentObject(viewModel)
         } label: {
-            HStack {
+            HStack() {
                 Image("StatusBarIcon")
                     .aspectRatio(contentMode: .fit)
+                    .padding(.trailing, 10)
                 Text(viewModel.statusBarTitle)
             }
         }
