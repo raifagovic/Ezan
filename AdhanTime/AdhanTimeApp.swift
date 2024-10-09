@@ -19,7 +19,6 @@ struct AdhanTimeApp: App {
         } label: {
             HStack {
                 Image("StatusBarIcon")
-                    .resizable()
                     .aspectRatio(contentMode: .fit)
                 Text(viewModel.statusBarTitle)
             }
