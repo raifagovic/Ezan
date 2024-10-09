@@ -21,7 +21,6 @@ struct AdhanTimeApp: App {
                 Image("StatusBarIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 16, height: 16)
                 Text(viewModel.statusBarTitle)
             }
         }
