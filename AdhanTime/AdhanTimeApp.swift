@@ -20,7 +20,6 @@ struct AdhanTimeApp: App {
             HStack() {
                 Image("StatusBarIcon")
                     .aspectRatio(contentMode: .fit)
-                    .padding(.trailing, 10)
                 Text(viewModel.statusBarTitle)
             }
         }
