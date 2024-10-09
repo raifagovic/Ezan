@@ -18,10 +18,10 @@ struct AdhanTimeApp: App {
                 .environmentObject(viewModel)
         } label: {
             HStack {
-                Image(systemName: "star.circle.fill")
+                Image("StatusBarIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 10, height: 10)
+                    .frame(width: 16, height: 16)
                 Text(viewModel.statusBarTitle)
             }
         }
