@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC661B6C2C7A3B3D0039F6CC /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B6B2C7A3B3D0039F6CC /* TimeUtils.swift */; };
+		DC661B6E2C7B2D6F0039F6CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B6D2C7B2D6F0039F6CC /* AppDelegate.swift */; };
+		DC661B702C7B326E0039F6CC /* StatusBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B6F2C7B326E0039F6CC /* StatusBarViewModel.swift */; };
+		DC661B722C7B334A0039F6CC /* PrayerTimeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B712C7B334A0039F6CC /* PrayerTimeCache.swift */; };
+		DC661B742C8261250039F6CC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B732C8261250039F6CC /* SettingsView.swift */; };
 		DCA22F482BA87A8200330EA2 /* AdhanTimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */; };
 		DCA22F4A2BA87A8200330EA2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F492BA87A8200330EA2 /* ContentView.swift */; };
 		DCA22F4C2BA87A8300330EA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */; };
 		DCA22F4F2BA87A8300330EA2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA22F4E2BA87A8300330EA2 /* Preview Assets.xcassets */; };
-		DCA22F5A2BA87A8300330EA2 /* AdhanTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F592BA87A8300330EA2 /* AdhanTimeTests.swift */; };
 		DCA22F642BA87A8300330EA2 /* AdhanTimeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F632BA87A8300330EA2 /* AdhanTimeUITests.swift */; };
 		DCA22F662BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F652BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift */; };
 		DCB52E452BA9B14D00EB66BD /* PrayerTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB52E442BA9B14D00EB66BD /* PrayerTimeCalculator.swift */; };
@@ -36,6 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC661B6B2C7A3B3D0039F6CC /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
+		DC661B6D2C7B2D6F0039F6CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DC661B6F2C7B326E0039F6CC /* StatusBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewModel.swift; sourceTree = "<group>"; };
+		DC661B712C7B334A0039F6CC /* PrayerTimeCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimeCache.swift; sourceTree = "<group>"; };
+		DC661B732C8261250039F6CC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DCA22F442BA87A8200330EA2 /* AdhanTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdhanTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeApp.swift; sourceTree = "<group>"; };
 		DCA22F492BA87A8200330EA2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,7 +52,6 @@
 		DCA22F4E2BA87A8300330EA2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DCA22F502BA87A8300330EA2 /* AdhanTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdhanTime.entitlements; sourceTree = "<group>"; };
 		DCA22F552BA87A8300330EA2 /* AdhanTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdhanTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCA22F592BA87A8300330EA2 /* AdhanTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeTests.swift; sourceTree = "<group>"; };
 		DCA22F5F2BA87A8300330EA2 /* AdhanTimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdhanTimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA22F632BA87A8300330EA2 /* AdhanTimeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeUITests.swift; sourceTree = "<group>"; };
 		DCA22F652BA87A8300330EA2 /* AdhanTimeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -80,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				DCA22F462BA87A8200330EA2 /* AdhanTime */,
-				DCA22F582BA87A8300330EA2 /* AdhanTimeTests */,
 				DCA22F622BA87A8300330EA2 /* AdhanTimeUITests */,
 				DCA22F452BA87A8200330EA2 /* Products */,
 			);
@@ -100,12 +107,17 @@
 			isa = PBXGroup;
 			children = (
 				DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */,
+				DC661B6D2C7B2D6F0039F6CC /* AppDelegate.swift */,
+				DC661B6F2C7B326E0039F6CC /* StatusBarViewModel.swift */,
 				DCA22F492BA87A8200330EA2 /* ContentView.swift */,
 				DCB52E442BA9B14D00EB66BD /* PrayerTimeCalculator.swift */,
 				DCEB612F2BDFCBEE00437E00 /* PrayerTimeAPI.swift */,
 				DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */,
 				DCA22F502BA87A8300330EA2 /* AdhanTime.entitlements */,
 				DCA22F4D2BA87A8300330EA2 /* Preview Content */,
+				DC661B6B2C7A3B3D0039F6CC /* TimeUtils.swift */,
+				DC661B712C7B334A0039F6CC /* PrayerTimeCache.swift */,
+				DC661B732C8261250039F6CC /* SettingsView.swift */,
 			);
 			path = AdhanTime;
 			sourceTree = "<group>";
@@ -116,14 +128,6 @@
 				DCA22F4E2BA87A8300330EA2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		DCA22F582BA87A8300330EA2 /* AdhanTimeTests */ = {
-			isa = PBXGroup;
-			children = (
-				DCA22F592BA87A8300330EA2 /* AdhanTimeTests.swift */,
-			);
-			path = AdhanTimeTests;
 			sourceTree = "<group>";
 		};
 		DCA22F622BA87A8300330EA2 /* AdhanTimeUITests */ = {
@@ -265,10 +269,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC661B6E2C7B2D6F0039F6CC /* AppDelegate.swift in Sources */,
+				DC661B702C7B326E0039F6CC /* StatusBarViewModel.swift in Sources */,
 				DCA22F4A2BA87A8200330EA2 /* ContentView.swift in Sources */,
+				DC661B742C8261250039F6CC /* SettingsView.swift in Sources */,
 				DCA22F482BA87A8200330EA2 /* AdhanTimeApp.swift in Sources */,
 				DCEB61302BDFCBEE00437E00 /* PrayerTimeAPI.swift in Sources */,
 				DCB52E452BA9B14D00EB66BD /* PrayerTimeCalculator.swift in Sources */,
+				DC661B722C7B334A0039F6CC /* PrayerTimeCache.swift in Sources */,
+				DC661B6C2C7A3B3D0039F6CC /* TimeUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +285,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCA22F5A2BA87A8300330EA2 /* AdhanTimeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
