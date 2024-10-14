@@ -3,9 +3,7 @@
   <a href="https://x.com/raifagovic"><img src="https://img.shields.io/badge/Contact-@raifagovic-%231DA1F2.svg" alt="Contact: @raifagovic" style="vertical-align: middle;"></a>
 </p>
 
-# Adhan Time
-
-It's a macOS app built with SwiftUI that displays the remaining time to the next Islamic prayer in the menu bar.
+Ezan is a macOS app built with SwiftUI that displays the remaining time to the next Islamic prayer in the menu bar.
 
 ## Author
 [Raif Agović](https://x.com/raifagovic)
