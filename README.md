@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Images/EzanIconReadme.png" alt="Ezan Icon">
+  <img src="Images/EzanIconReadme.png" alt="Ezan Icon" width="400">
 </p>
 
 <p align="center">
