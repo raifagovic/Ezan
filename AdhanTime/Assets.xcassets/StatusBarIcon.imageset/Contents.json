@@ -1,14 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "EzanStatusBarIcon-16x16.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "EzanStatusBarIcon-32x32.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "EzanStatusBarIcon-48x48.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
