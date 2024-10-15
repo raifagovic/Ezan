@@ -4,6 +4,9 @@
 
 <p align="center">
   <a href="#">
+    <img src="https://img.shields.io/badge/macOS-14.4+-blue.svg" alt="macOS 14.4+">
+  </a>
+  <a href="#">
     <img src="https://img.shields.io/badge/Swift-5.10-orange.svg" alt="Swift 5.10">
   </a>
   <a href="https://x.com/raifagovic">
