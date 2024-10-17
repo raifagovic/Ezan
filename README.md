@@ -18,7 +18,7 @@ Ezan is a macOS app built with SwiftUI that displays the remaining time to the n
 
 Here’s how the menu bar will appear:
 
-<p align="center">
+<p align="left">
   <img src="Images/EzanStatusBar.png" alt="Menu Bar Appearance" width="400">
 </p>
 
