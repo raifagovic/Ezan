@@ -16,6 +16,10 @@
 
 Ezan is a macOS app built with SwiftUI that displays the remaining time to the next Islamic prayer in the menu bar.
 
+Here’s how the menu bar will appear:
+
+![Menu Bar Appearance](Images/EzanStatusBar.png)
+
 ## Author
 [Raif Agović](https://x.com/raifagovic)
 
