@@ -22,6 +22,12 @@ Here’s how the menu bar will appear:
   <img src="Images/EzanStatusBar.png" alt="Menu Bar Appearance" width="400">
 </p>
 
+When the status bar title is clicked, a Menu Bar Extra window opens, displaying prayer times:
+
+<p align="left">
+  <img src="Images/EzanWindow.png" alt="Menu Bar Extra Window">
+</p>
+
 ## Author
 [Raif Agović](https://x.com/raifagovic)
 
