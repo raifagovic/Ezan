@@ -28,6 +28,10 @@ When the status bar title is clicked, a Menu Bar Extra window opens, displaying 
   <img src="Images/EzanWindow.png" alt="Menu Bar Extra Window">
 </p>
 
+<p align="left">
+  <img src="Images/EzanSettings.png" alt="Ezan Settings">
+</p>
+
 ## Author
 [Raif Agović](https://x.com/raifagovic)
 
