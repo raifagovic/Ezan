@@ -25,13 +25,13 @@ Here’s how the menu bar will appear:
 When the status bar title is clicked, a Menu Bar Extra window opens, displaying prayer times:
 
 <p align="left">
-  <img src="Images/EzanWindow.png" alt="Menu Bar Extra Window" width="250">
+  <img src="Images/EzanWindow.png" alt="Menu Bar Extra Window" width="200">
 </p>
 
 In the Settings (Postavke), you can select your location, set the prayer time for Sabah, choose to display a short version of the status bar title and use the standard prayer time for Podne:
 
 <p align="left">
-  <img src="Images/EzanSettings.png" alt="Ezan Settings" width="400">
+  <img src="Images/EzanSettings.png" alt="Ezan Settings" width="350">
 </p>
 
 ## Author
