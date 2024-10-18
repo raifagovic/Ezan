@@ -19,19 +19,19 @@ Ezan is a macOS app built with SwiftUI that displays the remaining time to the n
 Here’s how the menu bar will appear:
 
 <p align="left">
-  <img src="Images/EzanStatusBar.png" alt="Menu Bar Appearance" width="300">
+  <img src="Images/EzanStatusBar.png" alt="Menu Bar Appearance" width="350">
 </p>
 
 When the status bar title is clicked, a Menu Bar Extra window opens, displaying prayer times:
 
 <p align="left">
-  <img src="Images/EzanWindow.png" alt="Menu Bar Extra Window" width="200">
+  <img src="Images/EzanWindow.png" alt="Menu Bar Extra Window" width="300">
 </p>
 
 In the Settings (Postavke), you can select your location, set the prayer time for Sabah, choose to display a short version of the status bar title and use the standard prayer time for Podne:
 
 <p align="left">
-  <img src="Images/EzanSettings.png" alt="Ezan Settings" width="300">
+  <img src="Images/EzanSettings.png" alt="Ezan Settings" width="500">
 </p>
 
 ## Author
