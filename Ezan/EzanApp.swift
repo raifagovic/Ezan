@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct AdhanTimeApp: App {
+struct EzanApp: App {
     @StateObject private var viewModel = StatusBarViewModel.shared
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     
