@@ -12,6 +12,7 @@
 		DC661B702C7B326E0039F6CC /* StatusBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B6F2C7B326E0039F6CC /* StatusBarViewModel.swift */; };
 		DC661B722C7B334A0039F6CC /* PrayerTimeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B712C7B334A0039F6CC /* PrayerTimeCache.swift */; };
 		DC661B742C8261250039F6CC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B732C8261250039F6CC /* SettingsView.swift */; };
+		DC661B782CBF23940039F6CC /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = DC661B772CBF23940039F6CC /* Contents.json */; };
 		DCA22F482BA87A8200330EA2 /* AdhanTimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */; };
 		DCA22F4A2BA87A8200330EA2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F492BA87A8200330EA2 /* ContentView.swift */; };
 		DCA22F4C2BA87A8300330EA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		DC661B6F2C7B326E0039F6CC /* StatusBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewModel.swift; sourceTree = "<group>"; };
 		DC661B712C7B334A0039F6CC /* PrayerTimeCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimeCache.swift; sourceTree = "<group>"; };
 		DC661B732C8261250039F6CC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DC661B772CBF23940039F6CC /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		DCA22F442BA87A8200330EA2 /* AdhanTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdhanTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeApp.swift; sourceTree = "<group>"; };
 		DCA22F492BA87A8200330EA2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +80,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC661B752CBF22D00039F6CC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DC661B762CBF231B0039F6CC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DC661B762CBF231B0039F6CC /* Preview Assets.xcassets */ = {
+			isa = PBXGroup;
+			children = (
+				DC661B772CBF23940039F6CC /* Contents.json */,
+			);
+			path = "Preview Assets.xcassets";
+			sourceTree = "<group>";
+		};
 		DCA22F3B2BA87A8200330EA2 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +117,7 @@
 		DCA22F462BA87A8200330EA2 /* AdhanTime */ = {
 			isa = PBXGroup;
 			children = (
+				DC661B752CBF22D00039F6CC /* Preview Content */,
 				DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */,
 				DC661B6D2C7B2D6F0039F6CC /* AppDelegate.swift */,
 				DC661B6F2C7B326E0039F6CC /* StatusBarViewModel.swift */,
@@ -219,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCA22F4C2BA87A8300330EA2 /* Assets.xcassets in Resources */,
+				DC661B782CBF23940039F6CC /* Contents.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
