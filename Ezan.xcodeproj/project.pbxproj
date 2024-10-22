@@ -13,7 +13,7 @@
 		DC661B722C7B334A0039F6CC /* PrayerTimeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B712C7B334A0039F6CC /* PrayerTimeCache.swift */; };
 		DC661B742C8261250039F6CC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC661B732C8261250039F6CC /* SettingsView.swift */; };
 		DC661B782CBF23940039F6CC /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = DC661B772CBF23940039F6CC /* Contents.json */; };
-		DCA22F482BA87A8200330EA2 /* AdhanTimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */; };
+		DCA22F482BA87A8200330EA2 /* EzanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F472BA87A8200330EA2 /* EzanApp.swift */; };
 		DCA22F4A2BA87A8200330EA2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA22F492BA87A8200330EA2 /* ContentView.swift */; };
 		DCA22F4C2BA87A8300330EA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */; };
 		DCB52E452BA9B14D00EB66BD /* PrayerTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB52E442BA9B14D00EB66BD /* PrayerTimeCalculator.swift */; };
@@ -44,13 +44,13 @@
 		DC661B712C7B334A0039F6CC /* PrayerTimeCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimeCache.swift; sourceTree = "<group>"; };
 		DC661B732C8261250039F6CC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DC661B772CBF23940039F6CC /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
-		DCA22F442BA87A8200330EA2 /* AdhanTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdhanTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhanTimeApp.swift; sourceTree = "<group>"; };
+		DCA22F442BA87A8200330EA2 /* Ezan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ezan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA22F472BA87A8200330EA2 /* EzanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EzanApp.swift; sourceTree = "<group>"; };
 		DCA22F492BA87A8200330EA2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DCA22F502BA87A8300330EA2 /* AdhanTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdhanTime.entitlements; sourceTree = "<group>"; };
-		DCA22F552BA87A8300330EA2 /* AdhanTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdhanTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCA22F5F2BA87A8300330EA2 /* AdhanTimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdhanTimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA22F502BA87A8300330EA2 /* Ezan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ezan.entitlements; sourceTree = "<group>"; };
+		DCA22F552BA87A8300330EA2 /* EzanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EzanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA22F5F2BA87A8300330EA2 /* EzanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EzanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB52E442BA9B14D00EB66BD /* PrayerTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimeCalculator.swift; sourceTree = "<group>"; };
 		DCEB612F2BDFCBEE00437E00 /* PrayerTimeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimeAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,7 +99,7 @@
 		DCA22F3B2BA87A8200330EA2 = {
 			isa = PBXGroup;
 			children = (
-				DCA22F462BA87A8200330EA2 /* AdhanTime */,
+				DCA22F462BA87A8200330EA2 /* Ezan */,
 				DCA22F452BA87A8200330EA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,38 +107,38 @@
 		DCA22F452BA87A8200330EA2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DCA22F442BA87A8200330EA2 /* AdhanTime.app */,
-				DCA22F552BA87A8300330EA2 /* AdhanTimeTests.xctest */,
-				DCA22F5F2BA87A8300330EA2 /* AdhanTimeUITests.xctest */,
+				DCA22F442BA87A8200330EA2 /* Ezan.app */,
+				DCA22F552BA87A8300330EA2 /* EzanTests.xctest */,
+				DCA22F5F2BA87A8300330EA2 /* EzanUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DCA22F462BA87A8200330EA2 /* AdhanTime */ = {
+		DCA22F462BA87A8200330EA2 /* Ezan */ = {
 			isa = PBXGroup;
 			children = (
 				DC661B752CBF22D00039F6CC /* Preview Content */,
-				DCA22F472BA87A8200330EA2 /* AdhanTimeApp.swift */,
+				DCA22F472BA87A8200330EA2 /* EzanApp.swift */,
 				DC661B6D2C7B2D6F0039F6CC /* AppDelegate.swift */,
 				DC661B6F2C7B326E0039F6CC /* StatusBarViewModel.swift */,
 				DCA22F492BA87A8200330EA2 /* ContentView.swift */,
 				DCB52E442BA9B14D00EB66BD /* PrayerTimeCalculator.swift */,
 				DCEB612F2BDFCBEE00437E00 /* PrayerTimeAPI.swift */,
 				DCA22F4B2BA87A8300330EA2 /* Assets.xcassets */,
-				DCA22F502BA87A8300330EA2 /* AdhanTime.entitlements */,
+				DCA22F502BA87A8300330EA2 /* Ezan.entitlements */,
 				DC661B6B2C7A3B3D0039F6CC /* TimeUtils.swift */,
 				DC661B712C7B334A0039F6CC /* PrayerTimeCache.swift */,
 				DC661B732C8261250039F6CC /* SettingsView.swift */,
 			);
-			path = AdhanTime;
+			path = Ezan;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DCA22F432BA87A8200330EA2 /* AdhanTime */ = {
+		DCA22F432BA87A8200330EA2 /* Ezan */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCA22F692BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTime" */;
+			buildConfigurationList = DCA22F692BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "Ezan" */;
 			buildPhases = (
 				DCA22F402BA87A8200330EA2 /* Sources */,
 				DCA22F412BA87A8200330EA2 /* Frameworks */,
@@ -148,14 +148,14 @@
 			);
 			dependencies = (
 			);
-			name = AdhanTime;
+			name = Ezan;
 			productName = AdhanTime;
-			productReference = DCA22F442BA87A8200330EA2 /* AdhanTime.app */;
+			productReference = DCA22F442BA87A8200330EA2 /* Ezan.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DCA22F542BA87A8300330EA2 /* AdhanTimeTests */ = {
+		DCA22F542BA87A8300330EA2 /* EzanTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCA22F6C2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTimeTests" */;
+			buildConfigurationList = DCA22F6C2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "EzanTests" */;
 			buildPhases = (
 				DCA22F512BA87A8300330EA2 /* Sources */,
 				DCA22F522BA87A8300330EA2 /* Frameworks */,
@@ -166,14 +166,14 @@
 			dependencies = (
 				DCA22F572BA87A8300330EA2 /* PBXTargetDependency */,
 			);
-			name = AdhanTimeTests;
+			name = EzanTests;
 			productName = AdhanTimeTests;
-			productReference = DCA22F552BA87A8300330EA2 /* AdhanTimeTests.xctest */;
+			productReference = DCA22F552BA87A8300330EA2 /* EzanTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DCA22F5E2BA87A8300330EA2 /* AdhanTimeUITests */ = {
+		DCA22F5E2BA87A8300330EA2 /* EzanUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCA22F6F2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTimeUITests" */;
+			buildConfigurationList = DCA22F6F2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "EzanUITests" */;
 			buildPhases = (
 				DCA22F5B2BA87A8300330EA2 /* Sources */,
 				DCA22F5C2BA87A8300330EA2 /* Frameworks */,
@@ -184,9 +184,9 @@
 			dependencies = (
 				DCA22F612BA87A8300330EA2 /* PBXTargetDependency */,
 			);
-			name = AdhanTimeUITests;
+			name = EzanUITests;
 			productName = AdhanTimeUITests;
-			productReference = DCA22F5F2BA87A8300330EA2 /* AdhanTimeUITests.xctest */;
+			productReference = DCA22F5F2BA87A8300330EA2 /* EzanUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -212,7 +212,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DCA22F3F2BA87A8200330EA2 /* Build configuration list for PBXProject "AdhanTime" */;
+			buildConfigurationList = DCA22F3F2BA87A8200330EA2 /* Build configuration list for PBXProject "Ezan" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -225,9 +225,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DCA22F432BA87A8200330EA2 /* AdhanTime */,
-				DCA22F542BA87A8300330EA2 /* AdhanTimeTests */,
-				DCA22F5E2BA87A8300330EA2 /* AdhanTimeUITests */,
+				DCA22F432BA87A8200330EA2 /* Ezan */,
+				DCA22F542BA87A8300330EA2 /* EzanTests */,
+				DCA22F5E2BA87A8300330EA2 /* EzanUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -267,7 +267,7 @@
 				DC661B702C7B326E0039F6CC /* StatusBarViewModel.swift in Sources */,
 				DCA22F4A2BA87A8200330EA2 /* ContentView.swift in Sources */,
 				DC661B742C8261250039F6CC /* SettingsView.swift in Sources */,
-				DCA22F482BA87A8200330EA2 /* AdhanTimeApp.swift in Sources */,
+				DCA22F482BA87A8200330EA2 /* EzanApp.swift in Sources */,
 				DCEB61302BDFCBEE00437E00 /* PrayerTimeAPI.swift in Sources */,
 				DCB52E452BA9B14D00EB66BD /* PrayerTimeCalculator.swift in Sources */,
 				DC661B722C7B334A0039F6CC /* PrayerTimeCache.swift in Sources */,
@@ -294,12 +294,12 @@
 /* Begin PBXTargetDependency section */
 		DCA22F572BA87A8300330EA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DCA22F432BA87A8200330EA2 /* AdhanTime */;
+			target = DCA22F432BA87A8200330EA2 /* Ezan */;
 			targetProxy = DCA22F562BA87A8300330EA2 /* PBXContainerItemProxy */;
 		};
 		DCA22F612BA87A8300330EA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DCA22F432BA87A8200330EA2 /* AdhanTime */;
+			target = DCA22F432BA87A8200330EA2 /* Ezan */;
 			targetProxy = DCA22F602BA87A8300330EA2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -428,20 +428,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = AdhanTime/AdhanTime.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Ezan/Ezan.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AdhanTime/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Ezan/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.AdhanTime;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.Ezan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -453,20 +454,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = AdhanTime/AdhanTime.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Ezan/Ezan.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AdhanTime/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Ezan/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.AdhanTime;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raifagovic.Ezan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -487,7 +489,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdhanTime.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdhanTime";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ezan.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ezan";
 			};
 			name = Debug;
 		};
@@ -505,7 +507,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdhanTime.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdhanTime";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ezan.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ezan";
 			};
 			name = Release;
 		};
@@ -544,7 +546,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DCA22F3F2BA87A8200330EA2 /* Build configuration list for PBXProject "AdhanTime" */ = {
+		DCA22F3F2BA87A8200330EA2 /* Build configuration list for PBXProject "Ezan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCA22F672BA87A8300330EA2 /* Debug */,
@@ -553,7 +555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCA22F692BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTime" */ = {
+		DCA22F692BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "Ezan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCA22F6A2BA87A8300330EA2 /* Debug */,
@@ -562,7 +564,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCA22F6C2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTimeTests" */ = {
+		DCA22F6C2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "EzanTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCA22F6D2BA87A8300330EA2 /* Debug */,
@@ -571,7 +573,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCA22F6F2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "AdhanTimeUITests" */ = {
+		DCA22F6F2BA87A8300330EA2 /* Build configuration list for PBXNativeTarget "EzanUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCA22F702BA87A8300330EA2 /* Debug */,
