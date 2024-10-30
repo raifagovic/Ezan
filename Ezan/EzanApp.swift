@@ -21,6 +21,7 @@ struct EzanApp: App {
                 Image("StatusBarIcon")
                     .aspectRatio(contentMode: .fit)
                 Text(viewModel.statusBarTitle)
+                    .foregroundColor(.primary) 
             }
         }
         .menuBarExtraStyle(.window)
