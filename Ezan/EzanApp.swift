@@ -22,7 +22,6 @@ struct EzanApp: App {
                     .aspectRatio(contentMode: .fit)
                 Text(viewModel.statusBarTitle)
                     .foregroundColor(.primary)
-                    .shadow(color: .black.opacity(0.5), radius: 1, x: 0, y: 1)
             }
         }
         .menuBarExtraStyle(.window)
